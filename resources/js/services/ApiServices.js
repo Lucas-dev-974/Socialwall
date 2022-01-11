@@ -6,4 +6,7 @@ if(window.localStorage.getItem('vuex')){
 }
 
 Axios.defaults.headers.common = {'Authorization': `bearer ${token}`}
-export default Axios
+let axios = Axios.create({
+    url: "https://cm-wall.herokuapp.com"
+})
+export default axios
