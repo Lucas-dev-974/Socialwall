@@ -15,7 +15,7 @@ export default{
                 password: this.password
             }
 
-            ApiService.post('/api/auth/',  credentials)
+            ApiService.post('//api/auth/',  credentials)
             .then(({data}) => {
                 this.$store.commit('set_token', data.access_token)
                 this.$router.push('wall-moderation')
