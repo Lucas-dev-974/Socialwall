@@ -27,7 +27,8 @@ Route::group([
 ], function($router) {
     Route::post('/',   [AuthController::class, 'login'])->name('login');
     Route::patch('/',  [AuthController::class, 'register']);  
-    Route::get('/',    [AuthController::class, 'TestToken']);    
+    Route::get('/',    [AuthController::class, 'TestToken']); 
+    
 }); 
 
 
@@ -35,5 +36,6 @@ Route::group([
     'middlaware' => 'api',
     'prefix'     => 'facebook'
 ], function($router) {
-    Route::post('/',   [FacebookController::class, 'index']); 
+    Route::get('/auth',     [FacebookController::class, 'index']); 
+    Route::get('/callback', [FacebookController::class, 'index']); 
 }); 
