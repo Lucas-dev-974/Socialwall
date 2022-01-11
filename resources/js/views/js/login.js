@@ -16,7 +16,7 @@ export default{
                 password: this.password
             }
 
-            Axios.post('/api/auth/',  credentials)
+            Axios.post('https://dashboard.heroku.com/api/auth/',  credentials)
             .then(({data}) => {
                 console.log(data);
                 this.$store.commit('set_token', data.access_token)
