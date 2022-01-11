@@ -3,17 +3,20 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-// use App\Providers\Faceb  ookServiceProvider;
+use App\Http\FacebookServices;
 
 class FacebookController extends Controller
 {
-    public function index(Request $request){
-       
-        return response()->json(['test' => 'test']);
 
-        // $fields = "id,cover,name,first";
-        // $fb_user = $fb->get('/me?fields='.$fields);
-        // return response()->json($fb_user);
+    protected $facebook;
+
+    public function __construct()
+    {
+        $this->facebook = new FacebookServices();
+    }
+
+    public function index(Request $request){
+        return response()->json(['url' => $this->facebook->getRedirectLoginurl()]);
     }
 }
 
