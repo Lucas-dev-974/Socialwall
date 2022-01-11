@@ -21,6 +21,7 @@
 
 .w-10{ width: 10%;}
 .w-20{ width: 20%;}
+.w-25{ width: 25%;}
 .w-30{ width: 30%;}
 .w-40{ width: 40%;}
 .w-50{ width: 50%;}
@@ -30,7 +31,11 @@
 .w-90{ width: 90%; }
 .w-100{ width: 100%; }
 
-
+.pt-10{padding-top: 10px;}
+.pt-20{padding-top: 20px;}
+.pt-30{padding-top: 30px;}
+.pt-40{padding-top: 40px;}
+.pt-50{padding-top: 50px;}
 .pt-50{padding-top: 50px;}
 .pt-60{padding-top: 60px;}
 .pt-70{padding-top: 70px;}
@@ -47,6 +52,7 @@
 .mt-50{margin-top: 50px;}
 
 .bg-red{background-color: red;}
+.bg-blue2{background-color: #005475;}
 
 .o-hidden-y{overflow-y: hidden;}
 .o-hidden-x{overflow-x: hidden;}

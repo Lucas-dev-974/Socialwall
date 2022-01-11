@@ -20,7 +20,7 @@ export default{
             .then(({data}) => {
                 console.log(data);
                 this.$store.commit('set_token', data.access_token)
-                this.$router.push('admin')
+                this.$router.push('wall-moderation')
             }).catch(err => {
                 console.log(err.response.status);
             }) 

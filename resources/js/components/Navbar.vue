@@ -1,12 +1,12 @@
 <template>
-    <v-app-bar elevation="4" ref="appbar" app color="transparent" style="backdrop-filter: blur(2px)">
+    <v-app-bar elevation="4" ref="appbar" app :color="color" style="backdrop-filter: blur(2px)">
         <div class="d-flex justify-space-around w-100">
             <div class="w-100 text-center text-white" v-if="!is_dashboard">
                 {{hashtag}}
             </div>
 
             <div class="w-100">
-                <div v-if="is_dashboard" class="w-100 text-center">
+                <div v-if="is_dashboard" class="w-100 text-center fs-3 text-white">
                     {{Title}}
                 </div>
 
