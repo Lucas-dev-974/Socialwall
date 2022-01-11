@@ -15,4 +15,4 @@
     RewriteRule ^ index.php [L]
 
     # Handle Authorization Header
-    RewriteC
+    Rewrite
