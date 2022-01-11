@@ -22,7 +22,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 
 Route::group([
-    'middlaware' => 'api',
+    'middlaware' => ['api', 'cors'],
     'prefix'     => 'auth'
 ], function($router) {
     Route::post('/',   [AuthController::class, 'login'])->name('login');
@@ -33,7 +33,6 @@ Route::group([
 
 
 Route::group([
-    'middlaware' => 'api',
     'prefix'     => 'facebook'
 ], function($router) {
     Route::get('/auth',     [FacebookController::class, 'index']); 
