@@ -1,5 +1,4 @@
-import Axios from "axios"
-
+import ApiService from '../../services/ApiServices'
 
 export default{
     data(){
@@ -16,9 +15,8 @@ export default{
                 password: this.password
             }
 
-            Axios.post('https://dashboard.heroku.com/api/auth/',  credentials)
+            ApiService.post('/api/auth/',  credentials)
             .then(({data}) => {
-                console.log(data);
                 this.$store.commit('set_token', data.access_token)
                 this.$router.push('wall-moderation')
             }).catch(err => {
