@@ -19,6 +19,5 @@
             <layout></layout>
         </div>
         <script src="{{ secure_asset('js/app.js') }}"></script>
-        <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js"></script>
     </body>
 </html>
