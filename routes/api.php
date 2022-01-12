@@ -16,13 +16,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
+// Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+//     return $request->user();
+// });
 
 
 Route::group([
-    'middlaware' => ['api', 'cors'],
+    'middlaware' => ['api'],
     'prefix'     => 'auth'
 ], function($router) {
     Route::post('/',   [AuthController::class, 'login'])->name('login');
