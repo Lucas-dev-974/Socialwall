@@ -15,7 +15,7 @@ export default{
                 password: this.password
             }
 
-            let response = await axios.post('/api/auth/', credentials)
+            let response = await ApiService.post('/api/auth/', credentials)
             if(response.status == 200){
                 console.log();
                 this.$store.commit('set_token', data.access_token)
