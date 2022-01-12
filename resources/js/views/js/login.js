@@ -17,16 +17,23 @@ export default{
 
             let url = 'http://social-walll.herokuapp.com/api/auth/'
             console.log(url);
-            axios.post(url,  credentials)
-            .then(({data}) => {
-                console.log('okokkko');
-                console.log(data);
-                this.$store.commit('set_token', data.access_token)
-                this.$router.push('wall-moderation')
-            }).catch(err => {
+
+            try{
+                axios.post(url,  credentials)
+                .then(({data}) => {
+                    console.log('okokkko');
+                    console.log(data);
+                    this.$store.commit('set_token', data.access_token)
+                    this.$router.push('wall-moderation')
+                }).catch(err => {
+                    console.log(err);
+                    // console.log(err.response.status);
+                }) 
+            }catch(err){
+                console.log('try error');
                 console.log(err);
-                // console.log(err.response.status);
-            }) 
+            }
+
         }
     }   
 }
