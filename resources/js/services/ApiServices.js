@@ -7,4 +7,4 @@ if(window.localStorage.getItem('vuex')){
 
 Axios.defaults.headers.common = {'Authorization': `bearer ${token}`}
 
-export default axios
+export default Axios
