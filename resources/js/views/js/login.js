@@ -9,29 +9,17 @@ export default{
     }, 
 
     methods: {
-        login: function(){
+        login: async function(){
             let credentials = {
                 email: this.email,
                 password: this.password
             }
 
-            let url = 'http://social-walll.herokuapp.com/api/auth/'
-            console.log(url);
-
-            try{
-                axios.post(url,  credentials)
-                .then(({data}) => {
-                    console.log('okokkko');
-                    console.log(data);
-                    this.$store.commit('set_token', data.access_token)
-                    this.$router.push('wall-moderation')
-                }).catch(err => {
-                    console.log(err);
-                    // console.log(err.response.status);
-                }) 
-            }catch(err){
-                console.log('try error');
-                console.log(err);
+            let response = await axios.post('/api/auth/', credentials)
+            if(response.status == 200){
+                console.log();
+                this.$store.commit('set_token', data.access_token)
+                this.$router.push('wall-moderation')
             }
 
         }
