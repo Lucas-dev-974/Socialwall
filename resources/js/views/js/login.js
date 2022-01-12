@@ -23,6 +23,7 @@ export default{
             }).catch(error => {
                 console.log(error);
             })
+            
             // let response = await ApiService.post('https://social-walll.herokuapp.com/api/auth/', credentials)
             // if(response.status == 200){
             //     console.log();

@@ -6,8 +6,5 @@ if(window.localStorage.getItem('vuex')){
 }
 
 Axios.defaults.headers.common = {'Authorization': `bearer ${token}`}
-const axios = Axios.create({
-    url: "https://social-walll.herokuapp.com"
-})
 
 export default axios
