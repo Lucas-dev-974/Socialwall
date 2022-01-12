@@ -19,6 +19,7 @@ export default{
             console.log(url);
             axios.post(url,  credentials)
             .then(({data}) => {
+                console.log('okokkko');
                 console.log(data);
                 this.$store.commit('set_token', data.access_token)
                 this.$router.push('wall-moderation')
