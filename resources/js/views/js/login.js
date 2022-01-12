@@ -17,13 +17,13 @@ export default{
 
             let url = "http://social-walll.herokuapp.com/api/auth/"
             console.log('url:', url);
-            axios.post(url, credentials)
+            ApiService.post(url, credentials)
             .then(data => {
                 console.log(data);
             }).catch(error => {
                 console.log(error);
             })
-            
+
             // let response = await ApiService.post('https://social-walll.herokuapp.com/api/auth/', credentials)
             // if(response.status == 200){
             //     console.log();

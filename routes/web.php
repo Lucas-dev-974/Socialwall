@@ -5,4 +5,3 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::get('/{any}', [AppController::class, 'index'])->where('any', '.*');
-// Route::get('/login', [AppController::class, 'index']);
