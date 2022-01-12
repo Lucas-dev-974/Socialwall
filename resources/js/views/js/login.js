@@ -15,13 +15,14 @@ export default{
                 password: this.password
             }
 
-            axios.post('https://social-walll.herokuapp.com/api/auth/',  credentials)
+            axios.post('http://social-walll.herokuapp.com/api/auth/',  credentials)
             .then(({data}) => {
+                console.log(data);
                 this.$store.commit('set_token', data.access_token)
                 this.$router.push('wall-moderation')
             }).catch(err => {
                 console.log(err);
-                console.log(err.response.status);
+                // console.log(err.response.status);
             }) 
         }
     }   
