@@ -10,4 +10,4 @@ const axios = Axios.create({
     url: "https://social-walll.herokuapp.com"
 })
 
-export default Axios
+export default axios
