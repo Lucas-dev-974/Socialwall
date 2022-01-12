@@ -15,7 +15,7 @@ export default{
                 password: this.password
             }
 
-            let url = window.location.origin+"/api/auth/"
+            let url = "http://social-walll.herokuapp.com/api/auth/"
             console.log('url:', url);
             axios.post(url, credentials)
             .then(data => {
