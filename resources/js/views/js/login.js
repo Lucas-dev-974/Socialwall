@@ -15,7 +15,9 @@ export default{
                 password: this.password
             }
 
-            axios.post('http://social-walll.herokuapp.com/api/auth/',  credentials)
+            let url = 'http://social-walll.herokuapp.com/api/auth/'
+            console.log(url);
+            axios.post(url,  credentials)
             .then(({data}) => {
                 console.log(data);
                 this.$store.commit('set_token', data.access_token)
