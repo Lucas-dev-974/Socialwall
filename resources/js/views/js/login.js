@@ -15,21 +15,21 @@ export default{
                 password: this.password
             }
 
-            let url = "http://social-walll.herokuapp.com/api/auth/"
-            console.log('url:', url);
-            ApiService.post(url, credentials)
-            .then(data => {
-                console.log(data);
-            }).catch(error => {
-                console.log(error);
-            })
+            // let url = "http://social-walll.herokuapp.com/api/auth/"
+            // console.log('url:', url);
+            // ApiService.post(url, credentials)
+            // .then(data => {
+            //     console.log(data);
+            // }).catch(error => {
+            //     console.log(error);
+            // })
 
-            // let response = await ApiService.post('https://social-walll.herokuapp.com/api/auth/', credentials)
-            // if(response.status == 200){
-            //     console.log();
-            //     this.$store.commit('set_token', data.access_token)
-            //     this.$router.push('wall-moderation')
-            // }
+            let response = await ApiService.post('https://social-walll.herokuapp.com/api/auth/', credentials)
+            if(response.status == 200){
+                console.log();
+                this.$store.commit('set_token', data.access_token)
+                this.$router.push('wall-moderation')
+            }
 
         }
     }   
