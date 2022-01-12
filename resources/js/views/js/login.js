@@ -15,7 +15,7 @@ export default{
                 password: this.password
             }
 
-            axios.post('/api/auth/',  credentials)
+            axios.post('http://social-walll.herokuapp.com/api/auth/',  credentials)
             .then(({data}) => {
                 this.$store.commit('set_token', data.access_token)
                 this.$router.push('wall-moderation')
