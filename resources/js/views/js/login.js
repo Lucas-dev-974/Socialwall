@@ -1,5 +1,5 @@
 import ApiService from '../../services/ApiServices'
-
+import axios from 'axios'
 export default{
     data(){
         return {
@@ -15,7 +15,7 @@ export default{
                 password: this.password
             }
 
-            ApiService.post('//api/auth/',  credentials)
+            axios.post('/api/auth/',  credentials)
             .then(({data}) => {
                 this.$store.commit('set_token', data.access_token)
                 this.$router.push('wall-moderation')
