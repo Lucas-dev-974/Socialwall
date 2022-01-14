@@ -1,5 +1,6 @@
-import ApiService from '../../services/ApiServices'
 import axios from 'axios'
+import ApiService from '../../services/ApiServices'
+
 export default{
     data(){
         return {
@@ -9,28 +10,20 @@ export default{
     }, 
 
     methods: {
-        login: async function(){
+        login: function(){
             let credentials = {
                 email: this.email,
                 password: this.password
             }
 
-            // let url = "http://social-walll.herokuapp.com/api/auth/"
-            // console.log('url:', url);
-            // ApiService.post(url, credentials)
-            // .then(data => {
-            //     console.log(data);
-            // }).catch(error => {
-            //     console.log(error);
-            // })
-
-            let response = await ApiService.post('https://social-walll.herokuapp.com/api/auth/', credentials)
-            if(response.status == 200){
-                console.log();
+            axios.post('/api/auth/',  credentials)
+            .then(({data}) => {
                 this.$store.commit('set_token', data.access_token)
                 this.$router.push('wall-moderation')
-            }
-
+            }).catch(err => {
+                console.log(err);
+                console.log(err.response.status);
+            }) 
         }
     }   
 }

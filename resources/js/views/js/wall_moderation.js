@@ -5,8 +5,6 @@ import ViewsModal from '../../components/ViewsModal.vue'
 
 import { Icon } from '@iconify/vue2'
 import ApiServices from '../../services/ApiServices'
-import router from '../../services/router'
-
 
 export default{
     components: {
@@ -38,7 +36,7 @@ export default{
             if(this.$store.state.token !== null){
                 ApiServices.get('/api/auth/').then(({data}) => {console.log(data);})
                 .catch(error => {
-                    console.log(error);
+                    console.log(error); 
                     window.location.href = '/login'
                 })
             }else window.location.href = '/login'
