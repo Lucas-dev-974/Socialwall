@@ -15,6 +15,7 @@
     </head>
     <body class="antialiased">
         <div id="app">
+            test
             <layout></layout>
         </div>
         <script src="{{ asset('js/app.js') }}"></script>
