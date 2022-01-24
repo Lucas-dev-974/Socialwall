@@ -20,7 +20,7 @@ class CreatePostsTable extends Migration
             $table->string('user_id');
             $table->string('hashtag');
             $table->boolean('have_media');
-            $table->int('state');
+            $table->integer('state');
         });
     }
 
