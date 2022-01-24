@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Http\FacebookServices;
+use App\Providers\FacebookRepository;
 
 class FacebookController extends Controller
 {
@@ -12,11 +12,15 @@ class FacebookController extends Controller
 
     public function __construct()
     {
-        $this->facebook = new FacebookServices();
+        $this->facebook = new FacebookRepository();
     }
 
     public function index(Request $request){
-        return response()->json(['url' => $this->facebook->getRedirectLoginurl()]);
+        // return redirect($this->facebook->redirectTo());
+    }
+
+    public function callbacb(Request $request){
+
     }
 }
 
