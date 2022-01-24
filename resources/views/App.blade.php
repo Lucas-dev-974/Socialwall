@@ -14,6 +14,7 @@
 
     </head>
     <body class="antialiased">
+        test
         <div id="app">
             <layout></layout>
         </div>
