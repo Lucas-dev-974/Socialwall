@@ -1,3 +1,6 @@
+/public/css
+/ressources/views/App.blade.php
+
 /node_modules
 /public/hot
 /public/storage
@@ -14,5 +17,3 @@ yarn-error.log
 /.idea
 /.vscode
 
-/public
-/ressources/views/App.blade.php
