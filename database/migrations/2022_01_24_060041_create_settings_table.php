@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreatePostsTable extends Migration
+class CreateSettingsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,12 @@ class CreatePostsTable extends Migration
      */
     public function up()
     {
-        Schema::create('posts', function(Blueprint $table){
+        Schema::create('settings', function (Blueprint $table) {
             $table->id();
-            $table->integer('platform');
-            $table->string('post_id');
-            $table->string('user_id');
+            $table->timestamps();
+            $table->json('blocked_users');
+            $table->json('suspect_words');
             $table->string('hashtag');
-            $table->boolean('have_media');
-            $table->int('state');
         });
     }
 
@@ -31,6 +29,6 @@ class CreatePostsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('posts');
+        Schema::dropIfExists('settings');
     }
 }
