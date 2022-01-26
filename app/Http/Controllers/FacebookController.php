@@ -16,11 +16,19 @@ class FacebookController extends Controller
     }
 
     public function index(Request $request){
-        // return redirect($this->facebook->redirectTo());
+        return redirect($this->facebook->redirectTo());
     }
 
-    public function callbacb(Request $request){
+    public function callback(Request $request){
+        if (request('error') == 'access_denied') return response()->json(['error' => 'l\'accès vous à été refusé']); 
+        //handle error 
 
+        $accessToken = $this->facebook->handleCallback();
+        return response()->json(['access_token' =>$accessToken]);
+    }
+
+    public function getPages(Request $request){
+        
     }
 }
 

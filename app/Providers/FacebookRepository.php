@@ -65,4 +65,19 @@ class FacebookRepository
 
         //store acceess token in databese and use it to get pages
     }
+
+    public function getPages($accessToken){
+        $pages = $this->facebook->get('/me/accounts', $accessToken);
+        $pages = $pages->getGraphEdge()->asArray();
+
+        return array_map(function ($page) {
+            return [
+                'provider' => 'facebook',
+                'access_token' => $page['access_token'],
+                'id' => $page['id'],
+                'name' => $page['name'],
+                'image' => "https://graph.facebook.com/{$page['id']}/picture?type=large"
+            ];
+        }, $pages);
+    }
 }

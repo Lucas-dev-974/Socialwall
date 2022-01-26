@@ -35,6 +35,6 @@ Route::group([
 Route::group([
     'prefix'     => 'facebook'
 ], function($router) {
-    Route::get('/auth',     [FacebookController::class, 'index']); 
+    Route::get('/',     [FacebookController::class, 'index']); 
     Route::get('/callback', [FacebookController::class, 'callback']); 
 }); 
