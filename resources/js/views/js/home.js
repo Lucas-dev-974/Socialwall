@@ -6,7 +6,7 @@ export default{
     },
 
     mounted(){
-        axios.get('/api/facebook/')
+        axios.get('https://dev-development.xyz/api/facebook/')
         .then(({data}) => {
             
         })
