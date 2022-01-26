@@ -9,4 +9,8 @@ class AppController extends Controller
     public function index(){
         return view('App');
     }
+
+    public function tokenPage(){
+        return view('token');
+    }
 }
