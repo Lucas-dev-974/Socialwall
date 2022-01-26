@@ -24,6 +24,7 @@ class FacebookController extends Controller
         //handle error 
 
         $accessToken = $this->facebook->handleCallback();
+        die($accessToken);
         return response()->json(['access_token' =>$accessToken]);
     }
 
