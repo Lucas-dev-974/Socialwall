@@ -16,7 +16,7 @@ class FacebookController extends Controller
     }
 
     public function index(Request $request){
-        return redirect($this->facebook->redirectTo());
+        return redirect()->secure($this->facebook->redirectTo());
     }
 
     public function callback(Request $request){
@@ -28,7 +28,7 @@ class FacebookController extends Controller
     }
 
     public function getPages(Request $request){
-        
+
     }
 }
 
