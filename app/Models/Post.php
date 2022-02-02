@@ -9,7 +9,7 @@ class Post extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'platform', 'post_id', 'user_id',
+        'platform', 'platform_post_id', 'user_id',
         'hashtag', 'have_media', 'state'
     ];
 }

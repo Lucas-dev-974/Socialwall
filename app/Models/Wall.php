@@ -16,7 +16,20 @@ class Wall extends Model
         return $this->hasMany(Setting::class);
     }
 
+    public function views(){
+        return $this->hasMany(Views::class);
+    }
+    
     public function user(){
         return $this->belongsTo(User::class);
     }
+
+    public function suspectWords(){
+        return $this->hasMany(SuspectWords::class);
+    }
+
+    public function blockedUsers(){
+        return $this->hasMany(BlockedUsers::class);
+    }
+
 }
