@@ -16,9 +16,15 @@ class CreateSettingsTable extends Migration
         Schema::create('settings', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->json('blocked_users');
-            $table->json('suspect_words');
-            $table->string('hashtag');
+            $table->unsignedBigInteger('wall_id');
+            $table->json('blocked_users')->nullable();
+            $table->json('suspect_words')->nullable();
+            $table->string('hashtag')->default('pomme');
+        });
+
+        
+        Schema::table('settings', function(Blueprint $table) {
+            $table->foreign('wall_id')->references('id')->on('walls')->onDelete('cascade');
         });
     }
 

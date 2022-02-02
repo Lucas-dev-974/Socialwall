@@ -16,11 +16,12 @@ class CreatePostsTable extends Migration
         Schema::create('posts', function(Blueprint $table){
             $table->id();
             $table->integer('platform');
-            $table->string('post_id');
-            $table->string('user_id');
+            $table->bigInteger('platform_post_id');
+            $table->bigInteger('post_id');
             $table->string('hashtag');
             $table->boolean('have_media');
             $table->integer('state');
+
         });
     }
 

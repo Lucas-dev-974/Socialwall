@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateWallTable extends Migration
+class CreateViewsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,15 +13,16 @@ class CreateWallTable extends Migration
      */
     public function up()
     {
-        Schema::create('walls', function (Blueprint $table) {
+        Schema::create('views', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('wall_id');
+            $table->dateTime('date');
+            $table->integer('views')->default(0);
             $table->timestamps();
-            $table->unsignedBigInteger('user_id');
-            $table->boolean('moderated');
         });
 
-        Schema::table('walls', function(Blueprint $table) {
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+        Schema::table('views', function(Blueprint $table){
+            $table->foreign('wall_id')->references('id')->on('walls')->onDelete('cascade');
         });
     }
 
@@ -32,6 +33,6 @@ class CreateWallTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('walls');
+        Schema::dropIfExists('views');
     }
 }
