@@ -1,14 +1,17 @@
-import axios from "axios"
+// require('./wall-animation.js') // Make wall animation
 
 export default{
     data(){
+        return {
 
+        }
     },
 
     mounted(){
-        axios.get('/api/facebook/')
-        .then(({data}) => {
-            
-        })
+
+    }, 
+
+    methods: {
+        
     }
-} 
+}

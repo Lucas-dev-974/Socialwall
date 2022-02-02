@@ -21,8 +21,11 @@ export default{
                 this.$store.commit('set_token', data.access_token)
                 this.$router.push('wall-moderation')
             }).catch(err => {
-                console.log(err);
-                console.log(err.response.status);
+                console.log(err.response.data);
+                this.$store.commit('push_alert', {
+                    type: 'warning',
+                    message: err.response.data.error
+                })
             }) 
         }
     }   

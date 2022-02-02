@@ -2,7 +2,9 @@ import Vue from 'vue';
 import VueRouter from 'vue-router';
 import Home from '../views/home.vue';
 import Login from '../views/login.vue';
+import Register from '../views/register.vue';
 import WallModeration from '../views/wall_moderation.vue';
+import Wall from '../views/wall.vue';
 
 Vue.use(VueRouter);
 
@@ -20,9 +22,20 @@ const router = new VueRouter({
             component: Login,
         },
         {
+            path: '/register',
+            name: 'register',
+            component: Register,
+        },
+        {
             path: '/wall-moderation',
-            name: 'wall',
+            name: 'wall-moderation',
             component: WallModeration
+        },
+
+        {
+            path: '/wall',
+            name: 'wall',
+            component: Wall
         },
     
         { path: "*", component: Home }

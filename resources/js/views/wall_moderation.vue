@@ -37,10 +37,10 @@
             </span>
 
             <span class="b-10 absolute">
-                <v-card class="w-80 center my-2 d-flex h-50 justify-space-around align-center">
-                    <Icon  class="w-20" icon="fontisto:hashtag"  style="color: #00B7FF" height="25"/>
-                    <input type="text" class="w-80 text-center" v-model="hashtag" >
-                </v-card>
+                <div class="w-80 center my-2 d-flex h-50 justify-space-around align-center">
+                    <Icon  class="w-20" icon="fontisto:facebook"  style="color: white" height="25"/>
+                    
+                </div>
             </span>
         </div>
         <div class="bg-red">
