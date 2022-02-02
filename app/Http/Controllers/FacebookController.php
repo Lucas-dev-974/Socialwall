@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Providers\FacebookRepository;
+use Illuminate\Support\Facades\Validator;
 
 class FacebookController extends Controller
 {
@@ -30,6 +31,15 @@ class FacebookController extends Controller
 
     public function getPages(Request $request){
 
+    }
+
+    public function setToken(Request $request){
+        $validator = Validator::make($request->all(), [
+            'token' => 'required:string'
+        ]);
+        if($validator->fails()) return response()->json(['error' => $validator->fails()]);
+
+        
     }
 }
 
