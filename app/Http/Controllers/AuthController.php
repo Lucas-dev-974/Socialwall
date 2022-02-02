@@ -5,13 +5,13 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Tymon\JWTAuth\Facades\JWTAuth;
 
 class AuthController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth:api', ['except' => ['login', 'register']]);
-
+        $this->middleware('jwt.verify', ['except' => ['login', 'register']]);
     }
 
     public function login(Request $request){
@@ -25,6 +25,7 @@ class AuthController extends Controller
         if (! $token = auth()->attempt($credentials->validated())) {
             return response()->json(['error' => 'Email ou mot de passe incorrecte'], 401);
         }
+        
         return $this->respondWithToken($token);
     }
 
@@ -32,6 +33,7 @@ class AuthController extends Controller
     public function register(Request $request){
         $validator = Validator::make($request->all(), [
             'name' => 'required|string|between:2,20',
+            'lastname' => 'required|string|between:2,20',
             'email' => 'required|string|email|unique:users',
             'password' => 'required|string|confirmed',
         ]);
@@ -40,22 +42,21 @@ class AuthController extends Controller
             return response()->json($validator->errors(), 400);
         }
 
-        $user = User::create(array_merge(
-                    $validator->validated(),
-                    ['password' => bcrypt($request->password)]
-                ));
+        $registerDatas = $validator->validated();
+        $registerDatas['password'] = bcrypt($request->password);
+        $registerDatas['role_id']  = 1;
+
+        $user = User::firstOrCreate($registerDatas);    
 
         return response()->json([
             'message' => 'User successfully registered',
-            'user' => $user
+            'user' => $user,
         ], 201);
     }
 
     protected function respondWithToken($token){
         return response()->json([
             'access_token' => $token,
-            'token_type' => 'bearer',
-            'expires_in' => auth()->factory()->getTTL() * 60
         ]);
     }
 
