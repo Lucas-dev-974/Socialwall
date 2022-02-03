@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::group([
-    'middlaware' => ['api'],
+    'middlaware' => ['jwt.verify'],
     'prefix'     => 'auth'
 ], function($router) {
     Route::post('/',   [AuthController::class, 'login'])->name('login');
