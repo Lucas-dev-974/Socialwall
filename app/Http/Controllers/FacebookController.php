@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\AdminSettings;
 use Illuminate\Http\Request;
 use App\Providers\FacebookRepository;
 use Illuminate\Support\Facades\Validator;
@@ -39,7 +40,13 @@ class FacebookController extends Controller
         ]);
         if($validator->fails()) return response()->json(['error' => $validator->fails()]);
 
-        
+        $adminSettings = AdminSettings::create([
+            'name' => 'facebook_token',
+            'type' => 'string',
+            'value' => $validator->validated(['token'])
+        ]);
+
+        return response()->json(['adminsettings' => $adminSettings]);
     }
 }
 
