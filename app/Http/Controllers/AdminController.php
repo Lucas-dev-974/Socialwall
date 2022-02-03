@@ -26,7 +26,7 @@ class AdminController extends Controller
             'value' => 'required:string'
         ]);
 
-        return response()->json(['test' => 'ok']);
+        // return response()->json(['test' => 'ok']);
         if($validator->fails()) return response()->json(['error' => $validator->failed()]);
         $adminSettings = AdminSettings::where([
             'name' => $validator->validated(['name'])
