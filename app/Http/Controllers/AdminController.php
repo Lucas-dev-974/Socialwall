@@ -30,7 +30,9 @@ class AdminController extends Controller
         $adminSettings = AdminSettings::where([
             'name' => $validator->validated(['name'])
         ]);
+        
         if($adminSettings) return response()->json(['error' => 'ce parametre existe déjà']);
+
         $adminSettings = new AdminSettings();
         $adminSettings['name'] = $validator->validated(['name']);
         $adminSettings['type'] = $validator->validated(['type']);
