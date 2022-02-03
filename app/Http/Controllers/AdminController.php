@@ -28,7 +28,7 @@ class AdminController extends Controller
 
         if($validator->fails()) return response()->json(['error' => $validator->failed()]);
         $adminSettings = AdminSettings::where([
-            'name' => $this->validated['name']
+            'name' => $validator->validated(['name'])
         ]);
         if($adminSettings) return response()->json(['error' => 'ce parametre existe déjà']);
         $adminSettings = new AdminSettings();
