@@ -10,8 +10,8 @@
         <link href="https://cdn.jsdelivr.net/npm/vuetify/dist/vuetify.min.css" rel="stylesheet">
         <link href="https://cdn.jsdelivr.net/npm/@mdi/font@4.x/css/materialdesignicons.min.css" rel="stylesheet">
 
-        <link href="{{ asset('/css/style.css') }}" rel="stylesheet" type="text/css">
-        <link href="{{ asset('/css/wall-animation-1.css') }}" rel="stylesheet" type="text/css">
+        <link href="{{ secure_asset('/css/style.css') }}" rel="stylesheet" type="text/css">
+        <link href="{{ secure_asset('/css/wall-animation-1.css') }}" rel="stylesheet" type="text/css">
 
     </head>
     <body class="antialiased">
@@ -19,8 +19,8 @@
             <layout></layout>
         </div>
 
-        <!-- <script src="{{ asset('js/wall-animation.js') }}"></script> -->
-        <script src="{{ asset('js/app.js') }}"></script>
+        <!-- <script src="{{ secure_asset('js/wall-animation.js') }}"></script> -->
+        <script src="{{ secure_asset('js/app.js') }}"></script>
         
     </body>
 </html>

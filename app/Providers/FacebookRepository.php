@@ -76,8 +76,10 @@ class FacebookRepository
                 'access_token' => $page['access_token'],
                 'id' => $page['id'],
                 'name' => $page['name'],
-                'image' => "https://graph.facebook.com/{$page['id']}/picture?type=large"
+                'image' => "https://graph.facebook.com/{$page->id}/picture?type=large"
             ];
         }, $pages);
     }
+
+
 }
