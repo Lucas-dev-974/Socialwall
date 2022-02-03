@@ -14,6 +14,7 @@ class FacebookController extends Controller
 
     public function __construct()
     {
+        $this->middleware('jwt.verify', ['except' => ['index']]);
         $this->facebook = new FacebookRepository();
     }
 
@@ -31,22 +32,11 @@ class FacebookController extends Controller
     }
 
     public function getPages(Request $request){
-
-    }
-
-    public function setToken(Request $request){
-        $validator = Validator::make($request->all(), [
-            'token' => 'required:string'
-        ]);
-        if($validator->fails()) return response()->json(['error' => $validator->fails()]);
-
-        $adminSettings = AdminSettings::create([
-            'name' => 'facebook_token',
-            'type' => 'string',
-            'value' => $validator->validated(['token'])
-        ]);
-
-        return response()->json(['adminsettings' => $adminSettings]);
+        $token = AdminSettings::where([
+            'name' => 'facebook_app_token'
+        ])->first();
+        $datas = $this->facebook->getPages($token);
+        return response()->json([ 'token' => $token ]);
     }
 }
 
