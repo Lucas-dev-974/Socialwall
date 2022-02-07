@@ -14,7 +14,7 @@ const router = new VueRouter({
         {
             path: '/',
             name: 'home',
-            component: Home,
+            component: WallModeration,
         },
         {
             path: '/login',
@@ -25,11 +25,6 @@ const router = new VueRouter({
             path: '/register',
             name: 'register',
             component: Register,
-        },
-        {
-            path: '/wall-moderation',
-            name: 'wall-moderation',
-            component: WallModeration
         },
 
         {

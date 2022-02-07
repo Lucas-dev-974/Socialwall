@@ -14,13 +14,12 @@ Route::group([
     'middlaware' => ['jwt.verify'],
     'prefix'     => 'auth'
 ], function($router) {
-    // Route::post('/',   [AuthController::class, 'login'])->name('login');
+    Route::post('/',   [AuthController::class, 'login'])->name('login');
     Route::patch('/',  [AuthController::class, 'register']);  
     Route::get('/',    [AuthController::class, 'TestToken']); 
     
 }); 
 
-Route::post('/auth',   [AuthController::class, 'login'])->name('login');
 
 Route::group([
     // 'middleware' => ['jwt.verify'],
