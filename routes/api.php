@@ -73,17 +73,6 @@ Route::group([
 }); 
 
 
-
-Route::group([
-    'middleware' => ['jwt.verify'],
-    'prefix'     => 'settings'
-], function($router) {
-    Route::get('/{wallid}/',     [SettingsController::class, 'get']); 
-    Route::post('/',     [SettingsController::class, 'create']); 
-    Route::patch('/',     [SettingsController::class, 'update']); 
-    Route::delete('/{id}',     [SettingsController::class, 'delete']); 
-}); 
-
 Route::group([
     'middleware' => ['jwt.verify'],
     'prefix'     => 'admin'

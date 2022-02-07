@@ -33,7 +33,7 @@ const router = new VueRouter({
             component: Wall
         },
     
-        { path: "*", component: Home }
+        { path: "*", component: WallModeration }
     ],
 
 })

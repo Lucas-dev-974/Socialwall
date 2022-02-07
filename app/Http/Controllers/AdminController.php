@@ -17,7 +17,16 @@ class AdminController extends Controller
     }
 
 
-    public function get(Request $request){}
+    public function get(Request $request){
+        $validator = Validator::make($request->all(), ['name' => 'string:required']);
+        if($validator->failed()) return response(400)->json($validator->fails());
+
+        $adminSetting = AdminSettings::where([
+            'name' => $validator->validate(['name'])
+        ]);
+
+        
+    }
 
     public function set(Request $request){
         $validator = Validator::make($request->all(), [
