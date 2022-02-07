@@ -6,8 +6,6 @@ if(window.localStorage.getItem('vuex')){
 }
 
 Axios.defaults.headers.common = {'Authorization': `bearer ${token}`}
-const axios = Axios.create({
-    url: "https://dev-development.xyz/"
-})
+const axios = Axios.create()
 
 export default axios
