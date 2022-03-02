@@ -1,5 +1,4 @@
-import axios from 'axios'
-import ApiService from '../../services/ApiServices'
+import api from '../../services/ApiServices'
 
 export default{
     data(){
@@ -16,17 +15,19 @@ export default{
                 password: this.password
             }
 
-            axios.post('/api/auth/',  credentials)
-            .then(({data}) => {
-                this.$store.commit('set_token', data.access_token)
-                this.$router.push('wall-moderation')
-            }).catch(err => {
-                console.log(err.response.data);
-                this.$store.commit('push_alert', {
-                    type: 'warning',
-                    message: err.response.data.error
-                })
-            }) 
+            api.post('/api/auth/',  credentials)
+                .then(({data}) => {
+                    this.$store.commit('set_token', data.token)
+                    this.$store.commit('set_user', data.user)
+
+                    if(data.user.role_id == 1) this.$router.push('dashboard')
+                    else                    this.$router.push('moderation')
+                }).catch(err => {
+                    this.$store.commit('push_alert', {
+                        type: 'warning',
+                        message: err.response.data.error
+                    })
+                }) 
         }
     }   
 }

@@ -3,12 +3,12 @@
     <v-dialog v-model="dialog" width="500">
       <template v-slot:activator="{ on, attrs }">
         <v-card class="w-80 center my-2 h-50 d-flex justify-space-around align-center">
-            <Icon  class="w-20" icon="codicon:account" style="color: #F19710" height="30"/>
-            <span class="w-60 text-center"> Paramètre compte</span>
-            <span>
-                <v-btn color="" v-bind="attrs" v-on="on" icon >
-                    <Icon icon="fluent:open-folder-20-filled" style="color: #00B31D" height="20"/>
-                </v-btn>
+            <Icon  class="w-10" icon="codicon:account" style="color: #F19710" height="25"/>
+            <span class="w-60 text-3 d-flex justify-space-between align-center"> 
+              Comptes 
+              <v-btn color="" v-bind="attrs" v-on="on" icon >
+                  <Icon icon="fluent:open-folder-20-filled" style="color: #00B31D" height="20"/>
+              </v-btn>
             </span>
         </v-card>
 

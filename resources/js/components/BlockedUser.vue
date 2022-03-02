@@ -3,11 +3,11 @@
     <v-dialog v-model="dialog" width="500">
       <template v-slot:activator="{ on, attrs }">
         <v-card class="w-80 center my-2 h-50 d-flex justify-space-around align-center">
-            <Icon  class="w-20" icon="bi:card-list" style="color: #F11010" height="30"/>
-            <span class="">{{BlockedUser.length}}</span>
-            <span class="w-60 text-center">Utilisateur Bloqués</span>
-            <span>
-                <v-btn color="" v-bind="attrs" v-on="on" icon >
+            <Icon  class="w-10 mx-0" icon="codicon:account" style="color: #F11010" height="25"/>
+            <!-- <span class="text-3 w-1 text-center">{{BlockedUser.length}}</span> -->
+            <span class="w-60 d-flex justify-space-between align-center text-3">
+              Bloqués
+              <v-btn color="" v-bind="attrs" v-on="on" icon >
                     <Icon icon="fluent:open-folder-20-filled" style="color: #00B31D" height="20"/>
                 </v-btn>
             </span>

@@ -1,13 +1,14 @@
 <template>
-    <div>
-        <v-app style="position: relativ; ">
+    <div class="div"  >
+        <v-app >
             <Navbar />
             <Alert />
-            <router-view>
+            <router-view >
                 
             </router-view>
-        </v-app>
+        </v-app>        
     </div>
+
 
 </template>
 
@@ -17,6 +18,10 @@ import Alert from './services/Alert.vue'
 export default{
     components:{
         Navbar, Alert
+    },
+
+    mounted(){
+        this.$vuetify.theme.dark = true
     }
 }
 

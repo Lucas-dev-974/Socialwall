@@ -1,5 +1,5 @@
 <template>
-    <div style="z-index: 100;">
+    <div style="z-index: 100; position: absolute; top: 10px; left: calc(50% - 360px)">
         <div v-for="alert in this.$store.state.alerts" :key="alert.id" z-index="100000">
             <v-alert z-index="10000" elevation='15' :type="alert.type" v-model="alert.open"  transition="scale-transition" style="width:720px " class="mx-auto">
                 <v-row >

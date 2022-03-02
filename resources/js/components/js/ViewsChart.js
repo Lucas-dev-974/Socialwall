@@ -1,37 +1,33 @@
 
 const chartData = [
   {
-    label: "Venezuela",
-    value: "290"
+    label: "Lundi",
+    value: "90"
   },
   {
-    label: "Saudi",
+    label: "Mardi",
     value: "260"
   },
   {
-    label: "Canada",
+    label: "Mercredi",
     value: "180"
   },
   {
-    label: "Iran",
+    label: "Jeudi",
     value: "140"
   },
   {
-    label: "Russia",
+    label: "Vendredi",
     value: "115"
   },
   {
-    label: "UAE",
+    label: "Samedi",
     value: "100"
   },
   {
-    label: "US",
+    label: "Dimanche",
     value: "30"
   },
-  {
-    label: "China",
-    value: "30"
-  }
 ];
 
 const dataSource = {
@@ -40,7 +36,7 @@ const dataSource = {
     subcaption: "",
     xaxisname: "Date",
     yaxisname: "Vue",
-    numbersuffix: "V",
+    numbersuffix: "Vues",
     theme: "fusion"
   },
   data: chartData
@@ -61,6 +57,7 @@ export default {
   },
 
   mounted () {
+    console.log(this.$store.state.wall);
       this.render()
   },
 

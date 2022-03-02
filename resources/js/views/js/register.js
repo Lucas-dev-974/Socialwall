@@ -5,14 +5,11 @@ import api from '../../services/ApiServices'
 export default{
     data(){
         return {
-            name: '',
             lastname: '',
+            name: '',
             email: '',
             password: '',
             password_confirmation: '',
-
-            create_wall: false,
-            token: null
         }
     },
 
@@ -28,17 +25,8 @@ export default{
 
             }).then(({data}) => {
                 this.$store.commit('set_user', data.user)
-            }).catch(error => {
-                console.log(error);
-            })
-
-            api.post('/api/auth/', {
-                email: this.email,
-                password: this.password
-            }).then(({data}) => {
-                console.log(data);
-                this.$store.commit('set_token', data.access_token)
-                this.$router.push('wall-moderation')
+                this.$store.commit('set_token', data.token)
+                this.$router.push('/dashboard')
             }).catch(error => {
                 console.log(error);
             })

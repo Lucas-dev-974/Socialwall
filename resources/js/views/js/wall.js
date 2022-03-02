@@ -6,6 +6,8 @@ export default{
     },
 
     mounted(){
+
+        if(this.$store.state.views)
         axios.get('/api/facebook/')
         .then(({data}) => {
             

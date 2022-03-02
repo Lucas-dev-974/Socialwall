@@ -3,6 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
         <title>SocialWall</title>
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
@@ -10,8 +11,8 @@
         <link href="https://cdn.jsdelivr.net/npm/vuetify/dist/vuetify.min.css" rel="stylesheet">
         <link href="https://cdn.jsdelivr.net/npm/@mdi/font@4.x/css/materialdesignicons.min.css" rel="stylesheet">
 
-        <link href="{{ secure_asset('/css/style.css') }}" rel="stylesheet" type="text/css">
-        <link href="{{ secure_asset('/css/wall-animation-1.css') }}" rel="stylesheet" type="text/css">
+        <link href="{{ asset('/css/style.css') }}" rel="stylesheet" type="text/css">
+        <link href="{{ asset('/css/wall-animation-1.css') }}" rel="stylesheet" type="text/css">
 
     </head>
     <body class="antialiased">
@@ -20,7 +21,7 @@
         </div>
 
         <!-- <script src="{{ secure_asset('js/wall-animation.js') }}"></script> -->
-        <script src="{{ secure_asset('js/app.js') }}"></script>
+        <script src="{{ asset('js/app.js') }}"></script>
         
     </body>
 </html>
