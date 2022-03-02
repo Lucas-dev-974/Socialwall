@@ -39,7 +39,10 @@ Route::group([
     Route::get('/',        [UserController::class, 'get_me']); 
     Route::patch('/',      [UserController::class, 'update']); 
     Route::delete('/{id}', [UserController::class, 'delete']); 
+    Route::post('/',       [UserController::class, 'search']);
 }); 
+
+Route::get('/users', [UserController::class, 'get'])->middleware(['jwt.verify']);
 
 Route::group([
     'middleware' => ['jwt.verify'],
@@ -66,10 +69,10 @@ Route::group([
     'middleware' => ['jwt.verify'],
     'prefix'     => 'settings'
 ], function($router) {
-    Route::get('/{wallid}/',     [SettingsController::class, 'get']); 
-    Route::post('/',     [SettingsController::class, 'create']); 
-    Route::patch('/',     [SettingsController::class, 'update']); 
-    Route::delete('/{id}',     [SettingsController::class, 'delete']); 
+    Route::get('/{wallid}/', [SettingsController::class, 'get']); 
+    Route::post('/',         [SettingsController::class, 'create']); 
+    Route::patch('/',        [SettingsController::class, 'update']); 
+    Route::delete('/{id}',   [SettingsController::class, 'delete']); 
 }); 
 
 
@@ -77,6 +80,6 @@ Route::group([
     'middleware' => ['jwt.verify'],
     'prefix'     => 'admin'
 ], function($router) {
-    Route::get('/',  [AdminController::class, 'get']); 
+    Route::get('/{name}',  [AdminController::class, 'get']); 
     Route::post('/', [AdminController::class, 'set']); 
 }); 
