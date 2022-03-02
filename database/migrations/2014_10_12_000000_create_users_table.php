@@ -22,6 +22,8 @@ class CreateUsersTable extends Migration
             $table->string('password');
             $table->unsignedBigInteger('role_id');
             $table->string('phone')->nullable();
+            $table->string('medias_url')->nullable();
+            $table->boolean('blocked')->default(false);
             $table->rememberToken();
             $table->timestamps();
         });

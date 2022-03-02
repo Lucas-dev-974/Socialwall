@@ -17,9 +17,9 @@ class CreateSettingsTable extends Migration
             $table->id();
             $table->timestamps();
             $table->unsignedBigInteger('wall_id');
-            $table->json('blocked_users')->nullable();
-            $table->json('suspect_words')->nullable();
-            $table->string('hashtag')->default('pomme');
+            $table->string('name');
+            $table->string('type');
+            $table->string('value');
         });
 
         

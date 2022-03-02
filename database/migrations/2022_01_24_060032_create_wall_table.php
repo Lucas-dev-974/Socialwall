@@ -18,6 +18,11 @@ class CreateWallTable extends Migration
             $table->timestamps();
             $table->unsignedBigInteger('user_id');
             $table->boolean('moderated');
+            $table->string('name');
+            $table->string('hashtag')->nullable();
+            $table->string('background_url')->nullable();
+            $table->string('background_color')->default('#FFFFF');
+
         });
 
         Schema::table('walls', function(Blueprint $table) {
