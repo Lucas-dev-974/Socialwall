@@ -25,8 +25,13 @@ class AuthController extends Controller
         if (! $token = auth()->attempt($credentials->validated())) {
             return response()->json(['error' => 'Email ou mot de passe incorrecte'], 401);
         }
-        
-        return $this->respondWithToken($token);
+
+        $user = JWTAuth::user();
+        if($user->blocked) return response()->json(['error' => 'Votre compté a été mis en suspend par un admin.'], 401);
+        return response()->json([
+            'token' => $token,
+            'user'  => $user
+        ]);
     }
 
 
@@ -44,14 +49,16 @@ class AuthController extends Controller
 
         $registerDatas = $validator->validated();
         $registerDatas['password'] = bcrypt($request->password);
-        $registerDatas['role_id']  = 1;
+        $registerDatas['role_id']  = 3;
 
         $user = User::firstOrCreate($registerDatas);    
 
+        $token = auth()->login($user);
+
         return response()->json([
-            'message' => 'User successfully registered',
-            'user' => $user,
-        ], 201);
+            'token' => $token,
+            'user' => $user
+        ]);
     }
 
     protected function respondWithToken($token){

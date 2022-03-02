@@ -9,7 +9,7 @@ class Setting extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'blocked_user', 'suspect_words', 'hashtag'
+        'id', 'field', 'type', 'value', 'wall_id'
     ];
 
     public function wall(){

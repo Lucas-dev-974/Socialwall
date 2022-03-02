@@ -9,7 +9,7 @@ class Wall extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'user_id', 'moderated'
+        'user_id', 'moderated', 'name', 'hashtag', 'background_url', 'background_color'
     ];
     
     public function settings(){

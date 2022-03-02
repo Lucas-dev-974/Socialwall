@@ -9,70 +9,48 @@ use Tymon\JWTAuth\Facades\JWTAuth;
 
 class SettingsController extends Controller
 {
-    public function get(Request $request, $wallid = null){
+    public function get(Request $request, $wallid){
         $user = JWTAuth::user();
+        $wallSetting = Setting::where(['wall_id' => $wallid ])->with('wall')->first();
 
-        $wallSetting = Setting::where([
-            'wall_id' => $wallid
-        ])->with('wall')->first();
-        
+        if(!$wallSetting) return response()->json(['error' => 'Pas de paramètre pour ce mur']);
         if($wallSetting->wall->user_id == $user->id || $user->role_id == 1){
             return response()->json($wallSetting);
         }else{
             return response()->json(['error' => 'Vous n\'êtes pas autorisé à accédé à cet ressource !']);
         }
-        return $wallSetting;
     }
     
-    // public function create(Request $request){
-    //     $user = JWTAuth::user();
-
-    //     $validator = Validator::make($request->all(), [
-    //         'wallname' => 'required:string', 
-    //     ]);
-
-    //     if($validator->fails()) return response()->json(['error' => $validator->errors()]);
-
-    //     // Setting::create([
-    //     //     ''
-    //     // ]);
-
-    //     // return response()->json(['wall' => $wall]);
-    // }
+    public function set_Settings(Request $request){
+        $user = JWTAuth::user();
+        $validator = Validator::make($request->all(), [
+            'wall_id' => 'required|number',
+            'type'   => 'required|string',
+            'name'   => 'required|string',
+            'value'  => 'required|string'
+        ]);
+        if($validator->fails()) return response()->json(['error' => $validator->errors()]);
+        
+        Setting::create(array_merge($validator->validated()));
+        return response()->json('Parametre mis à jour');
+    }
 
     public function update(Request $request){
         $user = JWTAuth::user();
         
         $validator = Validator::make($request->all(), [
-            'fields'  => 'required:string',
+            'field'  => 'required:string',
             'wallid'  => 'required:int',
-            'values'  => 'required:string',
-            'options' => 'string',
+            'value'  => 'required:string',
+            'name' => 'string:required',
+
         ]);
         if($validator->fails()) return response()->json(['error' => $validator->errors()]);
 
-        $wallSettings = Setting::where(['wall_id' => 'wallid'])->with('wall')->first();
+        $wallSettings = Setting::where(['wall_id' => 'wallid', 'name' => $validator->validated()['name']])->with('wall')->first();
 
         if($wallSettings->wall->user_id == $user->id || $user->role_id == 1){
-            switch($validator->validated()['field']){
-                case 'hashtag':
-                    $wallSettings->hashtag = $validator->validated()['value'];
-                    $wallSettings->save();
-                    break;
-
-                case 'blocked_user':
-                    if($validator->validated()['options']) {}
-
-                    break;
-
-                case 'suspect_words':
-                    break;
-
-                default: 
-                    return response()->json(['error' => 'Désoler impossible d\'effectuer cet action']);
-            }
-
-
+            
         }else return response()->json(['error' => 'Vous n\'êtes pas autorisé à modifier cet ressource !']);
 
 

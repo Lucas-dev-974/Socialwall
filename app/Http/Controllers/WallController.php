@@ -33,13 +33,14 @@ class WallController extends Controller
         $wall = Wall::where([ 'id' => $wallid])->with(['settings', 'views', 'suspectWords', 'BlockedUsers'])->first();
 
         if($user['id'] == $wall['user_id'] || $user['role_id'] == 1){
+            $wall->settings();
+            $wall->views();
             return response()->json(['wall' => $wall]);
         }else return response()->json([ 'error' => 'Vous n\'ête pas autorisé à récuperer cet ressource']);
     }
     
     public function create(Request $request){
         $user = JWTAuth::user();
-        // return $user;
         $validator = Validator::make($request->all(), [
             'wallname' => 'required:string', 
         ]);
@@ -47,28 +48,22 @@ class WallController extends Controller
         if($validator->fails()) return response()->json(['error' => $validator->errors()]);
 
         $wall = Wall::create([
-            'user_id' => $user['id'],
-            'moderated' => true
+            'user_id' =>  $user['id'],
+            'moderated' => true,
+            'name'      => $validator->validated()['wallname'],
         ]);
-
-        $settings = new Setting();
-        $settings->wall_id = $wall->id;
-        $settings->save();
 
         $views = new Views();
         $views->wall_id = $wall->id;
         $views->date    = date('Y-m-d H:i:s');
-        $wall->settings();
 
-        $wall->settings = $settings;
         $wall->views    = $views;
 
-        return response()->json(['wall' => $wall]);
+        return response()->json($wall);
     }
 
     public function update(Request $request){
         $user = JWTAuth::user();
-        
         $validator = Validator::make($request->all(), [
             'field' => 'required:string',
             'wallid' => 'required:int',
@@ -76,22 +71,21 @@ class WallController extends Controller
         ]);
         if($validator->fails()) return response()->json(['error' => $validator->errors()]);
 
+
+        $available_fields = ['moderated', 'hashtag', 'name', 'background_url', 'background_color'];
         
         // Get wall where id is id given
         $wall = Wall::where([ 'id' => $validator->validate()['wallid']])->first();
 
+        // return $wall->fillable;
         if($wall->user_id == $user->id || $user->role_id == 1){
-            switch($validator->validated()['field']){
-                case 'moderated':
-                    $wall->moderated = $validator->validated()['value'];
-                    $wall->save();
-                    break;
-                    
-                default:
-                    return response()->json(['error' => 'Impossible d\'efectuer cet action ']);
-                    break;
+            if(in_array($validator->validated()['field'], $available_fields, true)){
+                $wall[$validator->validated()['field']] = $validator->validated()['value'];
+                $wall->save();
+            }else{
+                return response()->json(['error' => 'Le paramete ' . $validator->validated()['field'] . ' n\'existe pas !'], 404);
             }
-            return response()->json([ 'updated' => true, 'wall' => $wall ]);
+            return response()->json('Le paramete ' . $validator->validated()['field'] . ' à été mis à jours');
         }else return response()->json([ 'error' => 'Vous n\'avez pas accès à la modification de cet ressource !']);
 
     }

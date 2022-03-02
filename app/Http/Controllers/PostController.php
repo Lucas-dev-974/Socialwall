@@ -9,15 +9,15 @@ use Tymon\JWTAuth\Facades\JWTAuth;
 
 class PostController extends Controller
 {
-    public function get(Request $request, $hashtag = null){
+    public function get(Request $request, $hashtag, $wallid){
         $user = JWTAuth::user();
-        if(!$hashtag){               // Check if wall id is
-            $posts = Post::where([ 'hashtag' => $user['id'] ])->get();
 
+        if(!$hashtag && !$wallid){               // Check if wall id is
+            $posts = Post::where([ 'hashtag' => $user['id'] ])->get();
             return $posts;
         }
 
-        $post = Post::where([ 'id' => $hashtag])->first();
+        $post = Post::where([ 'hastag' => $hashtag])->first();
         return response()->json(['post' => $post]);
     }
     
