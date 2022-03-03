@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\AdminSettings;
 use Illuminate\Http\Request;
 use App\Providers\FacebookRepository;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 
 class FacebookController extends Controller
@@ -27,8 +28,11 @@ class FacebookController extends Controller
         //handle error 
 
         $accessToken = $this->facebook->handleCallback();
-        // return redirect()->route('token')->with('token', $accessToken);
-        return response()->json(['access_token' =>$accessToken]);
+        
+        return response()->json([
+            'access_token' => $accessToken,
+            'user'         => Auth::user()
+        ]);
     }
 
     public function getPages(Request $request){
