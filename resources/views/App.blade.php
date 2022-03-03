@@ -21,7 +21,7 @@
         </div>
 
         <!-- <script src="{{ secure_asset('js/wall-animation.js') }}"></script> -->
-        <script src="{{ asset('js/app.js') }}"></script>
+        
         <script>
             window.fbAsyncInit = function() {
                 FB.init({
@@ -48,6 +48,11 @@
                     statusChangeCallback(response);
                 });
             }
+
+            function statusChangeCallback(data){
+                console.log(data);
+            }
         </script>
+        <script src="{{ asset('js/app.js') }}"></script>
     </body>
 </html>
