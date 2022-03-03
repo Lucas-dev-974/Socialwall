@@ -39,7 +39,7 @@ export default{
         
         if(this.$store.state.user.role_id == 1){
             this.getAdminParams()
-            this.load_wall()
+            // this.load_wall()
         }
     },
 
