@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Providers\FacebookRepository;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
+use Tymon\JWTAuth\Facades\JWTAuth;
 
 class FacebookController extends Controller
 {
@@ -31,7 +32,7 @@ class FacebookController extends Controller
         
         return response()->json([
             'access_token' => $accessToken,
-            'user'         => Auth::user()
+            'user'         => JWTAuth::user()
         ]);
     }
 
