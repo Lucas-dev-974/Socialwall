@@ -2,6 +2,7 @@ import UsersList from '../../components/UsersList.vue'
 import WallList  from '../../components/WallList.vue'
 
 import api from '../../services/ApiServices.js'
+import facebook from '../../facebook.js'
 
 export default{
     components: {
@@ -27,6 +28,7 @@ export default{
     },
 
     mounted(){
+        facebook.handleFacebookSdk()
         this.$store.commit('check_login', null)
         this.load_walls()
         

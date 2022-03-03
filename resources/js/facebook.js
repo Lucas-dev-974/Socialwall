@@ -2,10 +2,10 @@ module.exports = {
     handleFacebookSdk: function(app_id, api_version){
         window.fbAsyncInit = function() {
             FB.init({
-            appId      : app_id,
+            appId      : 3093684740891759,
             cookie     : true,
             xfbml      : true,
-            version    : api_version
+            version    : 'v12.0'
             });
             
             FB.AppEvents.logPageView();   
