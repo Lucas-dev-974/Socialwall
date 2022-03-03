@@ -20,7 +20,7 @@
             <layout></layout>
         </div>
 
-        <!-- <script src="{{ secure_asset('js/wall-animation.js') }}"></script> --> -->
+        <!-- <script src="{{ secure_asset('js/wall-animation.js') }}"></script> --> 
        
         <script>
             // import store from '../js/services/Storage.js'
@@ -54,7 +54,6 @@
             function statusChangeCallback(data){
                 
             }
-            console.log(store);
         </script>
         <script src="{{ asset('js/app.js') }}"></script>
     </body>
