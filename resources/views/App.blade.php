@@ -52,7 +52,7 @@
             }
 
             function statusChangeCallback(data){
-                
+                console.log(data);
             }
         </script>
         <script src="{{ asset('js/app.js') }}"></script>
