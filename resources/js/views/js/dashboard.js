@@ -72,10 +72,11 @@ export default{
                 data = JSON.parse(data)
                 wallid = data.wall_demo
                 api.get('/api/wall/' + data.wall_demo).then(({data}) => {
-                    console.log(data);
-                    this.$store.commit('set_wall', data.wall)
-                    this.wallname = data.wall.name
-                    this.hashtag  = data.wall.hashtag
+                    if(data !== null){
+                        this.$store.commit('set_wall', data.wall)
+                        this.wallname = data.wall.name
+                        this.hashtag  = data.wall.hashtag
+                    }
                 })
             }).catch(error => { console.log(error); })
 
