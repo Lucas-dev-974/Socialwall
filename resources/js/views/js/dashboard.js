@@ -23,7 +23,9 @@ export default{
 
             appid: '',
             appsecret: '',
-            show_app_secret: false
+            show_app_secret: false,
+
+            facebook_connected: false,
         }
     },
 
