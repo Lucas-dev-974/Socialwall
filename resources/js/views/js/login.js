@@ -15,7 +15,7 @@ export default{
                 password: this.password
             }
 
-            axios.post('/api/auth/',  credentials)
+            axios.post('/api/auth',  credentials)
                 .then(({data}) => {
                     console.log('login');
                     console.log(data);
