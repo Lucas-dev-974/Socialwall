@@ -11,35 +11,15 @@ Vue.use(VueRouter);
 const router = new VueRouter({
     mode: 'history',
     routes: [
-        {
-            path: '/moderation',
-            name: 'moderation',
-            component: WallModeration,
-        },
+        { path: '/login', name: 'login', component: Login, },
 
-        {
-            path: '/login',
-            name: 'login',
-            component: Login,
-        },
+        { path: '/register', name: 'register', component: Register },
 
-        {
-            path: '/register',
-            name: 'register',
-            component: Register,
-        },
+        { path: '/moderation', name: 'moderation', component: WallModeration },
 
-        {
-            path: '/wall',
-            name: 'wall',
-            component: Wall
-        },
+        { path: '/dashboard', name: 'dashboard', component: Dashboard },
 
-        {
-            path: '/dashboard',
-            name: 'dashboard',
-            component: Dashboard
-        },
+        { path: '/wall', name: 'wall', component: Wall },
     
         { path: "*", component: WallModeration }
     ],

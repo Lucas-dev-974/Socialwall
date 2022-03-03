@@ -11,7 +11,7 @@ class AuthController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('jwt.verify',  ['except' => ['register', 'login']]);
+        $this->middleware('jwt.verify',  ['except' => ['login', 'register']]);
     }
 
     public function login(Request $request){
@@ -34,9 +34,9 @@ class AuthController extends Controller
 
     public function register(Request $request){
         $validator = Validator::make($request->all(), [
-            'name' => 'required|string|between:2,20',
+            'name'     => 'required|string|between:2,20',
             'lastname' => 'required|string|between:2,20',
-            'email' => 'required|string|email|unique:users',
+            'email'    => 'required|string|email|unique:users',
             'password' => 'required|string|confirmed',
         ]);
 

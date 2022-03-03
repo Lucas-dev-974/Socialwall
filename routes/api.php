@@ -16,8 +16,7 @@ Route::group([
 ], function($router) {
     Route::post('/',   [AuthController::class, 'login'])->name('login');
     Route::patch('/',  [AuthController::class, 'register'])->name('register');  
-    // Route::get('/',    [AuthController::class, 'TestToken']); 
-    
+    Route::get('/',    [AuthController::class, 'TestToken'])->name('check_token'); 
 }); 
 
 
