@@ -153,8 +153,8 @@ export default{
             else this.$refs.appInputSecret.type = 'password'
         },
 
-        checkLoginState: function(){
-            facebook.checkLoginState()
+        facebook_login: function(){
+            console.log(JSON.parse(localStorage));
         }
     }
 }
