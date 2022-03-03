@@ -15,8 +15,8 @@ Route::group([
     'prefix'     => 'auth'
 ], function($router) {
     Route::post('/',   [AuthController::class, 'login'])->name('login');
-    Route::patch('/',  [AuthController::class, 'register']);  
-    Route::get('/',    [AuthController::class, 'TestToken']); 
+    Route::patch('/',  [AuthController::class, 'register'])->name('register');  
+    // Route::get('/',    [AuthController::class, 'TestToken']); 
     
 }); 
 

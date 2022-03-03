@@ -11,7 +11,7 @@ class AuthController extends Controller
 {
     public function __construct()
     {
-        // $this->middleware('jwt.verify',  ['except' => ['register', 'login']]);
+        $this->middleware('jwt.verify',  ['except' => ['register', 'login']]);
     }
 
     public function login(Request $request){
@@ -28,10 +28,7 @@ class AuthController extends Controller
 
         $user = JWTAuth::user();
         if($user->blocked) return response()->json(['error' => 'Votre compté a été mis en suspend par un admin.'], 401);
-        return response()->json([
-            'token' => $token,
-            'user'  => $user
-        ]);
+        return response()->json([ 'token' => $token, 'user'  => $user ]);
     }
 
 
@@ -61,11 +58,6 @@ class AuthController extends Controller
         ]);
     }
 
-    protected function respondWithToken($token){
-        return response()->json([
-            'access_token' => $token,
-        ]);
-    }
 
     public function TestToken(Request $request){
         return response()->json(['success' => true]);
