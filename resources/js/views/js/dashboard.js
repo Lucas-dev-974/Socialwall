@@ -54,24 +54,23 @@ export default{
         },
 
         load_wall: function(){
-            let wallid = null
-            api.get('/api/admin/wall_demo')
-            .then(({data}) => {
-                console.log('laod wall data first step: ', data)
+            let wallid
+            api.get('/api/admin/wall_demo').then(({data}) => { // To get the wall demonstration id
+                console.log(data);
                 if(data != null){
                     data = JSON.parse(data)
                     wallid = data.wall_demo
-                    api.get('/api/wall/' + data.wall_demo).then(({data}) => {
-                        console.log('laod wall data second step: ', data);
-                        this.$store.commit('set_wall', data.wall)
-                        this.wallname = data.wall.name
-                        this.hashtag  = data.wall.hashtag
-                    }).catch(error => console.log(error))
                 }
+            }).catch(error => {  wallid = null })
 
-            }).catch(error => { console.log(error) })
-
-
+            if(wallid != null){ // To get the wall demonstration datas if wall demonstration was defined in database for the user
+                api.get('/api/wall/' + wallid).then(({data}) => { 
+                    console.log('laod wall data second step: ', data);
+                    this.$store.commit('set_wall', data.wall)
+                    this.wallname = data.wall.name
+                    this.hashtag  = data.wall.hashtag
+                }).catch(error => console.log(error))
+            }
         },
 
         open_wall: function(wallid){
@@ -133,20 +132,8 @@ export default{
             this.$refs[ref].focus()
         },
 
-        update_FacebookSetting: function(field, value, type){
-            api.post('/api/admin/', {
-                name: field,
-                type: type,
-                value: value
-            }).then(({data}) => {
-                data
-            }).catch(error => console.log(error ))
-        },
-
-        ShowAppSecret: function(){
-            this.show_app_secret = !this.show_app_secret
-            if(this.show_app_secret) this.$refs.appInputSecret.type = 'text'
-            else this.$refs.appInputSecret.type = 'password'
-        },
+        check_FacebookAuth: function(){
+            // api
+        }
     }
 }

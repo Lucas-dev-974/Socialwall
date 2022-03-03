@@ -29,6 +29,7 @@ class AdminController extends Controller
             foreach($admin_settings as $setting){
                 $settings[$setting['name']] = $setting['value'];
             }
+            if($settings == null) return response()->json(['error' => 'La donnés demander n\'existe pas !'], 403);
             return response()->json(json_encode($settings));
 
         }else{
