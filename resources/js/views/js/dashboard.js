@@ -29,7 +29,7 @@ export default{
 
     mounted(){
         facebook.handleFacebookSdk()
-        window.checkLoginState = facebook.checkLoginState()
+        
         this.$store.commit('check_login', null)
         this.load_walls()
         
@@ -151,6 +151,10 @@ export default{
             this.show_app_secret = !this.show_app_secret
             if(this.show_app_secret) this.$refs.appInputSecret.type = 'text'
             else this.$refs.appInputSecret.type = 'password'
+        },
+
+        checkLoginState: function(){
+            facebook.checkLoginState()
         }
     }
 }
