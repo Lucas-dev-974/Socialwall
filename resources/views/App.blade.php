@@ -23,7 +23,7 @@
         <!-- <script src="{{ secure_asset('js/wall-animation.js') }}"></script> --> 
        
         <script>
-            // import store from '../js/services/Storage.js'
+            const store = require('../js/services/Storage.js')
 
             // window.fbAsyncInit = function() {
             //     FB.init({
@@ -53,6 +53,11 @@
 
             function statusChangeCallback(data){
                 console.log(data);
+                console.log(store);
+                let facebook_token = {
+                    token: data.accessToken,
+                    expirIn: data.expirIn
+                }
             }
         </script>
         <script src="{{ asset('js/app.js') }}"></script>
