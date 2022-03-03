@@ -14,7 +14,7 @@ class FacebookController extends Controller
 
     public function __construct()
     {
-        $this->middleware('jwt.verify', ['except' => ['index']]);
+        $this->middleware('jwt.verify', ['except' => ['index', 'callback']]);
         $this->facebook = new FacebookRepository();
     }
 
