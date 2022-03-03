@@ -32,7 +32,10 @@
             function statusChangeCallback(data){
                 let storage = JSON.parse(localStorage.getItem('vuex'))
                 if(data.status == 'connected'){
-                    storage.facebook_user_data = data.authResponse
+                    storage.facebook = {
+                        user_infos: data.authResponse,
+                        connected: data.connected == 'connected' ? true : false
+                    }
                 }
 
                 localStorage.setItem('vuex', JSON.stringify(storage))
