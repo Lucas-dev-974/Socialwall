@@ -18,6 +18,11 @@ class FacebookController extends Controller
     {
         $this->middleware('jwt.verify', ['except' => ['index', 'callback']]);
         $this->facebook = new FacebookRepository();
+
+        $user = JWTAuth::user();
+        if(!$user) return abort(response()->json(['error' => 'Veuillez vous connectez !']));
+        
+        // $token = AdminSettings::where
     }
 
     public function index(Request $request){
@@ -41,6 +46,10 @@ class FacebookController extends Controller
         
         $datas = $this->facebook->getPages($token);
         return response()->json([ 'token' => $token ]);
+    }
+
+    public function getProfile(Request $request){
+        // $token = 
     }
 }
 

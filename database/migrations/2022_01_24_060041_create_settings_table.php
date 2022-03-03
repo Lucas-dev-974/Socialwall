@@ -16,7 +16,7 @@ class CreateSettingsTable extends Migration
         Schema::create('settings', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->unsignedBigInteger('wall_id');
+            $table->unsignedBigInteger('user_id');
             $table->string('name');
             $table->string('type');
             $table->string('value');
@@ -24,7 +24,7 @@ class CreateSettingsTable extends Migration
 
         
         Schema::table('settings', function(Blueprint $table) {
-            $table->foreign('wall_id')->references('id')->on('walls')->onDelete('cascade');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 

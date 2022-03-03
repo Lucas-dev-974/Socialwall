@@ -9,7 +9,7 @@ class Setting extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'id', 'field', 'type', 'value', 'wall_id'
+        'id', 'field', 'type', 'value', 'user_id'
     ];
 
     public function wall(){

@@ -30,9 +30,13 @@ export default{
     },
 
     mounted(){
-        facebook.handleFacebookSdk()
-
         this.$store.commit('check_login', null)
+        if(!this.$store.state.facebook.connected){
+            facebook.handleFacebookSdk()
+        }
+
+
+
         this.load_walls()
         
         if(this.$store.state.user.role_id == 1){
@@ -42,6 +46,8 @@ export default{
     },
 
     methods: {
+        
+
         getAdminParams: function(){
             api.get('/api/admin/facebook_app_id|facebook_app_secret')
             .then(({data}) => {
@@ -158,9 +164,5 @@ export default{
             if(this.show_app_secret) this.$refs.appInputSecret.type = 'text'
             else this.$refs.appInputSecret.type = 'password'
         },
-
-        facebook_login: function(){
-            console.log(JSON.parse(localStorage));
-        }
     }
 }

@@ -40,14 +40,16 @@ class SettingsController extends Controller
         
         $validator = Validator::make($request->all(), [
             'field'  => 'required:string',
-            'wallid'  => 'required:int',
+            'userid'  => 'required:int',
             'value'  => 'required:string',
             'name' => 'string:required',
 
         ]);
         if($validator->fails()) return response()->json(['error' => $validator->errors()]);
 
-        $wallSettings = Setting::where(['wall_id' => 'wallid', 'name' => $validator->validated()['name']])->with('wall')->first();
+        $wallSettings = Setting::where(['user_id' => $validator->validated()['userid'], 
+                                        'name'    => $validator->validated()['name']])
+                                    ->with('wall')->first();
 
         if($wallSettings->wall->user_id == $user->id || $user->role_id == 1){
             
