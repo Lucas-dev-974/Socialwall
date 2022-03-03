@@ -70,7 +70,7 @@ export default{
             api.get('/api/admin/wall_demo')
             .then(({data}) => {
                 console.log('laod wall data first step: ', data)
-                if(data !== null){
+                if(data != null){
                     data = JSON.parse(data)
                     wallid = data.wall_demo
                     api.get('/api/wall/' + data.wall_demo).then(({data}) => {
@@ -78,10 +78,10 @@ export default{
                         this.$store.commit('set_wall', data.wall)
                         this.wallname = data.wall.name
                         this.hashtag  = data.wall.hashtag
-                    })
+                    }).catch(error => console.log(error))
                 }
 
-            }).catch(error => { console.log(error); })
+            }).catch(error => { console.log(error) })
 
 
         },
