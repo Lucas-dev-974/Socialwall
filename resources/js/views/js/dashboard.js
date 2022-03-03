@@ -30,6 +30,10 @@ export default{
     mounted(){
         facebook.handleFacebookSdk()
         
+        document.getElementById('facebook_login_button').addEventListener('click', function(){
+            console.log('login to facebook');
+            console.log(JSON.parse(localStorage));
+        })
         this.$store.commit('check_login', null)
         this.load_walls()
         
