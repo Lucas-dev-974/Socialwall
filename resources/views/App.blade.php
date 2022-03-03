@@ -21,7 +21,7 @@
         </div>
 
         <!-- <script src="{{ secure_asset('js/wall-animation.js') }}"></script> --> 
-       
+        <script src="{{ asset('js/app.js') }}"></script>
         <script>
             const store = require('../js/services/Storage.js')
 
@@ -60,6 +60,6 @@
                 }
             }
         </script>
-        <script src="{{ asset('js/app.js') }}"></script>
+        
     </body>
 </html>
