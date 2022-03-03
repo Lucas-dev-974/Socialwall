@@ -20,30 +20,30 @@
             <layout></layout>
         </div>
 
-        <!-- <script src="{{ secure_asset('js/wall-animation.js') }}"></script> -->
-<!--         
+        <!-- <script src="{{ secure_asset('js/wall-animation.js') }}"></script> --> -->
+       
         <script>
-            import store from '../js/services/Storage.js'
+            // import store from '../js/services/Storage.js'
 
-            window.fbAsyncInit = function() {
-                FB.init({
-                appId      : '3093684740891759',
-                cookie     : true,
-                xfbml      : true,
-                version    : 'v12.0'
-                });
+            // window.fbAsyncInit = function() {
+            //     FB.init({
+            //     appId      : '3093684740891759',
+            //     cookie     : true,
+            //     xfbml      : true,
+            //     version    : 'v12.0'
+            //     });
                 
-                FB.AppEvents.logPageView();   
+            //     FB.AppEvents.logPageView();   
                 
-            };
+            // };
 
-            (function(d, s, id){
-                var js, fjs = d.getElementsByTagName(s)[0];
-                if (d.getElementById(id)) {return;}
-                js = d.createElement(s); js.id = id;
-                js.src = "https://connect.facebook.net/en_US/sdk.js";
-                fjs.parentNode.insertBefore(js, fjs);
-            }(document, 'script', 'facebook-jssdk'));
+            // (function(d, s, id){
+            //     var js, fjs = d.getElementsByTagName(s)[0];
+            //     if (d.getElementById(id)) {return;}
+            //     js = d.createElement(s); js.id = id;
+            //     js.src = "https://connect.facebook.net/en_US/sdk.js";
+            //     fjs.parentNode.insertBefore(js, fjs);
+            // }(document, 'script', 'facebook-jssdk'));
 
             function checkLoginState() {
                 FB.getLoginStatus(function(response) {
@@ -55,7 +55,7 @@
                 
             }
             console.log(store);
-        </script> -->
+        </script>
         <script src="{{ asset('js/app.js') }}"></script>
     </body>
 </html>
