@@ -58,7 +58,7 @@ Route::group([
     'prefix'     => 'wall'
 ], function($router) {
     Route::get('/',          [WallController::class, 'get']); 
-    Route::get('/{wallid}/', [WallController::class, 'get']); 
+    Route::get('/{wallid}', [WallController::class, 'get']); 
     Route::post('/',         [WallController::class, 'create']); 
     Route::patch('/',        [WallController::class, 'update']); 
     Route::delete('/{id}',   [WallController::class, 'delete']); 

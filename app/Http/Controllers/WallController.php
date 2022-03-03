@@ -13,13 +13,13 @@ use Tymon\JWTAuth\Facades\JWTAuth;
 class WallController extends Controller
 {
     
-    public function get(Request $request, $wallid){
+    public function get(Request $request, $wallid = null){
         $user = JWTAuth::user();
         if(!$wallid){               // Check if wall id is given is not given return all wall for the connected user
             $walls = Wall::where([ 'user_id' => $user['id'] ])->get();
             return $walls;
         }
-
+        
         $wall = Wall::where([ 'id' => $wallid])->with(['settings', 'views', 'suspectWords', 'BlockedUsers'])->first();
 
         if($user['id'] == $wall['user_id'] || $user['role_id'] == 1){

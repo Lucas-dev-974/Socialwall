@@ -55,7 +55,7 @@ export default{
         },
         
         load_walls: function(){
-            api.get('/api/wall/')
+            api.get('/api/wall')
             .then(({data}) => {
                 this.$store.commit('set_walls', data)
             }).catch(error => {
