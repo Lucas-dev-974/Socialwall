@@ -1,5 +1,3 @@
-import api from '../../services/ApiServices'
-
 export default{
     data(){
         return {
@@ -15,7 +13,7 @@ export default{
                 password: this.password
             }
 
-            api.post('/api/auth/',  credentials)
+            axios.post('/api/auth/',  credentials)
                 .then(({data}) => {
                     console.log('login');
                     console.log(data);
