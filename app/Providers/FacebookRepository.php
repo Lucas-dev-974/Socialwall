@@ -28,7 +28,7 @@ class FacebookRepository
             'pages_read_engagement'
         ];
 
-        $redirectUri = config('app.url') . '/auth/facebook/callback';
+        $redirectUri = config('app.url') . '/api/facebook/callback';
 
         return $helper->getLoginUrl($redirectUri, $permissions);
     }
