@@ -11,7 +11,7 @@ class AuthController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('jwt.verify',  ['except' => ['register', 'login']]);
+        // $this->middleware('jwt.verify',  ['except' => ['register', 'login']]);
     }
 
     public function login(Request $request){

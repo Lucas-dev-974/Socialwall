@@ -32,9 +32,8 @@ class FacebookController extends Controller
     }
 
     public function getPages(Request $request){
-        $token = AdminSettings::where([
-            'name' => 'facebook_app_token'
-        ])->first();
+        $token = AdminSettings::where([ 'name' => 'facebook_app_token' ])->first();
+        
         $datas = $this->facebook->getPages($token);
         return response()->json([ 'token' => $token ]);
     }
