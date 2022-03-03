@@ -69,11 +69,12 @@ export default{
             let wallid = null
             api.get('/api/admin/wall_demo')
             .then(({data}) => {
+                console.log('laod wall data first step: ', data)
                 if(data !== null){
                     data = JSON.parse(data)
                     wallid = data.wall_demo
                     api.get('/api/wall/' + data.wall_demo).then(({data}) => {
-                        
+                        console.log('laod wall data second step: ', data);
                         this.$store.commit('set_wall', data.wall)
                         this.wallname = data.wall.name
                         this.hashtag  = data.wall.hashtag
