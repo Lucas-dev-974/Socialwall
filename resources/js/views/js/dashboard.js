@@ -28,6 +28,8 @@ export default{
     },
 
     mounted(){
+        facebook.handleFacebookSdk()
+        window.checkLoginState = facebook.checkLoginState()
         this.$store.commit('check_login', null)
         this.load_walls()
         

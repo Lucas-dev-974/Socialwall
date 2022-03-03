@@ -1,5 +1,5 @@
 module.exports = {
-    handleFacebookSdk: function(app_id, api_version){
+    handleFacebookSdk: function(){
         window.fbAsyncInit = function() {
             FB.init({
             appId      : 3093684740891759,
@@ -23,8 +23,12 @@ module.exports = {
 
     checkLoginState: function(){
         FB.getLoginStatus(function(response) {
-            statusChangeCallback(response);
+            module.exports.statusChangeCallback(response);
         });
+    },
+
+    statusChangeCallback: function(data){
+        console.log(data);
     }
 
 }

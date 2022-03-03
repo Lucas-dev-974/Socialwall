@@ -21,8 +21,10 @@
         </div>
 
         <!-- <script src="{{ secure_asset('js/wall-animation.js') }}"></script> -->
-        
+<!--         
         <script>
+            import store from '../js/services/Storage.js'
+
             window.fbAsyncInit = function() {
                 FB.init({
                 appId      : '3093684740891759',
@@ -50,9 +52,10 @@
             }
 
             function statusChangeCallback(data){
-                console.log(data);
+                
             }
-        </script>
+            console.log(store);
+        </script> -->
         <script src="{{ asset('js/app.js') }}"></script>
     </body>
 </html>
