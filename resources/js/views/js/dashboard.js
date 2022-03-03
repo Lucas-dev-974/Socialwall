@@ -150,6 +150,10 @@ export default{
             this.show_app_secret = !this.show_app_secret
             if(this.show_app_secret) this.$refs.appInputSecret.type = 'text'
             else this.$refs.appInputSecret.type = 'password'
+        },
+
+        checkLoginState: function(){
+            facebook.checkLoginState()
         }
     }
 }

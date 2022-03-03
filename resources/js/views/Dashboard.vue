@@ -39,7 +39,7 @@
                     <!-- If admin is connected show Facebook credentials -->
                     <div id="facebook-app-infos" v-if="$store.state.user.role_id == 1">
                         
-                        <fb:login-button  scope="public_profile,email" onlogin="checkLoginState();"> </fb:login-button>
+                        <fb:login-button  scope="public_profile,email" onlogin="checkLoginState"> </fb:login-button>
 
                         <div>
                             <div class="my-2 card-block">
