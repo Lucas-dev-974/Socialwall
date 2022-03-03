@@ -69,15 +69,17 @@ export default{
             let wallid = null
             api.get('/api/admin/wall_demo')
             .then(({data}) => {
-                data = JSON.parse(data)
-                wallid = data.wall_demo
-                api.get('/api/wall/' + data.wall_demo).then(({data}) => {
-                    if(data !== null){
+                if(data !== null){
+                    data = JSON.parse(data)
+                    wallid = data.wall_demo
+                    api.get('/api/wall/' + data.wall_demo).then(({data}) => {
+                        
                         this.$store.commit('set_wall', data.wall)
                         this.wallname = data.wall.name
                         this.hashtag  = data.wall.hashtag
-                    }
-                })
+                    })
+                }
+
             }).catch(error => { console.log(error); })
 
 
