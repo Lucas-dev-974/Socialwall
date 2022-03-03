@@ -17,7 +17,7 @@ export default new Vuex.Store({
         // User informations
         user: null,
         token: null,
-        facebook_infos: null,
+        facebook: null,
 
         // Wall Moderation
         wall: null,
