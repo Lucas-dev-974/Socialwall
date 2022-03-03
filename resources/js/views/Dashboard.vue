@@ -37,25 +37,8 @@
                     </div>
 
                     <!-- If admin is connected show Facebook credentials -->
-                    <div id="facebook-app-infos" v-if="$store.state.user.role_id == 1">
-                        
-                        <fb:login-button  scope="public_profile,email" onlogin="checkLoginState()" v-if="!$store.state.facebook.connected"> </fb:login-button>
-
-                        <div>
-                            <div class="my-2 card-block">
-                                <label for="">App ID <v-icon small @click="handlePenUpdate('appInputID')">mdi-pen</v-icon></label>
-                                <input ref="appInputID" placeholder="Entrer l'id de l'app facebook a utilisé" disabled type="text" class="w-100" v-model="appid" v-on:keyup.enter="update_FacebookSetting('facebook_app_id', appid, 'text')">
-                            </div>
-                            
-                            <div class="my-2 card-block">
-                                <label for="">App secret 
-                                    <v-icon small @click="handlePenUpdate('appInputSecret')">mdi-pen</v-icon> 
-                                    <v-icon small color="green" v-if="!show_app_secret" @click="ShowAppSecret">mdi-eye-circle</v-icon>
-                                    <v-icon small color="red" v-else @click="ShowAppSecret">mdi-eye-circle</v-icon>
-                                </label>
-                                <input ref="appInputSecret" placeholder="Entrer la clé secret de l'app facebook a utilisé" disabled type="password" class="w-100" v-model="appsecret" v-on:keyup.enter="update_FacebookSetting('facebook_app_secret', appsecret, 'password')">
-                            </div>
-                        </div>
+                    <div id="facebook-app-infos">
+                        <fb:login-button  scope="public_profile,email" onlogin="checkLoginState()" v-if="!facebook_connected"> </fb:login-button>
                     </div>
                 </v-list-item>
             </v-card>

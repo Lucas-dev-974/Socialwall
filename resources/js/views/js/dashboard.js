@@ -13,17 +13,12 @@ export default{
             email:    this.$store.state.user.email,
             name:     this.$store.state.user.name,
             lastname: this.$store.state.user.lastname,
-            phone: this.$store.state.user.phone,
+            phone:    this.$store.state.user.phone,
             image_src: this.$store.state.user.medias_url ?? '/medias/default-user/account.png',
 
-            createwallform: false,
             wallname: '',
             hashtag: '',
             views:  0,
-
-            appid: '',
-            appsecret: '',
-            show_app_secret: false,
 
             facebook_connected: false,
         }
@@ -31,35 +26,24 @@ export default{
 
     mounted(){
         this.$store.commit('check_login', null)
-        if(!this.$store.state.facebook.connected){
-            facebook.handleFacebookSdk()
+        if(this.$store.state.facebook != null){ // Si il y'a des informations facebook
+            this.facebook_connected = !this.$store.state.facebook.connected
+        } else {
+            facebook.handleFacebookSdk()     
+            window.addEventListener('storage', function(){
+                console.log('storage was changed');
+            })
         }
-
-
+        
 
         this.load_walls()
         
         if(this.$store.state.user.role_id == 1){
-            this.getAdminParams()
-            // this.load_wall()
+            this.load_wall()
         }
     },
 
-    methods: {
-        
-
-        getAdminParams: function(){
-            api.get('/api/admin/facebook_app_id|facebook_app_secret')
-            .then(({data}) => {
-                data = JSON.parse(data);
-                this.$store.commit('set_FacebookAppInfos', data)
-                this.appid     = this.$store.state.facebook_app_infos.facebook_app_id
-                this.appsecret = this.$store.state.facebook_app_infos.facebook_app_secret
-            }).catch(error => {
-                console.log(error);
-            })
-        },
-        
+    methods: {        
         load_walls: function(){
             api.get('/api/wall')
             .then(({data}) => {

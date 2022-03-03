@@ -30,16 +30,17 @@
             }
 
             function statusChangeCallback(data){
-                console.log(data);
-                let storage = JSON.parse(localStorage.getItem('vuex'))
-                if(data.status == 'connected'){
+                let storage = JSON.parse(localStorage.getItem('vuex')) // Get Vuex Store from localStorage
+                if(data.status == 'connected'){ // If user have login into facebook so register the facebook response in the store
                     storage.facebook = {
                         user_infos: data.authResponse,
-                        connected: data.status  == 'connected' ? true : false
+                        connected: true
                     }
+                    
+                }else{  // If user tryed connect to facebook without success Just setup facebook.connected to false
+                    storage.facebook = { connected: false }
                 }
-
-                localStorage.setItem('vuex', JSON.stringify(storage))
+                localStorage.setItem('vuex', JSON.stringify(storage)) // Update Vuex Store
             }
         </script>
         

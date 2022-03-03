@@ -16,6 +16,7 @@ class UserController extends Controller
 
     public function get(Request $request){
         $user = JWTAuth::user();
+        // return $user;
         if($user->role_id !== 1) return response()->json(['error' => 'Vous ne pouvez pas accèdé à cet variable']);
 
         $users = User::with(['walls'])->get();
