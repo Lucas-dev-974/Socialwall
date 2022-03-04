@@ -69,7 +69,7 @@ Route::group([
     'prefix'     => 'settings'
 ], function($router) {
     Route::get('/{wallid}/', [SettingsController::class, 'get']); 
-    Route::post('/',         [SettingsController::class, 'create']); 
+    Route::post('/',         [SettingsController::class, 'set_Settings']); 
     Route::patch('/',        [SettingsController::class, 'update']); 
     Route::delete('/{id}',   [SettingsController::class, 'delete']); 
 }); 
