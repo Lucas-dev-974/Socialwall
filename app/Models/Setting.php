@@ -15,4 +15,8 @@ class Setting extends Model
     public function wall(){
         return $this->belongsTo(Wall::class);
     }
+
+    public function user(){
+        return $this->belongsTo(User::class);
+    }
 }

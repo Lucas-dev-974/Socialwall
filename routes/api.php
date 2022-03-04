@@ -68,7 +68,7 @@ Route::group([
     'middleware' => ['jwt.verify'],
     'prefix'     => 'settings'
 ], function($router) {
-    Route::get('/{wallid}/', [SettingsController::class, 'get']); 
+    Route::get('/',          [SettingsController::class, 'get']); 
     Route::post('/',         [SettingsController::class, 'set_Settings']); 
     Route::patch('/',        [SettingsController::class, 'update']); 
     Route::delete('/{id}',   [SettingsController::class, 'delete']); 
@@ -80,5 +80,5 @@ Route::group([
     'prefix'     => 'admin'
 ], function($router) {
     Route::get('/{name}',  [AdminController::class, 'get']); 
-    Route::post('/', [AdminController::class, 'set']); 
+    Route::post('/',       [AdminController::class, 'set']); 
 }); 

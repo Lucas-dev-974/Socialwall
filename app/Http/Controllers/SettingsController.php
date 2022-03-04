@@ -9,16 +9,12 @@ use Tymon\JWTAuth\Facades\JWTAuth;
 
 class SettingsController extends Controller
 {
-    public function get(Request $request, $wallid){
+    public function get(Request $request){
         $user = JWTAuth::user();
-        $wallSetting = Setting::where(['wall_id' => $wallid ])->with('wall')->first();
+        $user_settings = Setting::where(['user_id' => $user->id ])->get();
 
-        if(!$wallSetting) return response()->json(['error' => 'Pas de paramètre pour ce mur']);
-        if($wallSetting->wall->user_id == $user->id || $user->role_id == 1){
-            return response()->json($wallSetting);
-        }else{
-            return response()->json(['error' => 'Vous n\'êtes pas autorisé à accédé à cet ressource !']);
-        }
+        if(!$user_settings) return response()->json(['error' => 'Pas de paramètre pour cet utilisateur'], 403);
+        return response()->json($user_settings, 200);
     }
     
     public function set_Settings(Request $request){
@@ -37,25 +33,18 @@ class SettingsController extends Controller
 
     public function update(Request $request){
         $user = JWTAuth::user();
-        
         $validator = Validator::make($request->all(), [
-            'field'  => 'required:string',
-            'userid'  => 'required:int',
-            'value'  => 'required:string',
-            'name' => 'string:required',
-
+            // 'user_id'  => 'required:int',
+            'value'   => 'required:string',
+            'name'    => 'string:required',
         ]);
+
         if($validator->fails()) return response()->json(['error' => $validator->errors()]);
+        
+        $setting = Setting::where(['user_id' => $user->id, 'name' => $validator->validated()['name']])->first();
+        $setting->value = $validator->validated()['value'];
 
-        $wallSettings = Setting::where(['user_id' => $validator->validated()['userid'], 
-                                        'name'    => $validator->validated()['name']])
-                                    ->with('wall')->first();
-
-        if($wallSettings->wall->user_id == $user->id || $user->role_id == 1){
-            
-        }else return response()->json(['error' => 'Vous n\'êtes pas autorisé à modifier cet ressource !']);
-
-
+        return response()->json('Données mis à jour avec succès', 200);
     }
 
     // public function delete(Request $request, $id){
