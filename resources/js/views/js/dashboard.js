@@ -160,7 +160,7 @@ export default{
             FB.Event.subscribe('auth.statusChange', (response) => {
                 console.log(response);
                 if(response.status == 'connected'){
-                    console.log(authResponse.lenght);
+                    console.log(response.authResponse.lenght);
                 }
             });
         }
