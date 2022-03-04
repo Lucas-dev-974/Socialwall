@@ -19,7 +19,7 @@ class CreateSettingsTable extends Migration
             $table->unsignedBigInteger('user_id');
             $table->string('name');
             $table->string('type');
-            $table->string('value');
+            $table->longText('value');
         });
 
         
