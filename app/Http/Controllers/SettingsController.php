@@ -15,13 +15,16 @@ class SettingsController extends Controller
     }
 
     public function get(Request $request){
-        $user = JWTAuth::user();
-        $user_settings = Setting::where(['user_id' => $user->id ])->get();
-
-        if(!$user_settings) return response()->json(['error' => 'Pas de paramètre pour cet utilisateur'], 403);
-        return response()->json($user_settings, 200);
+        $Settings = Setting::where(['user_id' => $this->user->id ])->get();
+        $settings = null;
+        foreach($Settings as $setting){
+            $settings[$setting->name] = $setting->value;
+        }
+        // if(!$user_settings) return response()->json(['error' => 'Pas de paramètre pour cet utilisateur'], 403);
+        // return response()->json($user_settings, 200);
+        return response()->json($settings);
     }
-    
+
     public function set_Settings(Request $request){
         $user = JWTAuth::user();
         $validator = Validator::make($request->all(), [
