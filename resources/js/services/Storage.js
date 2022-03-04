@@ -33,7 +33,7 @@ export default new Vuex.Store({
 
         // Admin settings
         users: [],
-        facebook_app_infos: {},
+        facebook_infos: {},
 
         views: 0
 
@@ -74,8 +74,6 @@ export default new Vuex.Store({
         push_walls: function(state, wall){ state.walls.push(wall) },
         remove_walls: function(state, wallid){ state.walls = state.walls(wall => wall.id != wallid)},
 
-
-
         // App Settings - alerts ....
         push_alert: function(state, alert){
             state.alerts.push({
@@ -102,31 +100,17 @@ export default new Vuex.Store({
         update_users: function(state, user){},
         remove_users: function(state, user){ state.users = state.users.filter(User => User.id != user.id) },
 
-            // Facebook app 
-            set_FacebookAppInfos: function(state, infos){
-                if(Array.isArray(infos)){
-                    infos.forEach(info => {
-                        state.facebook_app_infos[info.name] = info.value                      
-                    })
-                }
-                
-            },
-            push_FacebookAppInfos: function(state, data){
-                state.facebook_app_infos.push(data)
+        // Facebook app 
+        set_FacebookInfos: function(state, infos){
+            if(Array.isArray(infos)){
+                infos.forEach(info => {
+                    state.facebook_infos[info.name] = info.value                      
+                })
             }
+        },
+        push_FacebookInfos: function(state, data){
+            state.facebook_infos.push(data)
+        }
 
     },
-
-    actions: {
-        get_FacebookAppParams(context, params_name){
-            // let params_to_get = null
-            // context.state.facebook_app_infos.forEach(params => {
-            //     if(params_name == params.name){
-            //        params_to_get = params
-            //     }
-            // })
-
-            // return params_to_get.value
-        }
-    }
 })

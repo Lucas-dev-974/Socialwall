@@ -25,32 +25,24 @@ export default{
     },
 
     mounted(){
-        window.addEventListener('storage', () => {
-            // When local storage changes, dump the list to
-            // the console.
-            console.log(JSON.parse(window.localStorage.getItem('sampleList')));
-        });
-        
         this.$store.commit('check_login', null)
+        this.load_Settings()
 
         if(this.$store.state.facebook != null && this.$store.state.facebook.connected == false){ // Si il y'a des informations facebook
             this.facebook_connected = false
             
             facebook.handleFacebookSdk() 
-            
-
         } else if(this.$store.state.facebook != null && this.$store.state.facebook.connected == true){
             if(this.$store.state.facebook.user_infos) this.check_FacebookAuth()
         }else{
             facebook.handleFacebookSdk() 
-            console.log('-----------');
             window.addEventListener('storage', function(){
                 console.log('storage was changed');
             })
 
             localStorage.setItem('test', 'test')
         }
-        this.load_Settings()
+        
         this.load_walls()
         
         if(this.$store.state.user.role_id == 1){
