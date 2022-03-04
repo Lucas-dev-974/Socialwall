@@ -26,7 +26,9 @@ export default{
 
     mounted(){
         this.$store.commit('check_login', null)
-        this.load_Settings()
+        this.load_Settings().then(() => {
+            console.log('test after setting was loaded')
+        })
 
         if(this.$store.state.facebook != null && this.$store.state.facebook.connected == false){ // Si il y'a des informations facebook
             this.facebook_connected = false
