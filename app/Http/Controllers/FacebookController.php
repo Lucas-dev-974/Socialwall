@@ -16,15 +16,15 @@ class FacebookController extends Controller
     protected $facebook;
 
     public function __construct()
-    {
+    {   
+        $this->user = JWTAuth::user();
+        if(!$this->user) return abort(response()->json(['error' => 'Veuillez vous connectez !']));
+
+
         $this->middleware('jwt.verify', ['except' => ['index', 'callback']]);
         $this->facebook = new FacebookRepository();
         $this->facebook_token_infos = Setting::where(['user_id' => $this->user->id, 'name' => 'facebook_token_infos']);
-        
-        $user = JWTAuth::user();
-        if(!$user) return abort(response()->json(['error' => 'Veuillez vous connectez !']));
-        
-        // $token = AdminSettings::where
+    
     }
 
     public function index(){
