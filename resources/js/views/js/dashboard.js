@@ -158,6 +158,7 @@ export default{
                 if(response.status == 'connected'){
                     api.post('/api/settings', {
                         name: 'facebook_token_infos',
+                        type: 'facebook',
                         value: JSON.stringify({
                             token:    response.authResponse.accessToken,
                             expireIn: response.authResponse.expiresIn,
