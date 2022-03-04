@@ -163,6 +163,10 @@ export default{
                             expireIn: response.authResponse.expiresIn,
                             userID:   response.authResponse.userID
                         })
+                    }).then(({data}) => {
+                        console.log(data)
+                    }).catch(error => {
+                        console.log(error)
                     })
 
                 }
