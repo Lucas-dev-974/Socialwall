@@ -59,6 +59,14 @@ export default{
     },
 
     methods: {        
+        load_Settings: function(){
+            api.get('/api/settings').then(({data}) => {
+                console.log(data); 
+            }).catch(error => {
+                console.log(error);
+            })
+        },
+        
         load_walls: function(){
             api.get('/api/wall')
             .then(({data}) => {
