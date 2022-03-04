@@ -20,14 +20,15 @@ class SettingsController extends Controller
     public function set_Settings(Request $request){
         $user = JWTAuth::user();
         $validator = Validator::make($request->all(), [
-            'user_id' => 'required|number',
+            // 'user_id' => 'required|number',
             'type'    => 'required|string',
             'name'    => 'required|string',
             'value'   => 'required|string'
         ]);
         if($validator->fails()) return response()->json(['error' => $validator->errors()]);
         
-        Setting::create(array_merge($validator->validated()));
+        Setting::create([ 'user_id' => $user->id ], array_merge($validator->validated()));
+        
         return response()->json('Parametre mis à jour');
     }
 
@@ -40,7 +41,7 @@ class SettingsController extends Controller
         ]);
 
         if($validator->fails()) return response()->json(['error' => $validator->errors()]);
-        
+
         $setting = Setting::where(['user_id' => $user->id, 'name' => $validator->validated()['name']])->first();
         $setting->value = $validator->validated()['value'];
 
