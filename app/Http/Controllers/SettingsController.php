@@ -18,7 +18,9 @@ class SettingsController extends Controller
         $Settings = Setting::where(['user_id' => $this->user->id ])->get();
         $settings = null;
         foreach($Settings as $setting){
-            $settings[$setting->name] = $setting->value;
+            if($this->isJson($setting->value)){
+                  $settings[$setting->name] = json_decode($setting->value);
+            }else $settings[$setting->name] = $setting->value;
         }
         // if(!$user_settings) return response()->json(['error' => 'Pas de paramètre pour cet utilisateur'], 403);
         // return response()->json($user_settings, 200);
@@ -73,5 +75,9 @@ class SettingsController extends Controller
     //         return $wall;
     //     }
     // }
+
+    private function isJson($string){
+        return is_string($string) && is_array(json_decode($string, true)) && (json_last_error() == JSON_ERROR_NONE) ? true : false;
+    }
 
 }
