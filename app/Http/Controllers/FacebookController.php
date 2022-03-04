@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\AdminSettings;
+use App\Models\Setting;
 use Illuminate\Http\Request;
 use App\Providers\FacebookRepository;
 use Illuminate\Support\Facades\Auth;
@@ -18,7 +19,8 @@ class FacebookController extends Controller
     {
         $this->middleware('jwt.verify', ['except' => ['index', 'callback']]);
         $this->facebook = new FacebookRepository();
-
+        $this->facebook_token_infos = Setting::where(['user_id' => $this->user->id, 'name' => 'facebook_token_infos']);
+        
         $user = JWTAuth::user();
         if(!$user) return abort(response()->json(['error' => 'Veuillez vous connectez !']));
         
@@ -42,15 +44,13 @@ class FacebookController extends Controller
     }
 
     public function getPages(Request $request){
-        $token = AdminSettings::where([ 'name' => 'facebook_app_token' ])->first();
-        
-        $datas = $this->facebook->getPages($token);
-        return response()->json([ 'token' => $token ]);
+        $datas = $this->facebook->getPages($this->facebook_token_infos->token);
+        return response()->json($datas);
     }
 
-    public function getProfile(Request $request){
-        // $token = 
-    }
+    // public function getProfile(Request $request){
+    //     // $token = 
+    // }
 }
 
 

@@ -111,6 +111,6 @@ export default new Vuex.Store({
         push_FacebookInfos: function(state, data){
             state.facebook_infos.push(data)
         }
-
+         
     },
 })

@@ -72,11 +72,11 @@ class FacebookRepository
 
         return array_map(function ($page) {
             return [
-                'provider' => 'facebook',
+                'provider'     => 'facebook',
                 'access_token' => $page['access_token'],
-                'id' => $page['id'],
-                'name' => $page['name'],
-                'image' => "https://graph.facebook.com/{$page->id}/picture?type=large"
+                'id'           => $page['id'],
+                'name'         => $page['name'],
+                'image'        => "https://graph.facebook.com/{$page->id}/picture?type=large"
             ];
         }, $pages);
     }
