@@ -102,7 +102,7 @@ export default new Vuex.Store({
 
         // Facebook app 
         set_FacebookInfos: function(state, infos){
-            console.log('in Store Facebook infos');
+            console.log('in Store Facebook infos: ', infos);
             if(Array.isArray(infos)){
                 infos.forEach(info => {
                     state.facebook_infos[info.name] = info.value                      
