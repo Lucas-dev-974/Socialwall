@@ -25,17 +25,32 @@ export default{
     },
 
     mounted(){
+        window.addEventListener('storage', () => {
+            // When local storage changes, dump the list to
+            // the console.
+            console.log(JSON.parse(window.localStorage.getItem('sampleList')));
+        });
+        
         this.$store.commit('check_login', null)
-        if(this.$store.state.facebook != null){ // Si il y'a des informations facebook
-            this.facebook_connected = !this.$store.state.facebook.connected
-        } else {
-            facebook.handleFacebookSdk()     
+
+        if(this.$store.state.facebook != null && this.$store.state.facebook.connected == false){ // Si il y'a des informations facebook
+            this.facebook_connected = false
+            
+            facebook.handleFacebookSdk() 
+            
+
+        } else if(this.$store.state.facebook != null && this.$store.state.facebook.connected == true){
+            if(this.$store.state.facebook.user_infos) this.check_FacebookAuth()
+        }else{
+            facebook.handleFacebookSdk() 
+            console.log('-----------');
             window.addEventListener('storage', function(){
                 console.log('storage was changed');
             })
-        }
-        
 
+            localStorage.setItem('test', 'test')
+        }
+    
         this.load_walls()
         
         if(this.$store.state.user.role_id == 1){
@@ -133,7 +148,20 @@ export default{
         },
 
         check_FacebookAuth: function(){
-            // api
+            
+        },
+
+        facebook_login: function(){
+            FB.login()
+            // FB.Event.subscribe('auth.authResponseChange', (status) => {
+            //     console.log('event emited');
+            //     console.log(status)  
+            // });
+            FB.Event.subscribe('auth.statusChange', (response) => {
+                if(response.status == 'connected'){
+                    
+                }
+            });
         }
     }
 }

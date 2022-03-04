@@ -38,7 +38,7 @@
 
                     <!-- If admin is connected show Facebook credentials -->
                     <div id="facebook-app-infos">
-                        <fb:login-button  scope="public_profile,email" onlogin="checkLoginState()" v-if="!facebook_connected"> </fb:login-button>
+                        <v-btn color="#1D3C78" v-if="!facebook_connected" class="pa-4" @click="facebook_login" x-small>Connexion <br> facebook</v-btn>
                     </div>
                 </v-list-item>
             </v-card>
