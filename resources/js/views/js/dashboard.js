@@ -25,25 +25,8 @@ export default{
     },
 
     mounted(){
-        this.$store.commit('check_login', null)
-        this.load_Settings().then(() => {
-            console.log('test after setting was loaded')
-        })
-
-        if(this.$store.state.facebook != null && this.$store.state.facebook.connected == false){ // Si il y'a des informations facebook
-            this.facebook_connected = false
-            
-            facebook.handleFacebookSdk() 
-        } else if(this.$store.state.facebook != null && this.$store.state.facebook.connected == true){
-            if(this.$store.state.facebook.user_infos) this.check_FacebookAuth()
-        }else{
-            facebook.handleFacebookSdk() 
-            window.addEventListener('storage', function(){
-                console.log('storage was changed');
-            })
-
-            localStorage.setItem('test', 'test')
-        }
+        this.$store.commit('check_login', null) // Check if user app token is valid
+        this.load_Settings()                    // Load user Facebook setting
         
         this.load_walls()
         
@@ -55,7 +38,9 @@ export default{
     methods: {        
         load_Settings: function(){
             api.get('/api/settings').then(({data}) => {
-                console.log(data); 
+                this.$store.commit('set_FacebookInfos', {
+                    ...data
+                })
             }).catch(error => {
                 console.log(error);
             })
