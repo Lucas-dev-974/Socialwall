@@ -2,12 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\AdminSettings;
 use App\Models\Setting;
 use Illuminate\Http\Request;
 use App\Providers\FacebookRepository;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Validator;
 use Tymon\JWTAuth\Facades\JWTAuth;
 
 class FacebookController extends Controller
@@ -23,8 +20,8 @@ class FacebookController extends Controller
 
         $this->middleware('jwt.verify', ['except' => ['index', 'callback']]);
         $this->facebook = new FacebookRepository();
-        $this->facebook_token_infos = Setting::where(['user_id' => $this->user->id, 'name' => 'facebook_token_infos']);
-    
+        $facebook_token_infos = Setting::where(['user_id' => $this->user->id, 'name' => 'facebook_token_infos'])->first();
+        $this->facebook_token_infos = json_decode($facebook_token_infos['value']);
     }
 
     public function index(){
@@ -44,7 +41,7 @@ class FacebookController extends Controller
     }
 
     public function getPages(){
-        return $this->facebook_token_infos->token;
+        return $this->facebook_token_infos;
         $datas = $this->facebook->getPages($this->facebook_token_infos->token);
         return response()->json($datas);
     }
