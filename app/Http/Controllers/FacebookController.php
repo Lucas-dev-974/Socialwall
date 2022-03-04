@@ -27,7 +27,7 @@ class FacebookController extends Controller
         // $token = AdminSettings::where
     }
 
-    public function index(Request $request){
+    public function index(){
         return redirect()->secure($this->facebook->redirectTo());
     }
 

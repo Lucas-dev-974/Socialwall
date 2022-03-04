@@ -28,6 +28,8 @@ export default{
         this.$store.commit('check_login', null) // Check if user app token is valid
         this.load_Settings()                    // Load user Facebook setting
         
+        this.load_facebook()
+
         this.load_walls()
         
         if(this.$store.state.user.role_id == 1){
@@ -38,7 +40,6 @@ export default{
     methods: {        
         load_Settings: function(){
             api.get('/api/settings').then(({data}) => {
-                console.log(data);
                 this.$store.commit('set_FacebookInfos', {
                     ...data.facebook_token_infos
                 })
@@ -135,8 +136,7 @@ export default{
             this.$refs[ref].focus()
         },
 
-        check_FacebookAuth: function(){
-            
+        check_FacebookAuth: function(){ 
         },
 
         facebook_login: function(){
@@ -160,6 +160,14 @@ export default{
 
                 }
             });
+        },
+
+        load_facebook: function(){
+            api.get('/api/facebook/getpages').then(({data}) => {
+                console.log(data)
+            }).catch(error => {
+                console.log(error)
+            })
         }
     }
 }
