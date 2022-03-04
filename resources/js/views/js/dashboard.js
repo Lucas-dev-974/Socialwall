@@ -38,6 +38,7 @@ export default{
     methods: {        
         load_Settings: function(){
             api.get('/api/settings').then(({data}) => {
+                console.log(data);
                 this.$store.commit('set_FacebookInfos', {
                     ...data
                 })
