@@ -28,13 +28,20 @@ class SettingsController extends Controller
 
         if($validator->fails()) return response()->json(['error' => $validator->errors()]);
         
-        Setting::create(array( 
-            'name'    => $validator->validated()['name'], 
-            'user_id' => $user->id, 
-            'type'    => $validator->validated()['type'], 
-            'value'   => $validator->validated()['value'] 
-        ));
+        // Setting::create(array( 
+        //     'name'    => $validator->validated()['name'], 
+        //     'user_id' => $user->id, 
+        //     'type'    => $validator->validated()['type'], 
+        //     'value'   => $validator->validated()['value'] 
+        // ));
 
+        $setting = new Setting();
+        $setting->name = $validator->validated()['name'];
+        $setting->user_id = $user->id;
+        $setting->type    =  $validator->validated()['type'];
+        $setting->value   = $validator->validated()['value'];
+        $setting->save();
+        
         return response()->json('Parametre mis à jour');
     }
 
