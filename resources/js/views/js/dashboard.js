@@ -160,7 +160,13 @@ export default{
             FB.Event.subscribe('auth.statusChange', (response) => {
                 console.log(response);
                 if(response.status == 'connected'){
-                    console.log(response.authResponse.lenght);
+                    let responseKey = Object.keys(response.authResponse)
+                    // console.log(Object.keys(response.authResponse).length);
+                    responseKey.forEach(key => {
+                        console.log('----');
+                        console.log(response.authResponse[key]);
+                    })
+
                 }
             });
         }
