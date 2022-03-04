@@ -41,7 +41,7 @@ class FacebookController extends Controller
     }
 
     public function getPages(){
-        return $this->facebook_token_infos;
+        return $this->facebook_token_infos->token;
         $datas = $this->facebook->getPages($this->facebook_token_infos->token);
         return response()->json($datas);
     }
