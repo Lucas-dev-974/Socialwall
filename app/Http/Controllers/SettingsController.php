@@ -27,7 +27,7 @@ class SettingsController extends Controller
         ]);
         if($validator->fails()) return response()->json(['error' => $validator->errors()]);
         
-        Setting::create([ 'user_id' => $user->id, array_merge($validator->validated()) ]);
+        Setting::create([ 'user_id' => $user->id, 'name' => $validator->validated()['name'], 'type' => $validator->validated()['type'], 'value' => $validator->validated()['value'] ]);
 
         return response()->json('Parametre mis à jour');
     }
