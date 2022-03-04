@@ -40,7 +40,7 @@ export default{
             api.get('/api/settings').then(({data}) => {
                 console.log(data);
                 this.$store.commit('set_FacebookInfos', {
-                    ...data
+                    ...data.facebook_token_infos
                 })
             }).catch(error => {
                 console.log(error);
