@@ -25,15 +25,15 @@ class SettingsController extends Controller
             'name'    => 'required|string',
             'value'   => 'required|string'
         ]);
-            
+
         if($validator->fails()) return response()->json(['error' => $validator->errors()]);
         
-        Setting::create([ 
+        Setting::create(array( 
             'name'    => $validator->validated()['name'], 
             'user_id' => $user->id, 
             'type'    => $validator->validated()['type'], 
             'value'   => $validator->validated()['value'] 
-        ]);
+        ));
 
         return response()->json('Parametre mis à jour');
     }
