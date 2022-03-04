@@ -153,17 +153,16 @@ export default{
 
         facebook_login: function(){
             FB.login()
-            // FB.Event.subscribe('auth.authResponseChange', (status) => {
-            //     console.log('event emited');
-            //     console.log(status)  
-            // });
             FB.Event.subscribe('auth.statusChange', (response) => {
                 console.log(response);
                 if(response.status == 'connected'){
-                    let responseKey = Object.keys(response.authResponse)
-                    // console.log(Object.keys(response.authResponse).length);
-                    responseKey.forEach(key => {
-                        api.post('/api/settings')
+                    api.post('/api/settings', {
+                        name: 'facebook_token_infos',
+                        value: JSON.stringify({
+                            token:    response.authResponse.accessToken,
+                            expireIn: response.authResponse.expiresIn,
+                            userID:   response.authResponse.userID
+                        })
                     })
 
                 }
