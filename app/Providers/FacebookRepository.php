@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use Error;
 use Exception;
 use Facebook\Exceptions\FacebookResponseException;
 use Facebook\Exceptions\FacebookSDKException;
@@ -80,7 +81,7 @@ class FacebookRepository
                     'image'        => "https://graph.facebook.com/{$page->id}/picture?type=large"
                 ];
             }, $pages);
-        }catch(Facebook\Exceptions\FacebookResponseException $error){
+        }catch(Error $error){
             return ['erreur' => 'Votre session semble expiré veuillez vous reconnecter !'];
         }
         
