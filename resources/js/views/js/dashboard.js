@@ -50,7 +50,7 @@ export default{
 
             localStorage.setItem('test', 'test')
         }
-    
+        this.load_Settings()
         this.load_walls()
         
         if(this.$store.state.user.role_id == 1){
