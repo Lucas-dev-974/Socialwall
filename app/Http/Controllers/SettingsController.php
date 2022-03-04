@@ -24,10 +24,10 @@ class SettingsController extends Controller
     public function set_Settings(Request $request){
         $user = JWTAuth::user();
         $validator = Validator::make($request->all(), [
-            'wall_id' => 'required|number',
-            'type'   => 'required|string',
-            'name'   => 'required|string',
-            'value'  => 'required|string'
+            'user_id' => 'required|number',
+            'type'    => 'required|string',
+            'name'    => 'required|string',
+            'value'   => 'required|string'
         ]);
         if($validator->fails()) return response()->json(['error' => $validator->errors()]);
         
