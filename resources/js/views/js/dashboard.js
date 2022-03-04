@@ -158,8 +158,9 @@ export default{
             //     console.log(status)  
             // });
             FB.Event.subscribe('auth.statusChange', (response) => {
+                console.log(response);
                 if(response.status == 'connected'){
-                    
+
                 }
             });
         }
