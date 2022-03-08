@@ -167,7 +167,12 @@ export default{
                 console.log(data)
             }).catch(error => {
                 if(error.response.status == 402){
-                    
+                    this.$store.commut('push_alert', {
+                        message: 'Vous avez été déconnecter de facebook en raison d\'une longue absence',
+                        type: 'warning'
+                    })
+                    this.facebook_connected = false
+                    this.load_facebook()
                 }
                 console.log(error.response.status)
             })
