@@ -39,7 +39,7 @@ class FacebookRepository
 
     public function getPages($accessToken){
         try{
-            $pages = $this->facebook->get('/me', $accessToken);
+            $pages = $this->facebook->get('/me/accounts', $accessToken);
             $pages = $pages->getGraphPage();
             return $pages;
         }catch(\Facebook\Exceptions\FacebookResponseException $e) {
