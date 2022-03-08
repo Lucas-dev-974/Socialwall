@@ -37,7 +37,7 @@ class FacebookController extends Controller
             return response()->json(['error' => 'Vous n\'ête plus connecter'], 401);
 
         else{
-            return response()->json($response);
+            return var_dump($response);
         }
     }
 }
