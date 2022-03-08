@@ -9,8 +9,7 @@ class FacebookRepository
 {
     protected $facebook;
 
-    public function __construct()
-    {
+    public function __construct(){
         $this->facebook = new Facebook([
             'app_id'     => config('providers.facebook.app_id'),
             'app_secret' => config('providers.facebook.app_secret'),
@@ -18,9 +17,13 @@ class FacebookRepository
         ]);
     }
 
+    public function getProfile(){
+        
+    }
+
     public function getPages($accessToken){
         try{
-            $pages = $this->facebook->get('/me', $accessToken);
+            $pages = $this->facebook->get('/me/accounts', $accessToken);
             $pages = $pages->getGraphEdge()->asArray();
 
             return array_map(function ($page) {

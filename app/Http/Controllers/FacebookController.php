@@ -24,6 +24,11 @@ class FacebookController extends Controller
         $this->facebook       = new FacebookRepository();
         $facebook_token_infos = Setting::where(['user_id' => $this->user->id, 'name' => 'facebook_token_infos'])->first();
         $this->facebook_token_infos = json_decode($facebook_token_infos['value']);
+    } 
+
+
+    public function getProfile(){
+        $response = $this->facebook->getProfile();
     }
 
     public function getPages(){
