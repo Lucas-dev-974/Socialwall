@@ -166,6 +166,9 @@ export default{
             api.get('/api/facebook/getpages').then(({data}) => {
                 console.log(data)
             }).catch(error => {
+                if(error.response.status == 402){
+                    
+                }
                 console.log(error.response.status)
             })
         }
