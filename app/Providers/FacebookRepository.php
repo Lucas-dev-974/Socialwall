@@ -25,7 +25,7 @@ class FacebookRepository
         try{
             $pages = $this->facebook->get('/me?fields=id,name', $accessToken);
             $pages = $pages->getGraphEdge()->asArray();
-            return $pages;
+            return abort($pages);
             // return array_map(function ($page) {
             //     return [
             //         'provider'     => 'facebook',
