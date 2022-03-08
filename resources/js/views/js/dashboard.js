@@ -172,7 +172,7 @@ export default{
                         type: 'warning'
                     })
                     this.facebook_connected = false
-                    this.load_facebook()
+                    facebook.handleFacebookSdk()
                 }
                 console.log(error.response.status)
             })
