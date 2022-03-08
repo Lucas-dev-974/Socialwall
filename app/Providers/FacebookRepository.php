@@ -21,25 +21,23 @@ class FacebookRepository
     public function getPages($accessToken){
         try{
             $pages = $this->facebook->get('/me', $accessToken);
-            return $pages;
-            // $pages = $pages->getGraphEdge()->asArray();
+            $pages = $pages->getGraphEdge()->asArray();
 
-            // return array_map(function ($page) {
-            //     return [
-            //         'provider'     => 'facebook',
-            //         'access_token' => $page['access_token'],
-            //         'id'           => $page['id'],
-            //         'name'         => $page['name'],
-            //         'image'        => "https://graph.facebook.com/{$page->id}/picture?type=large"
-            //     ];
-            // }, $pages);
+            return array_map(function ($page) {
+                return [
+                    'provider'     => 'facebook',
+                    'access_token' => $page['access_token'],
+                    'id'           => $page['id'],
+                    'name'         => $page['name'],
+                    'image'        => "https://graph.facebook.com/{$page->id}/picture?type=large"
+                ];
+            }, $pages);
         }catch(\Facebook\Exceptions\FacebookResponseException $e) {
             // return var_dump($e);
-            return 'Une erreur c\'est produite: ' . $e->getErrorType();
+            return $e->getErrorType();
             exit;
         } catch(\Facebook\Exceptions\FacebookSDKException $e) {
-            return $e;
-            return 'Une erreur c\'est produite: ' . $e->getMessage();
+            return $e->getMessage();
             exit;
         }
         

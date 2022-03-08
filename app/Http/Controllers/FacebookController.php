@@ -6,6 +6,7 @@ use App\Models\Setting;
 use Illuminate\Http\Request;
 use App\Providers\FacebookRepository;
 use Error;
+use GuzzleHttp\Psr7\Response;
 use Tymon\JWTAuth\Facades\JWTAuth;
 
 class FacebookController extends Controller
@@ -26,13 +27,9 @@ class FacebookController extends Controller
     }
 
     public function getPages(){
-        try{
-            $datas = $this->facebook->getPages($this->facebook_token_infos->token);
-            return response()->json($datas, 200);
-        }catch(Error $error){
-            return response()->json('Une erreur est survenue');
-        }
-
+        $response = $this->facebook->getPages($this->facebook_token_infos->token);
+        if(!is_array($response) && is_string($response) && $response == 'OAuthException') // Si le token est invalide
+            return response()->json(['error' => 'Vous n\'ête plus connecter'], 401);
     }
 }
 
