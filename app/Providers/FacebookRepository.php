@@ -21,17 +21,18 @@ class FacebookRepository
     public function getPages($accessToken){
         try{
             $pages = $this->facebook->get('/me/accounts', $accessToken);
-            $pages = $pages->getGraphEdge()->asArray();
+            return $pages;
+            // $pages = $pages->getGraphEdge()->asArray();
 
-            return array_map(function ($page) {
-                return [
-                    'provider'     => 'facebook',
-                    'access_token' => $page['access_token'],
-                    'id'           => $page['id'],
-                    'name'         => $page['name'],
-                    'image'        => "https://graph.facebook.com/{$page->id}/picture?type=large"
-                ];
-            }, $pages);
+            // return array_map(function ($page) {
+            //     return [
+            //         'provider'     => 'facebook',
+            //         'access_token' => $page['access_token'],
+            //         'id'           => $page['id'],
+            //         'name'         => $page['name'],
+            //         'image'        => "https://graph.facebook.com/{$page->id}/picture?type=large"
+            //     ];
+            // }, $pages);
         }catch(Error $error){
             return ['erreur' => 'Votre session semble expiré veuillez vous reconnecter !'];
         }
