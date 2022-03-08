@@ -33,11 +33,10 @@ class FacebookController extends Controller
 
     public function getPages(){
         $response = $this->facebook->getPages($this->facebook_token_infos->token);
-        if(!is_array($response) && is_string($response) && $response == 'OAuthException') // Si le token est invalide
+        if(!is_array($response) && is_string($response) && $response == 'OAuthException'){ // Si le token est invalide
             return response()->json(['error' => 'Vous n\'ête plus connecter'], 401);
-        else{
-            return response()->json($response, 200);
         }
+        return response()->json($response, 200);
     }
 }
 
