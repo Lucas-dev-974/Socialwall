@@ -37,6 +37,7 @@ class FacebookRepository
             return 'Une erreur c\'est produite: ' . $e->getMessage();
             exit;
         } catch(\Facebook\Exceptions\FacebookSDKException $e) {
+            return $e;
             return 'Une erreur c\'est produite: ' . $e->getMessage();
             exit;
         }
