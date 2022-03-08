@@ -27,6 +27,7 @@ class FacebookController extends Controller
 
     public function getPages(){
         try{
+            return response()->json(['state' => 'user']);
             $datas = $this->facebook->getPages($this->facebook_token_infos->token);
             return response()->json($datas, 200);
         }catch(Error $error){
