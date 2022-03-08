@@ -20,7 +20,7 @@ class FacebookRepository
 
     public function getPages($accessToken){
         try{
-            $pages = $this->facebook->get('/me/accounts', $accessToken);
+            $pages = $this->facebook->get('/me', $accessToken);
             return $pages;
             // $pages = $pages->getGraphEdge()->asArray();
 
@@ -33,8 +33,12 @@ class FacebookRepository
             //         'image'        => "https://graph.facebook.com/{$page->id}/picture?type=large"
             //     ];
             // }, $pages);
-        }catch(Error $error){
-            return ['erreur' => 'Votre session semble expiré veuillez vous reconnecter !'];
+        }catch(\Facebook\Exceptions\FacebookResponseException $e) {
+            return 'Une erreur c\'est produite: ' . $e->getMessage();
+            exit;
+        } catch(\Facebook\Exceptions\FacebookSDKException $e) {
+            return 'Une erreur c\'est produite: ' . $e->getMessage();
+            exit;
         }
         
 
