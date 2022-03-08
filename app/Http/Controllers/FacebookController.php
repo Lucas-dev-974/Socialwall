@@ -28,7 +28,12 @@ class FacebookController extends Controller
 
 
     public function getProfile(){
-        $response = $this->facebook->getProfile();
+        $response = $this->facebook->getProfile($this->facebook_token_infos->token);
+        if(!is_array($response) && is_string($response) && $response == 'OAuthException'){ // Si le token est invalide
+            return response()->json(['error' => 'Vous n\'ête plus connecter'], 401);
+        }
+
+        return response()->json($response, 200);
     }
 
     public function getPages(){

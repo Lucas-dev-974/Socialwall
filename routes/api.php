@@ -26,6 +26,8 @@ Route::group([
 ], function($router) {
     Route::post('/facebook', [FacebookController::class, 'setToken']);
     Route::get('/getpages',  [FacebookController::class, 'getPages']); 
+    Route::get('/profile',  [FacebookController::class, 'getProfile']); 
+
 }); 
 
 

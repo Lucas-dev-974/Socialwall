@@ -17,24 +17,31 @@ class FacebookRepository
         ]);
     }
 
-    public function getProfile(){
+    private function SetupProfile($facebook_profile){
+        
+    }
+
+    public function getProfile($accessToken){
+        try{
+            $response = $this->facebook->get('/me', $accessToken);
+            $me       = $response->getGraphUser();
+            return $me;
+        }catch(\Facebook\Exceptions\FacebookResponseException $e) {
+            // return var_dump($e);
+            return $e->getErrorType();
+            exit;
+        } catch(\Facebook\Exceptions\FacebookSDKException $e) {
+            return $e->getMessage();
+            exit;
+        }
         
     }
 
     public function getPages($accessToken){
         try{
-            $pages = $this->facebook->get('/me?fields=id,name', $accessToken);
-            // $pages = $pages->getGraphEdge()->asArray();
+            $pages = $this->facebook->get('/me', $accessToken);
+            $pages = $pages->getGraphEdge();
             return $pages;
-            // return array_map(function ($page) {
-            //     return [
-            //         'provider'     => 'facebook',
-            //         'access_token' => $page['access_token'],
-            //         'id'           => $page['id'],
-            //         'name'         => $page['name'],
-            //         'image'        => "https://graph.facebook.com/{$page->id}/picture?type=large"
-            //     ];
-            // }, $pages);
         }catch(\Facebook\Exceptions\FacebookResponseException $e) {
             // return var_dump($e);
             return $e->getErrorType();
