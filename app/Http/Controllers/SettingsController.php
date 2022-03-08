@@ -37,14 +37,21 @@ class SettingsController extends Controller
         ]);
 
         if($validator->fails()) return response()->json(['error' => $validator->errors()]);
+        $setting = Setting::where(['name' => $validator->validated()['name'], 'user_id' => $user->id])->first();
 
-        $setting = new Setting();
-        // Insert data
-        $setting->name    = $validator->validated()['name'];
-        $setting->user_id = $user->id;
-        $setting->type    =  $validator->validated()['type'];
-        $setting->value   = $validator->validated()['value'];
-        $setting->save();
+        if($setting){
+            $setting->value   = $validator->validated()['value'];
+            $setting->save();
+        }else{
+            $setting = new Setting();
+            // Insert data
+            $setting->name    = $validator->validated()['name'];
+            $setting->user_id = $user->id;
+            $setting->type    =  $validator->validated()['type'];
+            $setting->value   = $validator->validated()['value'];
+            $setting->save();
+        }
+
 
         return response()->json('Parametre mis à jour');
     }
