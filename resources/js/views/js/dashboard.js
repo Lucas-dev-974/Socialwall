@@ -166,7 +166,7 @@ export default{
             api.get('/api/facebook/getpages').then(({data}) => {
                 console.log(data)
             }).catch(error => {
-                if(error.response.status == 402){
+                if(error.response.status == 401){
                     this.$store.commut('push_alert', {
                         message: 'Vous avez été déconnecter de facebook en raison d\'une longue absence',
                         type: 'warning'
