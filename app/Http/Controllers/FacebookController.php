@@ -36,7 +36,7 @@ class FacebookController extends Controller
         if(!is_array($response) && is_string($response) && $response == 'OAuthException'){ // Si le token est invalide
             return response()->json(['error' => 'Vous n\'ête plus connecter'], 401);
         }
-        return response()->json($response, 200);
+        return var_dump($response);
     }
 }
 
