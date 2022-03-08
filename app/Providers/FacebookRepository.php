@@ -34,8 +34,8 @@ class FacebookRepository
             //     ];
             // }, $pages);
         }catch(\Facebook\Exceptions\FacebookResponseException $e) {
-            return var_dump($e);
-            return 'Une erreur c\'est produite: ' . $e->getMessage();
+            // return var_dump($e);
+            return 'Une erreur c\'est produite: ' . $e->getErrorType();
             exit;
         } catch(\Facebook\Exceptions\FacebookSDKException $e) {
             return $e;
