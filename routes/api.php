@@ -24,8 +24,6 @@ Route::group([
     // 'middleware' => ['jwt.verify'],
     'prefix'     => 'facebook'
 ], function($router) {
-    Route::get('/',          [FacebookController::class, 'index']); 
-    Route::get('/callback',  [FacebookController::class, 'callback']); 
     Route::post('/facebook', [FacebookController::class, 'setToken']);
     Route::get('/getpages',  [FacebookController::class, 'getPages']); 
 }); 

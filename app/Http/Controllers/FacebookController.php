@@ -20,40 +20,20 @@ class FacebookController extends Controller
 
 
         $this->middleware('jwt.verify', ['except' => ['index', 'callback']]);
-        $this->facebook = new FacebookRepository();
+        $this->facebook       = new FacebookRepository();
         $facebook_token_infos = Setting::where(['user_id' => $this->user->id, 'name' => 'facebook_token_infos'])->first();
         $this->facebook_token_infos = json_decode($facebook_token_infos['value']);
-    }
-
-    public function index(){
-        return redirect()->secure($this->facebook->redirectTo());
-    }
-
-    public function callback(Request $request){
-        if (request('error') == 'access_denied') return response()->json(['error' => 'l\'accès vous à été refusé']); 
-        //handle error 
-
-        $accessToken = $this->facebook->handleCallback();
-        
-        return response()->json([
-            'access_token' => $accessToken,
-            'user'         => JWTAuth::user()
-        ]);
     }
 
     public function getPages(){
         try{
             $datas = $this->facebook->getPages($this->facebook_token_infos->token);
-            return response()->json($datas);
+            return response()->json($datas, 200);
         }catch(Error $error){
             return response()->json('Une erreur est survenue');
         }
 
     }
-
-    // public function getProfile(Request $request){
-    //     // $token = 
-    // }
 }
 
 

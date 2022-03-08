@@ -21,7 +21,7 @@ const router = new VueRouter({
 
         { path: '/wall', name: 'wall', component: Wall },
     
-        { path: "*", component: WallModeration }
+        { path: "*", component: Dashboard }
     ],
 
 })
