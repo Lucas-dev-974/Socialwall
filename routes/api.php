@@ -21,7 +21,7 @@ Route::group([
 
 
 Route::group([
-    'middleware' => ['jwt.verify'],
+    // 'middleware' => ['jwt.verify'],
     'prefix'     => 'facebook'
 ], function($router) {
     Route::post('/facebook', [FacebookController::class, 'setToken']);

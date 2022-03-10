@@ -16,10 +16,6 @@ class FacebookRepository
         ]);
     }
 
-    private function SetupProfile($facebook_profile){
-        
-    }
-
     public function getProfile($accessToken){
         try{
             $response = $this->facebook->get('/me', $accessToken);
