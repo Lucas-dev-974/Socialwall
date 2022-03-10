@@ -94,7 +94,7 @@ class UserController extends Controller
 
         $users = User::where('name', 'like', '%' . $validator->validated()['query'] . '%')
                        ->orWhere('lastname', 'like', '%'  . $validator->validated()['query'] . '%')
-                       ->orWhere('email', 'like', '%'  . $validator->validated()['query'] . '%')
+                       ->orWhere('email',    'like', '%'  . $validator->validated()['query'] . '%')
                        ->with(['walls'])->get();
 
         return response()->json(['users' => $users]);

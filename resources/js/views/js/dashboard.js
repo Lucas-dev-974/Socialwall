@@ -32,9 +32,7 @@ export default{
 
         this.load_walls()
         
-        if(this.$store.state.user.role_id == 1){
-            this.load_wall()
-        }
+        if(this.$store.state.user.role_id == 1){ this.load_wall() }
     },
 
     methods: {        
@@ -61,12 +59,10 @@ export default{
             let wallid
 
             let params = await api.get('/api/admin/demo_wall')
-            console.log(params);
             wallid = params.data.value
         
             if(wallid != null){ // To get the wall demonstration datas if wall demonstration was defined in database for the user
                 api.get('/api/wall/' + wallid).then(({data}) => { 
-                    console.log('laod wall data second step: ', data);
                     this.$store.commit('set_wall', data.wall)
                     this.wallname = data.wall.name
                     this.hashtag  = data.wall.hashtag
