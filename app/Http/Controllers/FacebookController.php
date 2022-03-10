@@ -26,7 +26,7 @@ class FacebookController extends Controller
         if(isset($facebook_token_infos) && !empty($facebook_token_infos))
             $this->facebook_token_infos = json_decode($facebook_token_infos['value']);
         else
-            $this->facebook_token_infos = null;
+            abort(response()->json(['error' => 'Veuillez vous connecter à facebook'], 401));
     } 
 
 
@@ -40,11 +40,14 @@ class FacebookController extends Controller
     }
 
     public function getPages(){
-        $response = $this->facebook->getPages($this->facebook_token_infos->token);
-        if(!is_array($response) && is_string($response) && $response == 'OAuthException'){ // Si le token est invalide
-            return response()->json(['error' => 'Vous n\'ête plus connecter'], 401);
-        }
-        return var_dump($response);
+        if($this->facebook_token_infos != null){
+            $response = $this->facebook->getPages($this->facebook_token_infos->token);
+            if(!is_array($response) && is_string($response) && $response == 'OAuthException'){ // Si le token est invalide
+                return response()->json(['error' => 'Vous n\'ête plus connecter'], 401);
+            }
+            return var_dump($response);            
+        }else return response()->json(['error' => 'Veuillez vous connecter à facebook'], 401);
+
     }
 
     public function getPosts($hahstag){
