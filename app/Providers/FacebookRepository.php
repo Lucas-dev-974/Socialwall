@@ -22,7 +22,7 @@ class FacebookRepository
 
     public function getProfile($accessToken){
         try{
-            $response = $this->facebook->get('/me', $accessToken);
+            $response = $this->facebook->get('/me?fields=name,id', $accessToken);
             $me       = $response->getGraphUser();
             return $me;
         }catch(\Facebook\Exceptions\FacebookResponseException $e) {

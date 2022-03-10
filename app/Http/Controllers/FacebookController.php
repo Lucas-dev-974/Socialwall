@@ -3,10 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Setting;
-use Illuminate\Http\Request;
 use App\Providers\FacebookRepository;
-use Error;
-use GuzzleHttp\Psr7\Response;
 use Tymon\JWTAuth\Facades\JWTAuth;
 
 class FacebookController extends Controller
@@ -32,7 +29,7 @@ class FacebookController extends Controller
 
     public function getProfile(){
         $response = $this->facebook->getProfile($this->facebook_token_infos->token);
-        if(!is_array($response) && is_string($response) && $response == 'OAuthException'){ // Si le token est invalide
+        if($response == 'OAuthException'){ // Si le token est invalide
             return response()->json(['error' => 'Vous n\'ête plus connecter'], 401);
         }
 
