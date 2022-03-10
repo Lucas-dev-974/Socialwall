@@ -33,7 +33,8 @@ class AdminController extends Controller
 
         }else{
             $adminSetting = AdminSettings::where([ 'name' => $name ])->first();
-            if($adminSetting == null) return response()->json(['error' => 'Désoler ressource non disponible']);
+            return $adminSetting;
+            if($adminSetting == null) return response()->json(['error' => 'Désoler ressource non disponible'], 403);
             return response()->json($adminSetting);
         }
 
