@@ -157,8 +157,8 @@ export default{
             });
         },
 
-        load_facebook: function(){
-            api.get('/api/facebook/getpages').then(({data}) => {
+        load_facebook_profile: function(){
+            api.get('/api/facebook/profile').then(({data}) => {
                 console.log(data)
             }).catch(error => {
                 if(error.response.status == 401){
