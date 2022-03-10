@@ -26,6 +26,8 @@ export default{
 
     mounted(){
         this.$store.commit('check_login', null) // Check if user app token is valid
+
+        // if(this.$store.state.)
         this.load_Settings()                    // Load user Facebook setting
         
         this.load_facebook_profile()
