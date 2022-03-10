@@ -22,11 +22,10 @@ class FacebookRepository
 
     public function getProfile($accessToken){
         try{
-            $response = $this->facebook->get('/me?fields=name,id', $accessToken);
+            $response = $this->facebook->get('/me', $accessToken);
             $me       = $response->getGraphUser();
             return $me;
         }catch(\Facebook\Exceptions\FacebookResponseException $e) {
-            // return var_dump($e);
             return $e->getErrorType();
             exit;
         } catch(\Facebook\Exceptions\FacebookSDKException $e) {
