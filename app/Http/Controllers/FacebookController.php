@@ -43,7 +43,11 @@ class FacebookController extends Controller
         }
         return var_dump($response);
     }
+
+    public function getPosts($hahstag){
+        // $response = $this->facebook->getPosts($h)
+    }
 }
 
 
-// https://stackoverflow.com/questions/42945596/how-to-integrate-facebook-php-sdk-with-laravel-5-4t"ranch 
+// https://stackoverflow.com/questions/42945596/how-to-integrate-facebook-php-sdk-with-laravel-5-4t"ranch é

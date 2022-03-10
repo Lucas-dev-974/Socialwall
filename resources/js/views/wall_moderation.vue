@@ -42,7 +42,8 @@
                 </div>
             </span>
         </div>
-        <div class="bg-red">
+        <div class="w-75">
+            <PostValdiation />
         </div>
     </div>
 </template>

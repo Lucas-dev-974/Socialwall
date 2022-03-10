@@ -14,15 +14,14 @@ class AdminController extends Controller
     {
         $user = JWTAuth::user();
         if($user->role_id !== 1){
-            abort(response()->json(['error' => 'Vous n\'avez pas accès à cet donnée !']));   
+            abort(response()->json(['error' => 'Accés refuser']));   
         }
-        // 
     }
 
 
     public function get(Request $request, $name){
         $names = explode('|', $name);
-        if(sizeof($names) > 0){
+        if(sizeof($names) > 1){
             $admin_settings = AdminSettings::whereIn('name', $names)->get();
             $settings = null;
             // return $admin_settings;

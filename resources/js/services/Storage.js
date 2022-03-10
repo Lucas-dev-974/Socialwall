@@ -47,8 +47,7 @@ export default new Vuex.Store({
         update_user: function(state, data){
             let availableFields = Object.keys(state.user)
             if(availableFields.includes(data.field)){
-                state.user[data.field] = data.value   
-                this.push_alert()
+                state.user[data.field] = data.value
             }
         },
 
@@ -76,6 +75,7 @@ export default new Vuex.Store({
 
         // App Settings - alerts ....
         push_alert: function(state, alert){
+            console.log(alert);
             state.alerts.push({
                 id: state.alerts.length + 1,
                 ...alert

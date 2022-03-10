@@ -15,13 +15,11 @@ class UsersSeeder extends Seeder
     public function run()
     {
        DB::table('users')->insert([
-        'email' => 'admin@gmail.com',
+        'email'    => 'admin@gmail.com',
         'password' => bcrypt('#Admin-sc@'),
-        'name' => 'lucas',
+        'name'     => 'Administrator',
         'lastname' => 'admin',
-        'roles' => json_encode([
-            'xadmin', 3
-        ]),
+        'role_id'  => 1,
        ]);
     }
 }

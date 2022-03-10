@@ -35,8 +35,8 @@ const dataSource = {
     caption: "Vues par Jour",
     subcaption: "",
     xaxisname: "Date",
-    yaxisname: "Vue",
-    numbersuffix: "Vues",
+    yaxisname: "Vues",
+    numbersuffix: "",
     theme: "fusion"
   },
   data: chartData
@@ -49,7 +49,7 @@ export default {
     return {
       type: "column2d",
       renderAt: "chart-container",
-      width: "1000",
+      width:  "800",
       height: "350",
       dataFormat: "json",
       dataSource
@@ -57,15 +57,14 @@ export default {
   },
 
   mounted () {
-    console.log(this.$store.state.wall);
-      this.render()
+    this.render()
   },
 
   methods: {
     render() {
       const fusionChart = new FusionCharts({
-        type: this.type,
-        width: this.width,
+        type:   this.type,
+        width:  this.width,
         height: this.height
       });
 

@@ -40,7 +40,7 @@ class UserController extends Controller
         
         if($user['role_id'] == 1 || $user['id'] == $request['userid']){
             if(in_array($request['field'], $availableFields, true)){
-                if($request['field'] == 'email'){
+                if($request['field'] == 'email'){ // Check if value is a correct email
                     if(!filter_var($request['value'], FILTER_VALIDATE_EMAIL)){
                         return response()->json(['is not email']);
                     }
@@ -48,14 +48,14 @@ class UserController extends Controller
                     if($userViaEmail) return response()->json(['error' => 'L\'email est déjà enregistrer, connecté vous']);                       
                 }
 
-                $user = User::where(['id' => $request['userid']])->first();
+                $user = User::where(['id' => $request['userid'] ?? $user->id])->first();
                 
                 // if($user[$request['field']] == 'blocked' && $request['value'] == 1) $request['value'] = !$request['value'];
 
                 $user[$request['field']] = $request['value'];
-                $user->save();
+                $result = $user->save();
 
-                return response()->json(['data ' . $request['field'] . ' was modified']);
+                return response()->json(['Votre ' . $request['field'] . ' à été modifier']);
             }
             return response()->json(['error' => 'Désoler une erreur est survenue, un mauvais parametre à été renseigner !']);
         }

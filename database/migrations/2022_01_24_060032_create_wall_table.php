@@ -15,11 +15,11 @@ class CreateWallTable extends Migration
     {
         Schema::create('walls', function (Blueprint $table) {
             $table->id();
+            $table->string('name');
             $table->timestamps();
             $table->unsignedBigInteger('user_id');
-            $table->boolean('moderated');
-            $table->string('name');
-            $table->string('hashtag')->nullable();
+            $table->boolean('moderated')->default(true);
+            $table->string('hashtag')->default('Pomme');
             $table->string('background_url')->nullable();
             $table->string('background_color')->default('#FFFFF');
 

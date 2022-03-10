@@ -1,17 +1,6 @@
 <template>
-    <v-card class="mx-auto text-center  w-100"  width="1100px" height="480px" >
-
-    <div id="chart-container">
-      <!-- <fusioncharts
-      :type="type"
-      :width="width"
-      :height="height"
-      :dataformat="dataFormat"
-      :dataSource="dataSource"
-      >
-      </fusioncharts> -->
+    <div id="chart-container" class="mx-auto d-flex justify-center">
     </div>
-    </v-card>
 </template>
 
 <script src="./js/ViewsChart.js" />

@@ -1,5 +1,5 @@
 <template>
-  <v-dialog v-model="dialog" width="1200px">
+  <v-dialog v-model="dialog" width="900">
     <template v-slot:activator="{ on, attrs }">
 
       <v-card class="w-80 center my-2 h-50 d-flex justify-space-around align-center">
@@ -15,10 +15,8 @@
       </v-card>
 
     </template>
-    <v-card class=" bg-dark">
-      <v-card-title primary-title>
-        title
-      </v-card-title>
+    <v-card>
+      <v-card-title> Vues/Jours </v-card-title>
       <ViewsChart />
     </v-card>
   </v-dialog>

@@ -20,10 +20,9 @@ class WallController extends Controller
             return $walls;
         }
         
-        $wall = Wall::where([ 'id' => $wallid])->with(['settings', 'views', 'suspectWords', 'BlockedUsers'])->first();
+        $wall = Wall::where([ 'id' => $wallid])->with(['views', 'suspectWords', 'BlockedUsers'])->first();
 
         if($user['id'] == $wall['user_id'] || $user['role_id'] == 1){
-            $wall->settings();
             $wall->views();
             return response()->json(['wall' => $wall]);
         }else return response()->json([ 'error' => 'Vous n\'ête pas autorisé à récuperer cet ressource']);

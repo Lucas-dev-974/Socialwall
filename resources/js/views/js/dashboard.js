@@ -57,16 +57,13 @@ export default{
             })
         },
 
-        load_wall: function(){
+        load_wall: async function(){
             let wallid
-            api.get('/api/admin/wall_demo').then(({data}) => { // To get the wall demonstration id
-                console.log(data);
-                if(data != null){
-                    data = JSON.parse(data)
-                    wallid = data.wall_demo
-                }
-            }).catch(error => {  wallid = null })
 
+            let params = await api.get('/api/admin/demo_wall')
+            console.log(params);
+            wallid = params.data.value
+        
             if(wallid != null){ // To get the wall demonstration datas if wall demonstration was defined in database for the user
                 api.get('/api/wall/' + wallid).then(({data}) => { 
                     console.log('laod wall data second step: ', data);
@@ -127,7 +124,9 @@ export default{
                 field: Field,
                 value: value
             }).then(({data}) => {
-                console.log(data);
+                this.$store.commit('push_alert', {
+                    type: 'green', message: data[0]
+                })
             })
         },  
 
