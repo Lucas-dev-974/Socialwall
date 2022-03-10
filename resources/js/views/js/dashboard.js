@@ -28,11 +28,14 @@ export default{
         this.$store.commit('check_login', null) // Check if user app token is valid
         this.load_Settings()                    // Load user Facebook setting
         
-        this.load_facebook()
+        this.load_facebook_profile()
 
         this.load_walls()
         
-        if(this.$store.state.user.role_id == 1){ this.load_wall() }
+        // if(this.$store.)
+        if(this.$store.state.user.role_id == 1){ 
+            this.load_wall() 
+        }
     },
 
     methods: {        
