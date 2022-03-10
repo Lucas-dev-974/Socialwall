@@ -23,7 +23,10 @@ class FacebookController extends Controller
         $this->middleware('jwt.verify', ['except' => ['index', 'callback']]);
         $this->facebook       = new FacebookRepository();
         $facebook_token_infos = Setting::where(['user_id' => $this->user->id, 'name' => 'facebook_token_infos'])->first();
-        $this->facebook_token_infos = json_decode($facebook_token_infos['value']);
+        if(isset($facebook_token_infos) && !empty($facebook_token_infos))
+            $this->facebook_token_infos = json_decode($facebook_token_infos['value']);
+        else
+            $this->facebook_token_infos = null;
     } 
 
 
