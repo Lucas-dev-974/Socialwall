@@ -79,8 +79,10 @@ export default{
 
         is_logged: function(){
             if(this.$store.state.token !== null){
+                console.log('in login check');
                 api.get('/api/auth/')
                 .catch(error => {
+                    console.log('login fails');
                     this.$router.push('login')
                 })
             }else{
