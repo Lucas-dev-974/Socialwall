@@ -3,6 +3,7 @@
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\FacebookController;
+use App\Http\Controllers\MailController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\SettingsController;
 use App\Http\Controllers\UserController;
@@ -17,11 +18,15 @@ Route::group([
     Route::post('/',   [AuthController::class, 'login'])->name('login');
     Route::patch('/',  [AuthController::class, 'register'])->name('register');  
     Route::get('/',    [AuthController::class, 'TestToken'])->name('check_token'); 
+
+    Route::post('/reset-password',         [AuthController::class, 'ResetPassword']);
+    Route::post('/forgot-password',        [AuthController::class, 'ForgotPassword']);
+    Route::get('/reset-password/{token}',  [AuthController::class, 'ViewResetPassword'])->name('password.reset');
 }); 
 
 
 Route::group([
-    // 'middleware' => ['jwt.verify'],
+    'middleware' => ['jwt.verify'],
     'prefix'     => 'facebook'
 ], function($router) {
     Route::post('/facebook', [FacebookController::class, 'setToken']);
@@ -81,4 +86,16 @@ Route::group([
 ], function($router) {
     Route::get('/{name}',  [AdminController::class, 'get']); 
     Route::post('/',       [AdminController::class, 'set']); 
+}); 
+
+
+
+Route::group([
+    'prefix'     => 'mail'
+], function($router) {
+    Route::get('/confirm-mail',     [MailController::class, 'ConfirmMail']);
+
+    // Route::get('/forgot-password',  [MailController::class, 'ViewForgotPassword']);
+
+    
 }); 
