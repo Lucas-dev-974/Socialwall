@@ -1,87 +1,64 @@
 <template>
-    <v-container id="dash-container">
-        <div id="Facebook-manager" class="my-5">
-            <v-card height="140px" >
-                <v-list-item class="px-10 d-flex" style="height: 100%">
+    <div class="px-15" id="dash-container">
+        <div class="d-flex justify-center justify-space-arround mt" id="dash_user_card">
+            <div id="Account-profile">
+                <v-card  elevation="8" min-width="300" class="custom-card" id="user-card-data">
+                    <v-list-item class="d-flex justify-center pa-5">
+                         <v-img alt="Icon pour la wall page" :src='image_src' max-width="100"></v-img>
+                    </v-list-item>
 
-                    <!-- user account icon to show on wall -->
-                    <div class="h-100">
-                        <v-img alt="Icon pour la wall page" class="mr-5 mt-6" :src='image_src' max-width="50px"></v-img>
-                    </div>
-                    
-                    <!-- User account infos -->
-                    <div id="infos-account">
-                        <div >
-                            <div class="my-2 card-block">
-                                <label for="">Email <v-icon small>mdi-pen</v-icon></label>
-                                <input type="text" class="w-80" v-model="email" disabled  v-on:keyup.enter="update_user('email')">
+                    <v-list-item class="pa-3 " id="dash_user_card-itemContent">
+                        <!-- User account infos -->
+                        <div id="infos-account">
+                            <div >
+                                <div class="my-2 card-block">
+                                    <label for="">Email <v-icon small>mdi-pen</v-icon></label>
+                                    <input type="text" class="w-100" v-model="email" disabled  v-on:keyup.enter="update_user('email')">
+                                </div>
+                                
+                                <div class="my-2 card-block">
+                                    <label for="">Tel</label>
+                                    <input type="text" class="w-100" v-model="phone" placeholder="0693XXXXXX" v-on:keyup.enter="update_user('phone')">
+                                </div>
                             </div>
-                            
-                            <div class="my-2 card-block">
-                                <label for="">Tel</label>
-                                <input type="text" class="w-80" v-model="phone" v-on:keyup.enter="update_user('phone')">
+
+                            <div>
+                                <div class="my-2 card-block">
+                                    <label for="">Nom</label>
+                                    <input type="text" class="w-100" v-model="lastname" v-on:keyup.enter="update_user('lastname')">
+                                </div>
+                                
+                                <div class="my-2 card-block">
+                                    <label for="">Prénom</label>
+                                    <input type="text" class="w-100" v-model="name" v-on:keyup.enter="update_user('name')">
+                                </div>
+
+                                <div class="card-block">
+                                    <div class="d-flex w-100 justify-right" v-if="!facebook_connected">
+                                        <v-btn color="#1D3C78"  class="pa-4 text-white bold" @click="facebook_login" small>Connexion facebook</v-btn>
+                                    </div>
+
+                                    <div class="" v-else>
+                                        
+                                    </div>
+                                     
+                                </div>
                             </div>
                         </div>
+                    </v-list-item>
+                </v-card>
+                <WallModerationCard v-if="$store.state.responsive == 'large'"/>
+            </div>
 
-                        <div>
-                            <div class="my-2 card-block">
-                                <label for="">Nom</label>
-                                <input type="text" class="w-80" v-model="lastname" v-on:keyup.enter="update_user('lastname')">
-                            </div>
-                            
-                            <div class="my-2 card-block">
-                                <label for="">Prénom</label>
-                                <input type="text" class="w-80" v-model="name" v-on:keyup.enter="update_user('name')">
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- If admin is connected show Facebook credentials -->
-                    <div id="facebook-app-infos">
-                        <v-btn color="#1D3C78" v-if="!facebook_connected" class="pa-4" @click="facebook_login" x-small>Connexion <br> facebook</v-btn>
-                    </div>
-                </v-list-item>
-            </v-card>
+            <div id="wall-manager" class="w-100  pl-15">
+                <UsersList v-if="$store.state.user.role_id == 1"/>
+                <WallList  v-else />
+                
+                <!-- Wall Demonstration -->
+                <WallModerationCard v-if="$store.state.responsive == 'medium'"/>
+            </div>
         </div>
-
-        <div id="wall-manager" class="d-flex w-100" style="flex-wrap: wrap;">
-            <UsersList v-if="$store.state.user.role_id == 1"/>
-            <WallList v-else />
-            
-            <!-- Wall Demonstration -->
-            <v-card class="mx-auto" id="wall-infos" v-if="$store.state.user.role_id == 1">
-                <v-card-title primary-title class="d-flex justify-space-between">
-                    <p>Wall de démonstration</p> 
-                    <v-btn color="success" style='margin-top: -15px' @click="open_wall($store.state.wall.id)" x-small icon>
-                        <v-icon>mdi-open-in-new</v-icon>
-                    </v-btn>
-                </v-card-title> 
-
-
-                <div class="pa-5" v-if="$store.state.wall != null" style="display: grid;">
-                    <div class="form-inputs my-1">
-                        <label for="Nom">Nom</label>
-                        <input class="custom-input" type="text" v-model="wallname">  
-                    </div>
-                    <div class="form-inputs my-1">
-                        <label for="Nom">Hashtag</label>
-                        <input class="custom-input" type="text" v-model="hashtag">  
-                    </div>
-                    <div class="form-inputs my-1">
-                        <label for="Nom">Vues: </label>
-                        <p>{{views}}</p>
-                    </div>
-                </div>
-
-
-                <div class="w-80 mx-auto pa-2" v-else style="min-width: ">
-                    <div color="gray w-80 mx-auto mt-4 pa-5">
-
-                    </div>
-                </div>
-            </v-card>
-        </div>
-    </v-container>
+    </div>
 </template>
 
 <script src='./js/dashboard.js' />

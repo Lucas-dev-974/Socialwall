@@ -1,10 +1,15 @@
-import Vue from 'vue';
+import Vue       from 'vue';
 import VueRouter from 'vue-router';
-import Login from '../views/login.vue';
-import Register from '../views/register.vue';
-import WallModeration from '../views/wall_moderation.vue';
-import Wall from '../views/wall.vue';
-import Dashboard from '../views/Dashboard.vue'
+
+// Authentication Pages
+import ResetPassword  from '../views/Authentication/ResetPassword.vue'
+import Register       from '../views/Authentication/register.vue';
+import Login          from '../views/Authentication/login.vue';
+
+// Pages
+import Moderation     from '../views/Moderation.vue';
+import Wall           from '../views/wall.vue';
+import Dashboard      from '../views/Dashboard.vue'
 
 Vue.use(VueRouter);
 
@@ -15,7 +20,9 @@ const router = new VueRouter({
 
         { path: '/register', name: 'register', component: Register },
 
-        { path: '/moderation', name: 'moderation', component: WallModeration },
+        { path: '/reset-password/:token', name: 'reset-password', component: ResetPassword },
+
+        { path: '/moderation', name: 'moderation', component: Moderation },
 
         { path: '/dashboard', name: 'dashboard', component: Dashboard },
 

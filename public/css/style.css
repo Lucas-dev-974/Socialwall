@@ -2,9 +2,13 @@ html{
     overflow: hidden;
 }
 
+#navbar{
+
+}
+
 .bg-linear-blue{
-    background: rgb(125,186,210) !important;
-    background: linear-gradient(52deg, rgba(125,186,210,1) 0%, rgba(18,129,173,1) 100%) !important;
+    background: #7dbad2 !important;
+    background: linear-gradient(52deg, #7dbad2 0%, #1281ad 100%) !important;
     height: 100%;
 }
 
@@ -118,32 +122,8 @@ html{
 }
 
 
-/* Dashboard */
-#dash-container{
-    position: relative;
-    top: 64px;
-    height: calc(94vh);
-}
-#infos-account{
-    display: flex;
-}#facebook-app-infos{
-    position: absolute;
-    right: 40px;
-}
 
-.card-block{
-    display: grid;
-}.card-block label{
-    font-size: 14px;
-    font-weight: 600;
-}.card-block input{
-    padding-left: 5px;
-    color: white;
-}
-
-
-
-#dashboard-logout{
+#logout{
     position: absolute;
     right: 10px;
     top: 15px;
@@ -187,7 +167,7 @@ html{
 .wall-list-item{
     transition: all 0.8s;
 }.wall-list-item:hover{
-    background-color: gray;
+    background-color: rgb(32, 32, 32);
 }
 
 
@@ -216,8 +196,15 @@ background: #212529;
 
 .custom-link{
     text-decoration: none;
-    color: #fff !important;
-font-size: 12px !important;
+    color: #1281ad  !important;
+    font-size: 12px !important;
+    animation: all 1s;
+}.custom-link:hover{
+    text-decoration: underline;
+}
+
+.bold{
+    font-weight: 600;
 }
 
 .form-inputs{
@@ -226,9 +213,70 @@ font-size: 12px !important;
 
 
 .custom-input{
-    border: 1px solid #9c9c9c;
-    color: #fff;
-    border-radius: 5px;
+    border-bottom: 1px solid #292929;
+    color: #000c10;
     font-size: 14px;
     padding: 3px;
+}
+
+.dark-text{
+    color: #000c10 !important;
+}
+
+.custom-card{
+    background: #00caff !important;
+    background: linear-gradient(45deg, #00caff 0%, #1281ad 100%) !important;
+}.blue_{
+    background-color: #00caff !important;
+}.blue-dark{
+    background-color: #1281ad !important;
+}
+
+.custom-table-header-1 th{
+    font-size: 18px !important;
+    background-color: #1281ad !important;
+    color: #ffff !important;
+}
+
+.darkblue-text{
+    color: #1281ad !important;
+}
+
+
+#image-viewer{
+    background-color: #000000d7 !important;
+    position: absolute;
+    width: 50vw !important;
+    left: 30vw;
+    top: 70px;
+    z-index: 90;
+}
+
+.link-custom-hover-yellow{ background: linear-gradient(to right, #f1bf00, #ffe57b 50%, rgb(255, 255, 255) 50%);  }
+.link-custom-hover-pink{   background: linear-gradient(to right, #e5374e, #ff7e8f 50%, rgb(255, 255, 255) 50%); }
+
+.link-custom-hover-yellow, .link-custom-hover-pink{
+    position: relative;
+    display: inline-block;
+    font-size: 2em;
+    font-weight: 600;
+    color: inherit;
+    overflow: hidden;
+    transition: all 0.7s;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-size: 200% 100%;
+    background-position: 100%;
+    transition: background-position 275ms ease;
+    cursor: pointer;
+}.link-custom-hover-yellow:hover, .link-custom-hover-pink:hover{
+    background-position: 0 100%;
+}
+
+
+
+.list-item-facebook{
+    position: absolute;
+    bottom: 10px;
 }

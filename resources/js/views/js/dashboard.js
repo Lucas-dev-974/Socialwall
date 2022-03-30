@@ -1,43 +1,30 @@
-import UsersList from '../../components/UsersList.vue'
-import WallList  from '../../components/WallList.vue'
+import WallModerationCard from '../../components/Dashboard/wall-card-moderation.vue'
+import UsersList from '../../components/Dashboard/UsersList.vue'
+import WallList  from '../../components/Dashboard/WallList.vue'
 
-import api from '../../services/ApiServices.js'
+import api      from '../../services/ApiServices.js'
 import facebook from '../../facebook.js'
 
 export default{
     components: {
-        UsersList, WallList
+        UsersList, WallList, WallModerationCard
     },
     data(){
         return {
-            email:    this.$store.state.user.email,
-            name:     this.$store.state.user.name,
-            lastname: this.$store.state.user.lastname,
-            phone:    this.$store.state.user.phone,
+            email:     this.$store.state.user.email,
+            name:      this.$store.state.user.name,
+            lastname:  this.$store.state.user.lastname,
+            phone:     this.$store.state.user.phone,
             image_src: this.$store.state.user.medias_url ?? '/medias/default-user/account.png',
-
-            wallname: '',
-            hashtag: '',
-            views:  0,
 
             facebook_connected: false,
         }
     },
 
     mounted(){
-        this.$store.commit('check_login', null) // Check if user app token is valid
-
-        // if(this.$store.state.)
         this.load_Settings()                    // Load user Facebook setting
-        
         this.load_facebook_profile()
-
         this.load_walls()
-        
-        // if(this.$store.)
-        if(this.$store.state.user.role_id == 1){ 
-            this.load_wall() 
-        }
     },
 
     methods: {        
@@ -52,36 +39,11 @@ export default{
         },
         
         load_walls: function(){
-            api.get('/api/wall')
-            .then(({data}) => {
+            api.get('/api/wall').then(({data}) => {
                 this.$store.commit('set_walls', data)
             }).catch(error => {
                 console.log(error);
             })
-        },
-
-        load_wall: async function(){
-            let wallid
-
-            let params = await api.get('/api/admin/demo_wall')
-            wallid = params.data.value
-        
-            if(wallid != null){ // To get the wall demonstration datas if wall demonstration was defined in database for the user
-                api.get('/api/wall/' + wallid).then(({data}) => { 
-                    this.$store.commit('set_wall', data.wall)
-                    this.wallname = data.wall.name
-                    this.hashtag  = data.wall.hashtag
-                }).catch(error => console.log(error))
-            }
-        },
-
-        open_wall: function(wallid){
-            api.get('/api/wall/' + wallid)
-            .then(({data}) => {
-                console.log('open wall its data is loaded: ', data);
-                this.$store.commit('set_wall', data.wall)
-                this.$router.push('moderation')
-            }).catch(error => console.log(error))
         },
 
         delete_wall: function(wallid){
@@ -167,10 +129,7 @@ export default{
                 console.log(data)
             }).catch(error => {
                 if(error.response.status == 401){
-                    this.$store.commit('push_alert', {
-                        message: 'Vous avez été déconnecter de facebook en raison d\'une longue absence',
-                        type: 'warning'
-                    })
+                    // this.z
                     this.facebook_connected = false
                     facebook.handleFacebookSdk()
                 }

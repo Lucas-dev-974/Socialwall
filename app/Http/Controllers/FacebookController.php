@@ -13,14 +13,17 @@ class FacebookController extends Controller
 
     public function __construct()
     {   
+        // Get connected user
         $this->user = JWTAuth::user();
         if(!$this->user) return abort(response()->json(['error' => 'Veuillez vous connectez !']));
 
-
+        // Bypass middleware 
         $this->middleware('jwt.verify', ['except' => ['index', 'callback']]);
         $this->facebook       = new FacebookRepository();
+
+        // Get Facebook token for the user
         $facebook_token_infos = Setting::where(['user_id' => $this->user->id, 'name' => 'facebook_token_infos'])->first();
-        if(isset($facebook_token_infos) && !empty($facebook_token_infos))
+        if(isset($facebook_token_infos) && !empty($facebook_token_infos)) // Check if he have token 
             $this->facebook_token_infos = json_decode($facebook_token_infos['value']);
         else
             abort(response()->json(['error' => 'Veuillez vous connecter à facebook'], 401));
@@ -28,8 +31,9 @@ class FacebookController extends Controller
 
 
     public function getProfile(){
+
         $response = $this->facebook->getProfile($this->facebook_token_infos->token);
-        // return $response;s
+        
         if($response == 'OAuthException'){ // Si le token est invalide
             return response()->json(['error' => 'Vous n\'ête plus connecter'], 401);
         }
@@ -47,7 +51,7 @@ class FacebookController extends Controller
 
     }
 
-    public function getPosts($hahstag){
+    public function getPosts($wallid){
         // $response = $this->facebook->getPosts($h)
     }
 }

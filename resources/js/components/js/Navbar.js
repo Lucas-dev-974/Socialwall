@@ -5,7 +5,7 @@ export default{
             is_dashboard: null,
             hashtag: 'Pomme',
             app: app,
-            color: 'transparent',
+            color: '#1281AD',
         }
     },
 
@@ -15,26 +15,22 @@ export default{
                 this.is_dashboard = false
                 this.Title = 'Nautilus'
                 document.getElementById('appbar').classList.remove('v-app-bar--fixed')
-                this.color = "#1281AD"
                 break
 
             case 'login': 
                 this.is_dashboard = true
                 this.Title = 'Sociawall'
-                this.color = "#1281AD"
                 break
 
             case 'register': 
                 this.is_dashboard = true
                 this.Title = 'Sociawall'
-                this.color = "#1281AD"
                 break
 
             case 'wall':
                 this.is_dashboard = true
                 this.Title = ''
                 this.$refs['appbar'].$el.classList.remove('v-app-bar--fixed')
-                this.color = "#1281AD"
                 this.hashtag = this.$store.state.wall.hashtag
                 // this.hashtag = this.$store.state.settings.hashtag
 
@@ -42,7 +38,6 @@ export default{
                 this.is_dashboard = true
                 this.Title = 'Socialwall'
                 this.$refs['appbar'].$el.classList.remove('v-app-bar--fixed')
-                this.color = "#1281AD"
                 break
         }
     },

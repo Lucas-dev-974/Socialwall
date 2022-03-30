@@ -12,6 +12,7 @@
         <link href="https://cdn.jsdelivr.net/npm/@mdi/font@4.x/css/materialdesignicons.min.css" rel="stylesheet">
 
         <link href="{{ asset('/css/style.css') }}" rel="stylesheet" type="text/css">
+        <link href="{{ asset('/css/dashboard.css') }}" rel="stylesheet" type="text/css">
         <link href="{{ asset('/css/wall-animation-1.css') }}" rel="stylesheet" type="text/css">
 
     </head>

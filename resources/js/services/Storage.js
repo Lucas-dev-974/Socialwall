@@ -1,8 +1,6 @@
 import Vuex from 'vuex' 
 import VuePersist from 'vuex-persist'
 import Vue from 'vue'
-import ApiServices from './ApiServices'
-import router from './router'
 
 Vue.use(Vuex)
 
@@ -20,6 +18,7 @@ export default new Vuex.Store({
         facebook: null,
 
         // Wall Moderation
+        moderation_page: 'validation',
         wall: null,
         validated_posts: [],
         blocked_posts: [],
@@ -27,16 +26,23 @@ export default new Vuex.Store({
 
         // User walls
         walls: [],
+        responsive: null,
 
         // Settings
         alerts: [],
 
         // Admin settings
         users: [],
-        facebook_infos: {},
+        facebook_infos: null,
 
-        views: 0
+        views: 0,
 
+        display_view: 'square-grid',
+
+        image_viewer: {
+            show: false,
+            image_src: null
+        }
     },
 
     mutations: {
@@ -53,6 +59,7 @@ export default new Vuex.Store({
 
 
         // Wall moderations
+        set_moderationpage: function(state, page){ state.moderation_page = page },
         set_posts:   function(state, posts){ state.validated_posts = posts },
         remove_post: function(state, id){ state.validated_posts = state.validated_posts.filter(post => post.id != id) },
         update_post: function(state, post){},
@@ -84,17 +91,6 @@ export default new Vuex.Store({
         remove_alert: function(state, id){ state.alerts = state.alerts.filter(alert => alert.id !== id) },
 
 
-        check_login: function(state, data){
-            if(state.token !== null){
-                ApiServices.get('/api/auth/')
-                .catch(error => {
-                    window.location.href = '/login'
-                })
-            }
-            else window.location.href = '/login'
-        },
-
-
         // Admin settings
         set_users: function(state, users){ state.users = users },
         update_users: function(state, user){},
@@ -110,6 +106,28 @@ export default new Vuex.Store({
         },
         push_FacebookInfos: function(state, data){
             state.facebook_infos.push(data)
+        },
+
+        set_responsive: function(state, data){
+            state.responsive = data
+        },
+
+        // Dashboard settings
+        set_DisplayView: function(state, render){
+            state.display_view = render
+        },
+
+        set_ImageViewer: function(state, data){
+            if(state.image_viewer.show){
+                state.image_viewer.image_src = data
+            }else{
+                state.image_viewer.show = true
+                state.image_viewer.image_src = data
+            }
+        },
+
+        close_ImageViewer: function(state, data){
+            state.image_viewer.show = false
         }
          
     },

@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use Facebook\Facebook;
+use Tymon\JWTAuth\Facades\JWTAuth;
 
 class FacebookRepository
 {
@@ -14,6 +15,14 @@ class FacebookRepository
             'app_secret' => config('providers.facebook.app_secret'),
             'default_graph_version' => 'v12.0'
         ]);
+    }
+
+    public function SetupProfile(){
+        $user = JWTAuth::user();
+        $fields_type = [ 'facebook_profile', 'facebook_pages' ];
+
+        
+        
     }
 
     public function getProfile($accessToken){
@@ -28,7 +37,6 @@ class FacebookRepository
             return $e->getMessage();
             exit;
         }
-        
     }
 
     public function getPages($accessToken){
@@ -44,8 +52,6 @@ class FacebookRepository
             return $e->getMessage();
             exit;
         }
-        
-
     }
 
 
