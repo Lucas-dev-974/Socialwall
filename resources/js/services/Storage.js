@@ -105,6 +105,7 @@ export default new Vuex.Store({
             }
         },
         setKey_FacebookInfos: function(state, data){
+            if(state.facebook_infos == null) state.facebook_infos = {}
             state.facebook_infos[data.key] = data.value
         },
 
