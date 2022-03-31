@@ -22,7 +22,7 @@
         </div>
 
         <!-- <script src="{{ secure_asset('js/wall-animation.js') }}"></script> --> 
-        <script src="{{ asset('js/app.js') }}" ></script>
+        <script src="{{ secure_asset('js/app.js') }}" ></script>
         <script>
             function checkLoginState() {
                 FB.getLoginStatus(function(response) {
