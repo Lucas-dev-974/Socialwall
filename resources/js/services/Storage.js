@@ -1,6 +1,7 @@
 import Vuex from 'vuex' 
 import VuePersist from 'vuex-persist'
 import Vue from 'vue'
+import { isArray } from 'lodash'
 
 Vue.use(Vuex)
 
@@ -106,7 +107,12 @@ export default new Vuex.Store({
         },
         setKey_FacebookInfos: function(state, data){
             if(state.facebook_infos == null) state.facebook_infos = {}
-            state.facebook_infos[data.key] = data.value
+            if(isArray(data.key)){
+                data.key.forEach((key, index) => {
+                    console.log(index, key);
+                })
+            }else state.facebook_infos[data.key] = data.value
+            
         },
 
 
