@@ -52,6 +52,10 @@ export default{
                         })
                     }).then(({data}) => {
                         console.log(data)
+                        this.$store.commit('setKey_FacebookInfos', {
+                            key: ['connected'],
+                            value: [true]
+                        })
                     }).catch(error => {
                         console.log(error)
                     })
