@@ -104,9 +104,12 @@ export default new Vuex.Store({
                 })
             }
         },
-        push_FacebookInfos: function(state, data){
-            state.facebook_infos.push(data)
+        setKey_FacebookInfos: function(state, data){
+            state.facebook_infos[data.key] = data.value
         },
+
+
+
 
         set_responsive: function(state, data){
             state.responsive = data

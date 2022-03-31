@@ -3,14 +3,14 @@
         <div class="d-flex h-100 pt bg-blue2">
             <Sidebar v-if="$store.state.responsive !== 'mobile'" @facebook_login="facebook_login" />
 
-            <div class="w-100 mx-auto px-3" v-if="$store.state.facebook_infos">
+            <div class="w-100 mx-auto px-3" v-if="$store.state.facebook_infos && $store.state.facebook_infos.connected == true">
                 <PostValdiation v-if="$store.state.moderation_page == 'validation'" />
                 <Views          v-if="$store.state.moderation_page == 'views'"/>
                 <Template       v-if="$store.state.moderation_page == 'template'"/>
                 <UserManager    v-if="$store.state.moderation_page == 'user-manager'"/>
             </div>
             
-            <v-card outlined elevation="10" v-else class="mx-auto my-auto" height="auto" min-width="200" max-width="450">
+            <v-card v-else outlined elevation="10" class="mx-auto my-auto" height="auto" min-width="200" max-width="450">
                 <v-card-title class="d-flex w-100 ">
                    <span class="fs-2">Connectez-vous à facebook</span> 
                    <v-divider></v-divider>

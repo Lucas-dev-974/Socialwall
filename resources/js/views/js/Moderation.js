@@ -4,7 +4,7 @@ import PostValdiation  from '../../components/_Moderation/PostValidation.vue'
 import UserManager     from '../../components/_Moderation/UserManager.vue'
 import Sidebar         from '../../components/_Moderation/Sidebar-drawer.vue'
 
-import api from '../../services/ApiServices'
+import api      from '../../services/ApiServices'
 import facebook from '../../facebook.js'
 
 export default{
@@ -65,8 +65,11 @@ export default{
                 console.log(data)
             }).catch(error => {
                 if(error.response.status == 401){
-                    this.facebook_connected = false
                     facebook.handleFacebookSdk()
+                    this.$store.commit('setKey_FacebookInfos', {
+                        key:   "connected",
+                        value: false
+                    })
                 }
             })
         }
