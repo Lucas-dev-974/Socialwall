@@ -32,7 +32,7 @@ Route::group([
     Route::post('/facebook', [FacebookController::class, 'setToken']);
     Route::get('/getpages',  [FacebookController::class, 'getPages']); 
     Route::get('/profile',  [FacebookController::class, 'getProfile']); 
-
+    Route::get('/after-connection',  [FacebookController::class, 'afterConnection']); 
 }); 
 
 

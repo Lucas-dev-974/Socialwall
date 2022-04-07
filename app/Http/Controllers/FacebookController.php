@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Setting;
 use App\Providers\FacebookRepository;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 use Tymon\JWTAuth\Facades\JWTAuth;
 
 class FacebookController extends Controller
@@ -51,8 +53,9 @@ class FacebookController extends Controller
 
     }
 
-    public function getPosts($wallid){
-        // $response = $this->facebook->getPosts($h)
+    public function afterConnection(Request $request){
+        $validator = Validator::make($request->all());
+        return response()->json($validator->validated());
     }
 }
 
