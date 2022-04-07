@@ -89,7 +89,7 @@ export default{
         saveFacebookDatas: function(){
             console.log(this.facebook);
             api.post('/api/facebook/after-connection', {
-                fb_userid: this.facebook.userid, fb_token: this.facebook.token, fb_username: this.facebook.user,
+                fb_userid: 'test', fb_token: this.facebook.token, fb_username: this.facebook.user,
                 // userid: this.$store.state.user.id, wallid: this.$store.state.wall.id
             }).then(({data}) => {
                 console.log(data);
