@@ -62,7 +62,7 @@ class FacebookController extends Controller
     }
 
     public function afterConnection(Request $request){
-        return response()->json('in good method');
+        return response()->json($request);
         // $validator = Validator::make($request->all(), [
         //     'fb_userid' => 'required|integer',
         //     'fb_username' => 'required|string',
