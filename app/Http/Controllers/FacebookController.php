@@ -18,7 +18,8 @@ class FacebookController extends Controller
     {   
 
         $currentPath = Route::getFacadeRoot()->current()->uri();
-        abort(response()->json($currentPath));
+        
+        
         // Get connected user
         $this->user = JWTAuth::user();
         if(!$this->user) return abort(response()->json(['error' => 'Veuillez vous connectez !']));
@@ -28,11 +29,14 @@ class FacebookController extends Controller
         $this->facebook       = new FacebookRepository();
 
         // Get Facebook token for the user
-        $facebook_token_infos = Setting::where(['user_id' => $this->user->id, 'name' => 'facebook_token_infos'])->first();
-        if(isset($facebook_token_infos) && !empty($facebook_token_infos)) // Check if he have token 
-            $this->facebook_token_infos = json_decode($facebook_token_infos['value']);
-        else
-            abort(response()->json(['error' => 'Veuillez vous connecter à facebook'], 401));
+        if(!str_contains($currentPath, 'after-connection')){
+            $facebook_token_infos = Setting::where(['user_id' => $this->user->id, 'name' => 'facebook_token_infos'])->first();
+            if(isset($facebook_token_infos) && !empty($facebook_token_infos)) // Check if he have token 
+                $this->facebook_token_infos = json_decode($facebook_token_infos['value']);
+            else
+                abort(response()->json(['error' => 'Veuillez vous connecter à facebook'], 401));
+        }
+
     } 
 
 
