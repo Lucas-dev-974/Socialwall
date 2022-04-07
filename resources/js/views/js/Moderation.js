@@ -103,7 +103,7 @@ export default{
 
         FacebookLogout: function(){
             FB.logout((response) => {
-                console.log(response);
+                this.$store.commit('facebook_logout')
             })
         }
     }

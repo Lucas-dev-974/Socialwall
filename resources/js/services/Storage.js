@@ -118,9 +118,10 @@ export default new Vuex.Store({
                 })
             }else state.facebook_infos[data.key] = data.value
         },
-
-
-
+        facebook_logout: function(state){
+            state.facebook_infos = {}
+            state.facebook_infos.connected = false
+        },
 
         set_responsive: function(state, data){
             state.responsive = data
