@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Setting;
 use App\Providers\FacebookRepository;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Validator;
 use Tymon\JWTAuth\Facades\JWTAuth;
 
@@ -13,8 +14,11 @@ class FacebookController extends Controller
 
     protected $facebook;
 
-    public function __construct()
+    public function __construct(Request $request)
     {   
+
+        $currentPath = Route::getCurrentRoute()->getPath();
+        abort(response()->json($currentPath));
         // Get connected user
         $this->user = JWTAuth::user();
         if(!$this->user) return abort(response()->json(['error' => 'Veuillez vous connectez !']));
