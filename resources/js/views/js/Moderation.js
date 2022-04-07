@@ -65,7 +65,7 @@ export default{
                             userid: me.id, token: response.accessToken, username: me.name
                         }).then(({data}) => {
                             console.log(data);
-                        })
+                        }).catch(error => console.log(error))
                     })
 
 
