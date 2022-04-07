@@ -54,8 +54,7 @@ class FacebookController extends Controller
     }
 
     public function afterConnection(Request $request){
-        $validator = Validator::make($request->all());
-        return response()->json($validator->validated());
+        return response()->json($request, 200);
     }
 }
 
