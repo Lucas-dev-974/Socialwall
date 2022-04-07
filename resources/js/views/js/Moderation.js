@@ -55,11 +55,11 @@ export default{
             }).catch(error => { console.log(error);}) 
         },
         
-        facebook_login: async function(){
-            await FB.login((response) => {
+        facebook_login: function(){
+            FB.login((response) => {
                 this.facebook.token = response.authResponse.accessToken
                 if(response.authResponse){
-                    await FB.api('/me', (me) => {
+                    FB.api('/me', (me) => {
                         this.facebook.userid = me.id
                         this.facebook.user   = me.user
                     })
