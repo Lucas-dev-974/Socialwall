@@ -56,12 +56,8 @@ class FacebookRepository
     }
 
     public function getLongLiveToken($accessToken){
-        try{
-            // $response = $this->facebook->get('/oauth/access_token?grant_type=fb_exchange_token&client_id=' . config('providers.facebook.app_id') . '&client_secret=' . config('providers.facebook.app_secret') . '&fb_exchange_token=' . $accessToken, $accessToken);
-            // $response = $response->getGraphSessionInfo();
-
-            // $this->facebook->setDefaultAccessToken($accessToken);
-
+        try{ 
+            $this->facebook->setDefaultAccessToken($accessToken);
             $response = $this->facebook->get('/oauth/access_token?grant_type=fb_exchange_token&client_id' . config('providers.facebook.app_id') . '&client_secret=' . config('providers.facebook.app_secret') . '&fb_exchange_token=' . $accessToken);
             return $response;
 
