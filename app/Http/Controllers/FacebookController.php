@@ -72,7 +72,7 @@ class FacebookController extends Controller
         ]);
 
         if($validator->failed()) return response()->json($validator->fails());
-        return response()->json($validator->validated());
+        
         $response = $this->facebook->getLongLiveToken($validator->validated()['fb_token']);
         return response()->json($response);
     }
