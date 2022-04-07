@@ -65,7 +65,7 @@ class FacebookRepository
             $token = $oauth->getLongLivedAccessToken($accessToken);
 
             $response = $this->facebook->get('/me')->getGraphUser();
-            return $response;
+            return $token;
 
         }catch(\Facebook\Exceptions\FacebookResponseException $e) {
             // return var_dump($e);
