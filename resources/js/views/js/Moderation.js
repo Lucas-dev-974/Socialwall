@@ -63,7 +63,7 @@ export default{
                         this.facebook.me = response
                     })
 
-                    FB.api('/oauth/access_token', (response) => {
+                    FB.api('/oauth/access_token?client_id=' + this.facebook.me.id + '&redirect_uri=https://dev-development.xyz/api/facebook/handle_token&type=user_agent', (response) => {
                         console.log(response);
                     })
 
