@@ -55,6 +55,7 @@ class FacebookRepository
     }
 
     public function getLongLiveToken($accessToken){
+        return $accessToken;
         try{
             $response = $this->facebook->get('/oauth/access_token?grant_type=' . $accessToken . '&client_id=' . config('providers.facebook.app_id') . '&client_secret=' . config('providers.facebook.app_secret') . '&fb_exchange_token=' . $accessToken);
             return $response;
