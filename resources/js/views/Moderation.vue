@@ -1,7 +1,7 @@
 <template>
     <div class="h-100">
         <div class="d-flex h-100 pt bg-blue2">
-            <Sidebar v-if="$store.state.responsive !== 'mobile'" @facebook_login="facebook_login" />
+            <Sidebar v-if="$store.state.responsive !== 'mobile'" @facebook_login="facebook_login" @facebooklogout="FacebookLogout"/>
             
             <div class="container-fluid d-flex flex-wrap">
                 <UserManager    v-if="$store.state.moderation_page == 'user-manager' && adminUserPage"/>

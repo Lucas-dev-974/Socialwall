@@ -99,6 +99,12 @@ export default{
 
         saveFacebookDatas: function(datas){
             
+        },
+
+        FacebookLogout: function(){
+            FB.logout((response) => {
+                console.log(response);
+            })
         }
     }
 }

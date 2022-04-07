@@ -52,7 +52,7 @@
           </v-list-item>
 
           <v-list-item link class="list-item-facebook mx-0 px-0" >
-            
+                <v-btn x-small elevation="10" color="red" outlined @click="$emit('facebooklogout')">facebook déconexion</v-btn>
           </v-list-item>
         </v-list>
       </v-navigation-drawer>
