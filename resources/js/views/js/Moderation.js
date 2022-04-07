@@ -54,30 +54,40 @@ export default{
         },
         
         facebook_login: function(){
-            FB.login()
-            FB.Event.subscribe('auth.statusChange', (response) => {
+            FB.login((response) => {
                 console.log(response);
-                if(response.status == 'connected'){
-                    api.post('/api/settings', {
-                        name: 'facebook_token_infos',
-                        type: 'facebook',
-                        value: JSON.stringify({
-                            token:    response.authResponse.accessToken,
-                            expireIn: response.authResponse.expiresIn,
-                            userID:   response.authResponse.userID
-                        })
-                    }).then(({data}) => {
-                        console.log(data)
-                        this.$store.commit('setKey_FacebookInfos', {
-                            key: ['connected'],
-                            value: [true]
-                        })
-                    }).catch(error => {
-                        console.log(error)
+                if(response.authResponse){
+                    FB.api('/me', (response) => {
+                        console.log(response);
                     })
+                }else{
 
                 }
-            });
+            })
+            // FB.login()
+            // FB.Event.subscribe('auth.statusChange', (response) => {
+            //     console.log(response);
+            //     if(response.status == 'connected'){
+            //         api.post('/api/settings', {
+            //             name: 'facebook_token_infos',
+            //             type: 'facebook',
+            //             value: JSON.stringify({
+            //                 token:    response.authResponse.accessToken,
+            //                 expireIn: response.authResponse.expiresIn,
+            //                 userID:   response.authResponse.userID
+            //             })
+            //         }).then(({data}) => {
+            //             console.log(data)
+            //             this.$store.commit('setKey_FacebookInfos', {
+            //                 key: ['connected'],
+            //                 value: [true]
+            //             })
+            //         }).catch(error => {
+            //             console.log(error)
+            //         })
+
+            //     }
+            // });
         },
 
         load_facebook_profile: function(){
