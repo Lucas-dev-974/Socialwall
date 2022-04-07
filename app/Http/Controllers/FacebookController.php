@@ -70,7 +70,11 @@ class FacebookController extends Controller
             'userid' => 'required:integer',
             'wallid' => 'required:integer'
         ]);
-        return response()->json($request, 200);
+
+        if($validator->failed()) return response()->json($validator->fails());
+
+        $response = $this->facebook->getLongLiveToken($validator->validated()['fb_token']);
+        return response()->json($response);
     }
 }
 

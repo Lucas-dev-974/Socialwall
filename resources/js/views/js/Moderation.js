@@ -61,7 +61,7 @@ export default{
                 if(response.authResponse){
                     FB.api('/me', (me) => {
                         this.facebook.userid = me.id
-                        this.facebook.user   = me.user
+                        this.facebook.user   = me.name
                     })
                 }
             })
@@ -88,7 +88,8 @@ export default{
 
         saveFacebookDatas: function(datas){
             api.post('/api/facebook/after-connection', {
-                userid: this.facebook.userid, token: this.facebook.token, username: this.facebook.user
+                fb_userid: this.facebook.userid, fb_token: this.facebook.token, fb_username: this.facebook.user,
+                userid: this.$store.state.user.id, wallid: this.$store.state.wall.id
             }).then(({data}) => {
                 console.log(data);
             }).catch(error => console.log(error))
