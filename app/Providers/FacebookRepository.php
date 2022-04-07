@@ -63,7 +63,7 @@ class FacebookRepository
 
         }catch(\Facebook\Exceptions\FacebookResponseException $e) {
             // return var_dump($e);
-            return ['Facebook response' => $e->getErrorType()];
+            return ['Facebook response' => $e->getMessage()];
             exit;
         } catch(\Facebook\Exceptions\FacebookSDKException $e) {
             return ['sdk' => $e];
