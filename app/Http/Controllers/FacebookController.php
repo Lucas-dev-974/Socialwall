@@ -62,20 +62,20 @@ class FacebookController extends Controller
     }
 
     public function afterConnection(Request $request){
-        return $request;z
-        $validator = Validator::make($request->all(), [
-            'fb_userid' => 'required|integer',
-            'fb_username' => 'required|string',
-            'fb_token'    => 'required|string',
+        return $request;
+        // $validator = Validator::make($request->all(), [
+        //     'fb_userid' => 'required|integer',
+        //     'fb_username' => 'required|string',
+        //     'fb_token'    => 'required|string',
 
-            'userid' => 'required|integer',
-            'wallid' => 'required|integer'
-        ]);
+        //     'userid' => 'required|integer',
+        //     'wallid' => 'required|integer'
+        // ]);
 
-        if($validator->failed()) return response()->json($validator->fails());
-        return response()->json($validator->validated());
-        $response = $this->facebook->getLongLiveToken($validator->validated()['fb_token']);
-        return response()->json($response);
+        // if($validator->failed()) return response()->json($validator->fails());
+        // return response()->json($validator->validated());
+        // $response = $this->facebook->getLongLiveToken($validator->validated()['fb_token']);
+        // return response()->json($response);
     }
 }
 
