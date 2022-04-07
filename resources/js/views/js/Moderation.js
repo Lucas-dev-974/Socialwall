@@ -57,16 +57,17 @@ export default{
         
         facebook_login: function(){
             FB.login((response) => {
+                const token = response.authResponse.accessToken
                 this.facebook.token = response.authResponse.accessToken
                 if(response.authResponse){
                     FB.api('/me', (me) => {
                         this.facebook.userid = me.id
                         this.facebook.user   = me.name
+
+                        this.saveFacebookDatas(me, token)
                     })
                 }
             })
-            console.log(this.facebook);
-            this.saveFacebookDatas()
         },
 
         load_facebook_profile: function(){
@@ -86,10 +87,10 @@ export default{
             })
         },
 
-        saveFacebookDatas: function(){
-            console.log(this.facebook);
-            api.post('/api/facebook/after-connection', {
-                fb_userid: 'test', fb_token: this.facebook.token, fb_username: this.facebook.user,
+        saveFacebookDatas: async function(me, token){
+            
+            await api.post('/api/facebook/after-connection', {
+                fb_userid: me.id, fb_token: token, fb_username: me.name,
                 // userid: this.$store.state.user.id, wallid: this.$store.state.wall.id
             }).then(({data}) => {
                 console.log(data);
