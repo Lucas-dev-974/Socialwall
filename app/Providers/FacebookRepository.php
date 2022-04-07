@@ -66,7 +66,7 @@ class FacebookRepository
             return ['Facebook response' => $e->getErrorType()];
             exit;
         } catch(\Facebook\Exceptions\FacebookSDKException $e) {
-            return ['sdk' => $e->getMessage()];
+            return ['sdk' => $e];
             exit;
         }
     }
