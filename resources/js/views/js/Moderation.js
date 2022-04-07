@@ -22,7 +22,7 @@ export default{
             hashtag: 'Hashtag',
             bottom_navigation: 'recent',
 
-            facebook: null
+            facebook: {}
         }
     },
 
