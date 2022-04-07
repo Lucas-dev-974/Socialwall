@@ -17,7 +17,7 @@ class FacebookController extends Controller
     public function __construct(Request $request)
     {   
 
-        $currentPath = Route::getCurrentRoute()->getPath();
+        $currentPath = Route::getFacadeRoot()->current()->uri();
         abort(response()->json($currentPath));
         // Get connected user
         $this->user = JWTAuth::user();
