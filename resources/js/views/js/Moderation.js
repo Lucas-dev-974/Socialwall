@@ -27,7 +27,7 @@ export default{
     mounted(){
         // this.$store.commit('devMode')
         this.load_wall()
-        // this.load_facebook_profile()
+        this.load_facebook_profile()
     },
 
     methods: {

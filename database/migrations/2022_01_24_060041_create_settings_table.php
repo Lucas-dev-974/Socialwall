@@ -37,6 +37,11 @@ class CreateSettingsTable extends Migration
      */
     public function down()
     {
+        // Schema::table('settings', function (Blueprint $table) {
+        //     $table->dropForeign(['user_id', 'wall_id']);
+        //     $table->dropColumn('user_id');
+        //     $table->dropColumn('wall_id');
+        // });
         Schema::dropIfExists('settings');
     }
 }

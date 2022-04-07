@@ -37,6 +37,10 @@ class CreateWallTable extends Migration
      */
     public function down()
     {
+        Schema::table('walls', function (Blueprint $table) {
+            $table->dropForeign(['user_id']);
+            $table->dropColumn('user_id');
+        });
         Schema::dropIfExists('walls');
     }
 }

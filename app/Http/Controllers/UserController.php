@@ -46,7 +46,7 @@ class UserController extends Controller
         $availableFields = ['email', 'password', 'name', 'lastname', 'phone', 'blocked'];
 
         
-        if($user['role_id'] == 1 || $user['id'] == $request['userid']){
+        if($user['role'] == 1 || $user['id'] == $request['userid']){
             if(in_array($request['field'], $availableFields, true)){
                 if($request['field'] == 'email'){ // Check if value is a correct email
                     if(!filter_var($request['value'], FILTER_VALIDATE_EMAIL)){

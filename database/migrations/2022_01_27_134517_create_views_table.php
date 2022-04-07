@@ -33,6 +33,10 @@ class CreateViewsTable extends Migration
      */
     public function down()
     {
+        // Schema::table('views', function (Blueprint $table) {
+        //     $table->dropForeign(['wall_id']);
+        //     $table->dropColumn('wall_id');
+        // });
         Schema::dropIfExists('views');
     }
 }

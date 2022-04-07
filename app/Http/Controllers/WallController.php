@@ -16,6 +16,7 @@ class WallController extends Controller
     public function __construct()
     {
         $this->middleware('jwt.verify',  ['except' => ['public_wall']]);
+        $this->user = JWTAuth::user();
     }
     
     public function public_wall(Request $request){
@@ -30,39 +31,27 @@ class WallController extends Controller
 
 
     public function get(Request $request, $wallid = null){
-        $user = JWTAuth::user();
-        $walls = Wall::where(['user_id' => $user->id])->with(['settings', 'views'])->get();
-
+        $walls = Wall::where(['user_id' => $this->user->id])->with(['settings', 'views'])->get();
         if(sizeof($walls) == 1) return response()->json($walls[0]);
         else return response()->json($walls);
-
     }
     
     public function create(Request $request){
-        $user = JWTAuth::user();
-        $validator = Validator::make($request->all(), [
-            'wallname' => 'required:string', 
-        ]);
+        $validator = Validator::make($request->all(), [ 'wallname' => 'required:string' ]);
 
         if($validator->fails()) return response()->json(['error' => $validator->errors()]);
 
+        // Create wall in database
         $wall = Wall::create([
-            'user_id' =>  $user['id'],
+            'user_id' =>  $this->user->id,
             'moderated' => true,
             'name'      => $validator->validated()['wallname'],
         ]);
-
-        $views = new Views();
-        $views->wall_id = $wall->id;
-        $views->date    = date('Y-m-d H:i:s');
-
-        $wall->views    = $views;
 
         return response()->json($wall);
     }
 
     public function update(Request $request){
-        $user = JWTAuth::user();
         $validator = Validator::make($request->all(), [
             'field' => 'required:string',
             'wallid' => 'required:int',
@@ -77,7 +66,7 @@ class WallController extends Controller
         $wall = Wall::where([ 'id' => $validator->validate()['wallid']])->first();
 
         // return $wall->fillable;
-        if($wall->user_id == $user->id || $user->role_id == 1){
+        if($wall->user_id == $this->user->id || $this->user->role == 1){
             if(in_array($validator->validated()['field'], $available_fields, true)){
                 $wall[$validator->validated()['field']] = $validator->validated()['value'];
                 $wall->save();
@@ -91,9 +80,8 @@ class WallController extends Controller
 
     public function delete(Request $request, $id){
         if(isset($id) && !empty($id)){
-            $user = JWTAuth::user();
             // return response()->json($id);
-            if($user['role_id'] == 1 || $user['id'] == $id) {
+            if($this->user['role_id'] == 1 || $this->user['id'] == $id) {
                 $wall = Wall::where('id', $id)->first();
                 if(!$wall) return response()->json(['error' => 'Le wall n\'existe pas !']);
 
@@ -105,5 +93,13 @@ class WallController extends Controller
                 ]);
             }
         }
+    }
+
+    public function add_Moderator(){
+        
+    }
+
+    public function remove_Moderator(){
+
     }
 }
