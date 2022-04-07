@@ -83,6 +83,9 @@ export default{
         load_facebook_profile: function(){
             api.get('/api/facebook/profile').then(({data}) => {
                 console.log(data)
+                this.$store.commit('set_FacebookInfos', {
+                    ...data
+                })                
             }).catch(error => {
                 if(error.response.status == 401){
                     facebook.handleFacebookSdk()
@@ -92,6 +95,10 @@ export default{
                     })
                 }
             })
+        },
+
+        saveFacebookDatas: function(datas){
+            
         }
     }
 }
