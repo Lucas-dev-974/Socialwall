@@ -63,7 +63,8 @@ class FacebookRepository
             $this->facebook->setDefaultAccessToken($accessToken);
             $oauth = $this->facebook->getOAuth2Client();
 
-            return $oauth;
+            return $oauth->getLongLivedAccessToken($accessToken);
+            
         }catch(\Facebook\Exceptions\FacebookResponseException $e) {
             // return var_dump($e);
             return ['Facebook response' => $e->getErrorType()];
