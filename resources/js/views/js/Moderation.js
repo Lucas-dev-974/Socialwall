@@ -20,7 +20,9 @@ export default{
 
             postNumber: 0,
             hashtag: 'Hashtag',
-            bottom_navigation: 'recent'
+            bottom_navigation: 'recent',
+
+            facebook: null
         }
     },
 
@@ -55,11 +57,17 @@ export default{
         
         facebook_login: function(){
             FB.login((response) => {
-                console.log(response);
+                this.facebook.token = response.authResponse.accessToken
                 if(response.authResponse){
                     FB.api('/me', (response) => {
+                        this.facebook.me = response
+                    })
+
+                    FB.api('/oauth/access_token', (response) => {
                         console.log(response);
                     })
+
+                    console.log(this.facebook);
                 }else{
 
                 }
