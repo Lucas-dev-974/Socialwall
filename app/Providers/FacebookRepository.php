@@ -74,6 +74,9 @@ class FacebookRepository
         } catch(\Facebook\Exceptions\FacebookSDKException $e) {
             return ['sdk' => $e->getMessage()];
             exit;
+        }catch(\Facebook\Exceptions\FacebookAuthenticationException $e){
+            return ['sdk' => $e->getMessage()];
+            exit;
         }
     }
 
