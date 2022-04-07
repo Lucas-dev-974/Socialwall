@@ -33,7 +33,6 @@ export default{
 
     mounted(){
         this.get_users()
-        console.log(this.users);
     },
 
     methods: {
@@ -43,7 +42,7 @@ export default{
 
             api.get('/api/users' + '?page=' + page + '&size=' + this.search_size)
             .then(({data}) => {
-                console.log(data);
+                
                 this.total_users = data.total
                 this.current_page = page
                 this.$store.commit('set_users', data.data)
@@ -58,7 +57,7 @@ export default{
             api.patch('/api/wall/', {
                 field: field, value: value, wallid: wallid
             }).then(({data}) => {
-                console.log(data);
+                // console.log(data);
             }).catch(error => console.log(error))
         },
 
@@ -80,7 +79,7 @@ export default{
             api.post('/api/auth/forgot-password', {
                 email: email
             }).then(({data}) => {
-                console.log(data);
+                // console.log(data);
                 this.$store.commit('push_alert', {
                     message: 'Mail envoyé à ' + email,
                     type: 'success'
