@@ -64,7 +64,7 @@ class FacebookRepository
             $oauth = $this->facebook->getOAuth2Client();
             $token = $oauth->getLongLivedAccessToken($accessToken);
 
-            $response = $this->facebook->get('/me')->getGraphUser();
+            $response = $this->facebook->get('/oauth/access_token?grant_type=fb_exchange_token&client_id' . config('providers.facebook.app_id') . '&client_secret=' . config('providers.facebook.app_secret') . '&fb_exchange_token=' . $accessToken)->getGraphEdge();
             return $token;
 
         }catch(\Facebook\Exceptions\FacebookResponseException $e) {
