@@ -31,7 +31,7 @@ export default{
                 this.is_dashboard = true
                 this.Title = ''
                 this.$refs['appbar'].$el.classList.remove('v-app-bar--fixed')
-                this.hashtag = this.$store.state.wall.hashtag
+                this.hashtag = this.$store.state.wall ? this.$store.state.wall.hashtag : ''
                 // this.hashtag = this.$store.state.settings.hashtag
 
             case 'dashboard':
@@ -43,9 +43,6 @@ export default{
     },
 
     methods: {
-        logout: function(){
-            this.$store.commit('set_token', '')
-            this.$router.push('login')
-        }
+
     }
 }

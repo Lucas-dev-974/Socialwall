@@ -9,8 +9,10 @@ class Setting extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'id', 'field', 'type', 'value', 'user_id'
+        'id', 'name', 'type', 'value', 'user_id', 'wall_id'
     ];
+
+    protected $visible = ['name', 'value'];
 
     public function wall(){
         return $this->belongsTo(Wall::class);

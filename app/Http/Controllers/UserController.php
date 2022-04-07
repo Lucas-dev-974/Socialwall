@@ -7,21 +7,29 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Tymon\JWTAuth\Facades\JWTAuth;
 
+use function PHPUnit\Framework\isNan;
+
 class UserController extends Controller
 {
+    public function __construct(){
+        $this->user = JWTAuth::user();
+    }
     public function get_me(Request $request){
         $user = JWTAuth::user();
         return response()->json($user);
     }
 
-    public function get(Request $request){
-        $user = JWTAuth::user();
-        // return $user;
-        if($user->role_id !== 1) return response()->json(['error' => 'Vous ne pouvez pas accèdé à cet variable']);
+    public function get(Request $request){     
+        if(isset($request->size) && !empty($request->size) && intval($request->size)) $per_page = intval($request->size);
+        else $per_page = 10;
+        if($this->user->role !== 1) return response()->json(['error' => 'Vous ne pouvez pas accèdé à cet variable']);
+        $users = User::with(['walls'])->paginate($per_page);
+        return response()->json($users);
+    }
 
-        $users = User::with(['walls'])->get();
-
-        return response()->json(['users' => $users]);
+    public function all(){
+        if($this->user->role != 1) return response()->jsn(['error' => 'Vous ne pouvez pas accédé à cet ressource !']);
+        
     }
 
     public function update(Request $request){
@@ -86,7 +94,7 @@ class UserController extends Controller
 
     public function search(Request $request){
         $user = JWTAuth::user();
-        if($user->role_id !== 1) return response()->json(['error' => 'Vous ne pouvez accédé à cet ressource']);
+        if($user->role !== 1) return response()->json(['error' => 'Vous ne pouvez accédé à cet ressource']);
 
         $validator = Validator::make($request->all(), [
             'query' => 'string',
@@ -95,8 +103,8 @@ class UserController extends Controller
         $users = User::where('name', 'like', '%' . $validator->validated()['query'] . '%')
                        ->orWhere('lastname', 'like', '%'  . $validator->validated()['query'] . '%')
                        ->orWhere('email',    'like', '%'  . $validator->validated()['query'] . '%')
-                       ->with(['walls'])->get();
+                       ->with(['walls'])->paginate(15);
 
-        return response()->json(['users' => $users]);
+        return response()->json($users);
     }
 }

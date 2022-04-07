@@ -19,7 +19,7 @@ class AdminController extends Controller
     }
 
 
-    public function get(Request $request, $name){
+    public function get(Request $request, $name){ // Get admin parameters
         $names = explode('|', $name);
         if(sizeof($names) > 1){
             $admin_settings = AdminSettings::whereIn('name', $names)->get();
@@ -39,7 +39,7 @@ class AdminController extends Controller
 
     }
 
-    public function set(Request $request){
+    public function set(Request $request){ // Set admin parameters
         $validator = Validator::make($request->all(), [
             'name' => 'required:string',
             'type' => 'required:string',

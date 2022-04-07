@@ -37,14 +37,15 @@ export default{
 
     mounted(){
         // this.$vuetify.theme.dark = true
-        if(this.$route.name != 'login' || this.$route.name != 'reset-password'){
-            this.is_logged()
-        }
-       
-        if(window.location.pathname.includes('/api/auth/reset-password/')){
-            let token = window.location.href.split('/').splice(-1,1)[0]
-            this.$router.push('/reset-password/' + token)
-        } 
+        console.log(this.$route.name);
+        if(this.$route.name == 'login' || this.$route.name == 'register' || this.$route.name == 'resetpassword' 
+            || this.$route.name == 'default' || this.$route.name == 'wall'){
+                 
+            if(window.location.pathname.includes('/api/auth/reset-password/')){
+                let token = window.location.href.split('/').splice(-1,1)[0]
+                this.$router.push('/reset-password/' + token)
+            } 
+        }else this.is_logged()
         
         this.handle_ScreenResize()
         let _this = this
@@ -59,6 +60,8 @@ export default{
             let w = document.documentElement.clientWidth
             
             if(w < 682){
+                this.$store.commit('set_responsive', 'x-mobile')
+            }else if(w < 682){
                 this.$store.commit('set_responsive', 'mobile')
             }else if(w < 1083){
                 this.$store.commit('set_responsive', 'medium')
@@ -79,10 +82,8 @@ export default{
 
         is_logged: function(){
             if(this.$store.state.token !== null){
-                console.log('in login check');
                 api.get('/api/auth/')
                 .catch(error => {
-                    console.log('login fails');
                     this.$router.push('login')
                 })
             }else{

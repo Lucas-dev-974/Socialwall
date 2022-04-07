@@ -9,6 +9,8 @@ use Tymon\JWTAuth\Facades\JWTAuth;
 
 class PostController extends Controller
 {
+    
+
     public function get(Request $request, $hashtag, $wallid){
         $user = JWTAuth::user();
 

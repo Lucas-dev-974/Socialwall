@@ -9,44 +9,49 @@ const vuexLocal = new VuePersist({
     storage: window.localStorage
 })
 
+const initialState = {
+    // User informations
+    user: null,
+    token: null,
+    facebook: null,
+
+    // Wall Moderation
+    moderation_page: 'validation',
+    wall: null,
+    validated_posts: [],
+
+    // User walls
+    walls: [],
+    responsive: null,
+
+    // Settings
+    alerts: [],
+
+    // Admin settings
+    users: [],
+    facebook_infos: null,
+
+    views: 0,
+
+    display_view: 'square-grid',
+
+    image_viewer: {
+        show: false,
+        image_src: null
+    },
+
+    wall_style: null
+}
+
 export default new Vuex.Store({
     plugins: [vuexLocal.plugin],
 
     state: {
-        // User informations
-        user: null,
-        token: null,
-        facebook: null,
-
-        // Wall Moderation
-        moderation_page: 'validation',
-        wall: null,
-        validated_posts: [],
-        blocked_posts: [],
-        blocked_users: [],
-
-        // User walls
-        walls: [],
-        responsive: null,
-
-        // Settings
-        alerts: [],
-
-        // Admin settings
-        users: [],
-        facebook_infos: null,
-
-        views: 0,
-
-        display_view: 'square-grid',
-
-        image_viewer: {
-            show: false,
-            image_src: null
-        }
+        ...initialState
     },
 
     mutations: {
+        set_wallStyle: function(state, data){ state.wall_style = data },
         // User informations
         set_token: function(state, token){ state.token = token },
 
@@ -109,10 +114,9 @@ export default new Vuex.Store({
             if(state.facebook_infos == null) state.facebook_infos = {}
             if(isArray(data.key)){
                 data.key.forEach((key, index) => {
-                    console.log(index, key);
+                    state.facebook_infos[key] = data.value[index]
                 })
             }else state.facebook_infos[data.key] = data.value
-            
         },
 
 
@@ -138,7 +142,18 @@ export default new Vuex.Store({
 
         close_ImageViewer: function(state, data){
             state.image_viewer.show = false
+        },
+
+        
+        logout: function(state){
+            Object.assign(state, initialState)
+            window.location.href = '/login'
+        },
+
+        devMode: function(state, data){
+            state.facebook_infos = {
+                connected: true
+            }
         }
-         
     },
 })

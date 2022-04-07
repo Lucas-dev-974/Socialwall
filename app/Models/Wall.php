@@ -9,7 +9,7 @@ class Wall extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'user_id', 'moderated', 'name', 'hashtag', 'background_url', 'background_color'
+        'user_id', 'moderated', 'name', 'hashtag', 'background_url', 'background_color', 'wall_id'
     ];
     
     public function settings(){
@@ -28,8 +28,8 @@ class Wall extends Model
         return $this->hasMany(SuspectWords::class);
     }
 
-    public function blockedUsers(){
-        return $this->hasMany(BlockedUsers::class);
+    public function posts(){
+        return $this->hasMany(PostsWall::class);
     }
 
 }

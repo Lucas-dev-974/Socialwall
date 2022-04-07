@@ -6,9 +6,15 @@ import  Store  from './services/Storage';
 
 import VueFusionCharts from 'vue-fusioncharts';
 import FusionCharts from 'fusioncharts';
-import Column2D from 'fusioncharts/fusioncharts.charts';
-import FusionTheme from 'fusioncharts/themes/fusioncharts.theme.fusion';
+import Column2D     from 'fusioncharts/fusioncharts.charts';
+import FusionTheme  from 'fusioncharts/themes/fusioncharts.theme.fusion';
+import VueMasonry   from 'vue-masonry-css'
 
+
+window.Vue = Vue
+
+
+Vue.use(VueMasonry);
 Vue.use(VueFusionCharts, FusionCharts, Column2D, FusionTheme)
 Vue.use(Vuetify)
 

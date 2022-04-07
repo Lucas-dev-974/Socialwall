@@ -15,6 +15,9 @@ export default{
 
     data(){
         return {
+            FBconnected:    this.$store.state.facebook_infos != null && this.$store.state.facebook_infos.connected == true  ? true : false,
+            adminUserPage:  this.$store.state.moderation_page == 'user-manager' && this.$store.state.user.role == 1 ? true : false,
+
             postNumber: 0,
             hashtag: 'Hashtag',
             bottom_navigation: 'recent'
@@ -22,10 +25,23 @@ export default{
     },
 
     mounted(){
-        this.load_facebook_profile()
+        // this.$store.commit('devMode')
+        this.load_wall()
+        // this.load_facebook_profile()
     },
 
     methods: {
+        load_wall: function(){
+            api.get('/api/wall/wall-moderation')
+            .then(({data}) => {
+                if(typeof(data) == 'object') this.$store.commit('set_wall', data)
+                else{
+                    this.$store.commit('set_wall', data[0])
+                    this.$store.commit('set_walls', data)
+                }
+            }).catch(error => console.log(error))
+        },
+
         update_wall: function(field, value){
             api.patch('/api/wall', {
                 field: field, wallid: this.$store.state.wall.id, value: value

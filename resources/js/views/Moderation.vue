@@ -2,31 +2,32 @@
     <div class="h-100">
         <div class="d-flex h-100 pt bg-blue2">
             <Sidebar v-if="$store.state.responsive !== 'mobile'" @facebook_login="facebook_login" />
-
-            <div class="w-100 mx-auto px-3" v-if="$store.state.facebook_infos && $store.state.facebook_infos.connected == true">
-                <PostValdiation v-if="$store.state.moderation_page == 'validation'" />
-                <Views          v-if="$store.state.moderation_page == 'views'"/>
-                <Template       v-if="$store.state.moderation_page == 'template'"/>
-                <UserManager    v-if="$store.state.moderation_page == 'user-manager'"/>
-            </div>
             
-            <v-card v-else outlined elevation="10" class="mx-auto my-auto" height="auto" min-width="200" max-width="450">
-                <v-card-title class="d-flex w-100 ">
-                   <span class="fs-2">Connectez-vous à facebook</span> 
-                   <v-divider></v-divider>
+            <div class="container-fluid d-flex flex-wrap">
+                <UserManager    v-if="$store.state.moderation_page == 'user-manager' && adminUserPage"/>
+                <PostValdiation v-if="$store.state.moderation_page == 'validation' && FBconnected" />
+                <Views          v-if="$store.state.moderation_page == 'views' && FBconnected"/>
+                <Template       v-if="$store.state.moderation_page == 'template' && FBconnected"/>
+                
+                <v-card v-if="!FBconnected || !adminUserPage" outlined elevation="10" class="mx-auto my-auto" height="auto" min-width="200" max-width="450">
+                    <v-card-title class="d-flex w-100 ">
+                    <span class="fs-2">Connectez-vous à facebook</span> 
+                    <v-divider></v-divider>
 
-                </v-card-title>
+                    </v-card-title>
 
-                <v-card-text class="fs-6 px-7 d-flex align-center">
-                    Pour utilisé les services de recherche des postes Intagrame, Facebook sur Socialwall veuillez-vous connectez à facebook
-                </v-card-text>
+                    <v-card-text class="fs-6 px-7 d-flex align-center">
+                        Pour utilisé les services de recherche des postes Intagrame, Facebook sur Socialwall veuillez-vous connectez à facebook
+                    </v-card-text>
 
-                <v-card-text class=" d-flex align-center justify-end w-100">
-                    <v-btn color="#1D3C78"  class="text-white bold " tile  @click="facebook_login" small><v-icon left>mdi-facebook</v-icon> connexion </v-btn>
-                </v-card-text>
+                    <v-card-text class=" d-flex align-center justify-end w-100">
+                        <v-btn color="#1D3C78"  class="text-white bold " tile  @click="facebook_login" small><v-icon left>mdi-facebook</v-icon> connexion </v-btn>
+                    </v-card-text>
 
-            </v-card>
-        </div>
+                </v-card>
+            </div>
+            </div>
+
         
         <v-bottom-navigation fixed v-model="bottom_navigation" v-if="$store.state.responsive == 'mobile'">
             <v-btn value="posts">

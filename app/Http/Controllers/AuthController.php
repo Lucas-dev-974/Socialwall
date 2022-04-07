@@ -51,7 +51,7 @@ class AuthController extends Controller
 
         $registerDatas = $validator->validated();
         $registerDatas['password'] = bcrypt($request->password);
-        $registerDatas['role_id']  = 3;
+        $registerDatas['role']  = 3;
 
         $user = User::firstOrCreate($registerDatas);    
 

@@ -11,18 +11,21 @@
         <link href="https://cdn.jsdelivr.net/npm/vuetify/dist/vuetify.min.css" rel="stylesheet">
         <link href="https://cdn.jsdelivr.net/npm/@mdi/font@4.x/css/materialdesignicons.min.css" rel="stylesheet">
 
-        <link href="{{ secure_asset('/css/style.css') }}" rel="stylesheet" type="text/css">
-        <link href="{{ secure_asset('/css/dashboard.css') }}" rel="stylesheet" type="text/css">
-        <link href="{{ secure_asset('/css/wall-animation-1.css') }}" rel="stylesheet" type="text/css">
+        <link href="{{ asset('/css/style.css') }}" rel="stylesheet" type="text/css">
+        <link href="{{ asset('/css/dashboard.css') }}" rel="stylesheet" type="text/css">
+        <link href="{{ asset('/css/wall-animation-1.css') }}" rel="stylesheet" type="text/css">
 
+        {{-- <script src="https://unpkg.com/vue"></script> --}}
+        <script src="https://unpkg.com/vue-masonry-css"></script>
     </head>
+
     <body class="antialiased">
         <div id="app">
             <layout></layout>
         </div>
 
-        <!-- <script src="{{ secure_asset('js/wall-animation.js') }}"></script> --> 
-        <script src="{{ secure_asset('js/app.js') }}" ></script>
+        <!-- <script src="{{ asset('js/wall-animation.js') }}"></script> --> 
+        <script src="{{ asset('js/app.js') }}" ></script>
         <script>
             function checkLoginState() {
                 FB.getLoginStatus(function(response) {
@@ -44,6 +47,5 @@
                 localStorage.setItem('vuex', JSON.stringify(storage)) // Update Vuex Store
             }
         </script>
-        
     </body>
 </html>

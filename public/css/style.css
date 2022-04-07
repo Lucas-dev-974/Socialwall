@@ -280,3 +280,14 @@ background: #212529;
     position: absolute;
     bottom: 10px;
 }
+
+
+.content-card{
+    min-height: 45px;
+    height: 45px;
+    overflow-y: hidden !important;
+    transition: all 1.5s;
+}.content-card:hover{
+    /* background-color: to top right, #02020283, #181818b3; */
+    height: 100%;
+}

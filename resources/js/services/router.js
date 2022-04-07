@@ -20,7 +20,7 @@ const router = new VueRouter({
 
         { path: '/register', name: 'register', component: Register },
 
-        { path: '/reset-password/:token', name: 'reset-password', component: ResetPassword },
+        { path: '/reset-password/:token', name: 'resetpassword', component: ResetPassword },
 
         { path: '/moderation', name: 'moderation', component: Moderation },
 
@@ -28,7 +28,7 @@ const router = new VueRouter({
 
         { path: '/wall', name: 'wall', component: Wall },
     
-        { path: "*", component: Dashboard }
+        { path: "*", name: 'default', component: Wall }
     ],
 
 })

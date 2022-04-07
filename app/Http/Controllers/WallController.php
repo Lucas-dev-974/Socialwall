@@ -12,20 +12,30 @@ use Tymon\JWTAuth\Facades\JWTAuth;
 
 class WallController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('jwt.verify',  ['except' => ['public_wall']]);
+    }
     
+    public function public_wall(Request $request){
+        $wallid = $request->wallid;
+        if(empty($wallid)) return response()->json(['error' => 'Veuillez renseigner l\'id du mur']);
+
+        $wall = Wall::where([ 'id' => $wallid])->with(['posts', 'settings'])->first();
+        return response()->json($wall, 200);
+    }
+
+
+
+
     public function get(Request $request, $wallid = null){
         $user = JWTAuth::user();
-        if(!$wallid){               // Check if wall id is given is not given return all wall for the connected user
-            $walls = Wall::where([ 'user_id' => $user['id'] ])->get();
-            return $walls;
-        }
-        
-        $wall = Wall::where([ 'id' => $wallid])->with(['views', 'suspectWords', 'BlockedUsers'])->first();
+        $walls = Wall::where(['user_id' => $user->id])->with(['settings', 'views'])->get();
 
-        if($user['id'] == $wall['user_id'] || $user['role_id'] == 1){
-            $wall->views();
-            return response()->json(['wall' => $wall]);
-        }else return response()->json([ 'error' => 'Vous n\'ête pas autorisé à récuperer cet ressource']);
+        if(sizeof($walls) == 1) return response()->json($walls[0]);
+        else return response()->json($walls);
+
     }
     
     public function create(Request $request){

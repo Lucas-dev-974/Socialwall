@@ -62,7 +62,7 @@ Route::group([
     'middleware' => ['jwt.verify'],
     'prefix'     => 'wall'
 ], function($router) {
-    Route::get('/',          [WallController::class, 'get']); 
+    Route::get('/',          [WallController::class, 'public_wall']); 
     Route::get('/{wallid}',  [WallController::class, 'get']); 
     Route::post('/',         [WallController::class, 'create']); 
     Route::patch('/',        [WallController::class, 'update']); 
@@ -73,9 +73,9 @@ Route::group([
     'middleware' => ['jwt.verify'],
     'prefix'     => 'settings'
 ], function($router) {
-    Route::get('/',          [SettingsController::class, 'get']); 
-    Route::post('/',         [SettingsController::class, 'set_Settings']); 
-    Route::patch('/',        [SettingsController::class, 'update']); 
+    Route::get('/',          [SettingsController::class, 'all']); 
+    Route::get('/wall-moderation',          [SettingsController::class, 'all']); 
+    Route::post('/',         [SettingsController::class, 'UpdateOrCreate']);
     Route::delete('/{id}',   [SettingsController::class, 'delete']); 
 }); 
 

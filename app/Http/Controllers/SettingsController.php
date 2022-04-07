@@ -15,27 +15,31 @@ class SettingsController extends Controller
     }
 
     public function get(Request $request){
-        $Settings = Setting::where(['user_id' => $this->user->id ])->get();
-        $settings = null;
+        $Settings = Setting::where(['user_id' => $this->user->id, 'wall_id' => $request->wallid])->get();
         foreach($Settings as $setting){
             if($this->isJson($setting->value)){
                   $settings[$setting->name] = json_decode($setting->value);
             }else $settings[$setting->name] = $setting->value;
         }
-        // if(!$user_settings) return response()->json(['error' => 'Pas de paramètre pour cet utilisateur'], 403);
-        // return response()->json($user_settings, 200);
+
         return response()->json($settings);
     }
 
-    public function set_Settings(Request $request){
+    public function all(Request $request){
+        $wallid = $request->wallid;
+        if(empty($wallid)) return response()->json(['error' => 'L\'id du mur est menquant']);
+        
+        $settings = Setting::where(['wall_id' => $wallid])->get();
+        return response()->json($settings);
+    }
+
+    public function UpdateOrCreate(Request $request){
         $user = JWTAuth::user();
         $validator = Validator::make($request->all(), [
-            // 'user_id' => 'required|number',
-            'type'    => 'required|string',
             'name'    => 'required|string',
-            'value'   => 'required|string'
+            'value'   => 'required|string',
+            'wallid'  => 'required|integer'
         ]);
-
         if($validator->fails()) return response()->json(['error' => $validator->errors()]);
         $setting = Setting::where(['name' => $validator->validated()['name'], 'user_id' => $user->id])->first();
 
@@ -47,29 +51,12 @@ class SettingsController extends Controller
             // Insert data
             $setting->name    = $validator->validated()['name'];
             $setting->user_id = $user->id;
-            $setting->type    =  $validator->validated()['type'];
+            $setting->wall_id = $validator->validated()['wallid'];
+            $setting->type    =  'wall-style';
             $setting->value   = $validator->validated()['value'];
             $setting->save();
         }
-
-
         return response()->json('Parametre mis à jour');
-    }
-
-    public function update(Request $request){
-        $user = JWTAuth::user();
-        $validator = Validator::make($request->all(), [
-            // 'user_id'  => 'required:int',
-            'value'   => 'required:string',
-            'name'    => 'string:required',
-        ]);
-
-        if($validator->fails()) return response()->json(['error' => $validator->errors()]);
-
-        $setting = Setting::where(['user_id' => $user->id, 'name' => $validator->validated()['name']])->first();
-        $setting->value = $validator->validated()['value'];
-
-        return response()->json('Données mis à jour avec succès', 200);
     }
 
     // public function delete(Request $request, $id){

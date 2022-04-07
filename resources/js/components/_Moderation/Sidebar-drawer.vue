@@ -3,10 +3,13 @@
     <v-card tile style="heigth: 100% !important" class="bg-red h-100">
       <v-navigation-drawer permanent expand-on-hover  style="heigth: 100% !important">
         <v-list>
-          <v-list-item class="px-2">
+          <v-list-item class="px-0 d-flex justify-space-aroundz">
             <v-list-item-avatar>
               <v-img :src="user_media"></v-img>
             </v-list-item-avatar>
+
+             <v-icon color="red">mdi-account-cog</v-icon>
+            
           </v-list-item>
 
           <v-list-item link>

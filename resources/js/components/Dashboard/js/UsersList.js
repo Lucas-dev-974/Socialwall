@@ -3,36 +3,50 @@ import api from '../../../services/ApiServices'
 export default{
     data(){
         return {
+            current_page: 1,
+            total_users: 0,
+
             selected: [],
             users: [],
-            search: ''
+            search: '',
+            search_size: 10
         }
     },
 
     watch: {
         search: function(val){
-            if(val && val.length > 1){
+            if(val && val.length > 0){
                 api.post('/api/user/', {query: this.search})
                 .then(({data}) => {
-                    if(data.users.length > 0){
-                        this.$store.commit('set_users', data.users)
+                    console.log(data);
+                    if(data.data.length > 0){
+                        this.$store.commit('set_users', data.data)
                     }
                 }).catch(error => {
-                    this.$store.commit('Alert', {alert: true, message: error.message, color: 'error'})
+                    this.$store.commit('push_alert', {alert: true, message: error.message, color: 'error'})
                 })
+            }else{
+                this.get_users()
             }
         }
     },
 
     mounted(){
         this.get_users()
+        console.log(this.users);
     },
 
     methods: {
-        get_users: function(){
-            api.get('/api/users')
+        get_users: function(page = 1, state){
+            if(state == 'next') page = page + 1
+            if(state == 'previous' && page > 1) page = page - 1
+
+            api.get('/api/users' + '?page=' + page + '&size=' + this.search_size)
             .then(({data}) => {
-                this.$store.commit('set_users', data.users)
+                console.log(data);
+                this.total_users = data.total
+                this.current_page = page
+                this.$store.commit('set_users', data.data)
             }).catch(error => console.log(error))
         },
 
