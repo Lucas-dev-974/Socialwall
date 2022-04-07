@@ -55,50 +55,18 @@ export default{
             }).catch(error => { console.log(error);}) 
         },
         
-        facebook_login: function(){
-            FB.login((response) => {
+        facebook_login: async function(){
+            await FB.login((response) => {
                 this.facebook.token = response.authResponse.accessToken
                 if(response.authResponse){
-                    FB.api('/me', (me) => {
-                        this.facebook.me = me
-                        api.post('/api/facebook/after-connection', {
-                            userid: me.id, token: response.accessToken, username: me.name
-                        }).then(({data}) => {
-                            console.log(data);
-                        }).catch(error => console.log(error))
+                    await FB.api('/me', (me) => {
+                        this.facebook.userid = me.id
+                        this.facebook.user   = me.user
                     })
-
-
-
-                    console.log(this.facebook);
-                }else{
-
                 }
             })
-            // FB.login()
-            // FB.Event.subscribe('auth.statusChange', (response) => {
-            //     console.log(response);
-            //     if(response.status == 'connected'){
-            //         api.post('/api/settings', {
-            //             name: 'facebook_token_infos',
-            //             type: 'facebook',
-            //             value: JSON.stringify({
-            //                 token:    response.authResponse.accessToken,
-            //                 expireIn: response.authResponse.expiresIn,
-            //                 userID:   response.authResponse.userID
-            //             })
-            //         }).then(({data}) => {
-            //             console.log(data)
-            //             this.$store.commit('setKey_FacebookInfos', {
-            //                 key: ['connected'],
-            //                 value: [true]
-            //             })
-            //         }).catch(error => {
-            //             console.log(error)
-            //         })
-
-            //     }
-            // });
+            console.log(this.facebook);
+            this.saveFacebookDatas()
         },
 
         load_facebook_profile: function(){
@@ -119,7 +87,11 @@ export default{
         },
 
         saveFacebookDatas: function(datas){
-            
+            api.post('/api/facebook/after-connection', {
+                userid: this.facebook.userid, token: this.facebook.token, username: this.facebook.user
+            }).then(({data}) => {
+                console.log(data);
+            }).catch(error => console.log(error))
         },
 
         FacebookLogout: function(){
