@@ -91,7 +91,7 @@ export default{
             
             await api.post('/api/facebook/after-connection', {
                 fb_userid: me.id, fb_token: token, fb_username: me.name,
-                // userid: this.$store.state.user.id, wallid: this.$store.state.wall.id
+                userid: this.$store.state.user.id, wallid: this.$store.state.wall.id
             }).then(({data}) => {
                 console.log(data);
             }).catch(error => console.log(error))
